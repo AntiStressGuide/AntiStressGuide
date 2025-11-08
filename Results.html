@@ -18,9 +18,12 @@ input[type="checkbox"], input[type="radio"] { margin-right:5px; }
 select, input[type=email] { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
 button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
 button:hover { background:#27623e; }
-.score { display:none; margin-top:20px; border-radius:10px; padding:20px; text-align:center; color:#fff; font-weight:bold; }
-#newFormBtn { background:#27623e; padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font-size:16px; margin-top:15px; }
-#newFormBtn:hover { background:#2E5D3D; }
+
+/* Ergebnisbox */
+#results { display:none; margin-top:20px; padding:20px; border-radius:10px; background:#d4efd5; color:#004d00; font-weight:bold; text-align:center; }
+#categoryColor { margin-top:10px; padding:15px; border-radius:8px; background:#e0ffe0; color:#004d00; font-size:18px; font-weight:bold; }
+#newFormBtn { margin-top:15px; background:#004d00; color:#fff; border:none; border-radius:8px; padding:12px 25px; cursor:pointer; font-size:16px; }
+#newFormBtn:hover { background:#002a00; }
 </style>
 </head>
 <body>
@@ -126,13 +129,11 @@ button:hover { background:#27623e; }
 </form>
 
 <!-- Ergebnis -->
-<div class="score" id="results">
-  <div id="resultContent">
-    <div id="responseID"></div>
-    <div id="totalPoints"></div>
-    <div id="categoryColor"></div>
-    <button id="newFormBtn">Fill Again</button>
-  </div>
+<div id="results">
+  <div id="responseID"></div>
+  <div id="totalPoints"></div>
+  <div id="categoryColor"></div>
+  <button id="newFormBtn">Fill Again</button>
 </div>
 
 <script>
@@ -150,7 +151,6 @@ const stressQuestions = [
   "Over the last month, my workload prevented me from completing important personal tasks.",
   "In the past month, I had sufficient control over how I completed my work tasks."
 ];
-
 const questionsDiv = document.getElementById('questions');
 stressQuestions.forEach((q,i)=>{
   const div=document.createElement('div');
@@ -163,12 +163,12 @@ stressQuestions.forEach((q,i)=>{
 
 // Sequenzielle Response ID
 function generateSequentialID() {
-  const now = new Date();
-  const yearMonth = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`; 
-  const storageKey = `internalID_${yearMonth}`;
-  let currentNumber = parseInt(localStorage.getItem(storageKey) || "0", 10);
-  currentNumber += 1;
-  localStorage.setItem(storageKey, currentNumber);
+  const now=new Date();
+  const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
+  const storageKey=`internalID_${yearMonth}`;
+  let currentNumber=parseInt(localStorage.getItem(storageKey)||"0",10);
+  currentNumber+=1;
+  localStorage.setItem(storageKey,currentNumber);
   return `ASG${yearMonth}${String(currentNumber).padStart(4,'0')}`;
 }
 
@@ -176,7 +176,6 @@ function generateSequentialID() {
 const form=document.getElementById('assessmentForm');
 form.addEventListener('submit', e=>{
   e.preventDefault();
-
   const responseID=generateSequentialID();
 
   // Stresspunkte
@@ -201,11 +200,9 @@ form.addEventListener('submit', e=>{
   if(form.age.value==="31-50") badPoints+=1;
   if(form.age.value==="51-70") badPoints+=2;
   if(form.age.value==">70") badPoints+=3;
-
   form.querySelectorAll('input[name="chronic"]:checked').forEach(c=>{
     if(c.value!=="None") badPoints+=2;
   });
-
   ["alcohol","tobacco","drugs","gambling"].forEach(name=>{
     const val=form.querySelector(`input[name="${name}"]:checked`)?.value;
     if(val && val!=="None") badPoints+=1;
@@ -216,29 +213,21 @@ form.addEventListener('submit', e=>{
   if(totalPoints>63) totalPoints=63;
 
   // Kategorie & Farbpunkt
-  let category="", color="";
-  if(totalPoints<=12){ category="Sehr gut / niedriges Risiko"; color="🟢 Dunkelgrün"; }
-  else if(totalPoints<=25){ category="Gut / mildes Risiko"; color="🟢 Hellgrün"; }
-  else if(totalPoints<=38){ category="Mäßig / mittleres Risiko"; color="🟡 Gelb"; }
-  else if(totalPoints<=51){ category="Erhöht / auffälliges Risiko"; color="🟠 Orange"; }
-  else{ category="Hoch / sehr hohes Risiko"; color="🔴 Rot"; }
+let category="", color="";
+if(totalPoints<=12){ category="Sehr gut / niedriges Risiko"; color="🟢"; }
+else if(totalPoints<=25){ category="Gut / mildes Risiko"; color="🟢"; }
+else if(totalPoints<=38){ category="Mäßig / mittleres Risiko"; color="🟡"; }
+else if(totalPoints<=51){ category="Erhöht / auffälliges Risiko"; color="🟠"; }
+else{ category="Hoch / sehr hohes Risiko"; color="🔴"; }
 
-  // Ergebnisse anzeigen
+
+  // Ergebnis anzeigen
   form.style.display='none';
   const resultsDiv=document.getElementById('results');
   resultsDiv.style.display='block';
   document.getElementById('responseID').textContent=`Response ID: ${responseID}`;
   document.getElementById('totalPoints').textContent=`Gesamtpunkte: ${totalPoints}`;
   document.getElementById('categoryColor').textContent=`Kategorie: ${category} Farbpunkt: ${color}`;
-
-  // Hintergrundfarbe passend
-  switch(color){
-    case "🟢 Dunkelgrün": document.getElementById('categoryColor').style.background="#006400"; break;
-    case "🟢 Hellgrün": document.getElementById('categoryColor').style.background="#7CFC00"; break;
-    case "🟡 Gelb": document.getElementById('categoryColor').style.background="#FFD700"; break;
-    case "🟠 Orange": document.getElementById('categoryColor').style.background="#FF8C00"; break;
-    case "🔴 Rot": document.getElementById('categoryColor').style.background="#FF0000"; break;
-  }
 });
 
 // Fill Again
