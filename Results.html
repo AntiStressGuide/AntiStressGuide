@@ -99,14 +99,15 @@ nav a:hover {
     <h2>Health Conditions</h2>
     <div class="question">
       <label>Do you have any chronic diseases, medical conditions, or have you undergone surgery recently?</label>
-      <label><input type="checkbox" name="chronic" value="Diabetes"> Diabetes</label>
+      <label><input type="checkbox" name="chronic" value="None"> None</label>
       <label><input type="checkbox" name="chronic" value="Hypertension"> Hypertension</label>
       <label><input type="checkbox" name="chronic" value="Heart Disease"> Heart Disease</label>
       <label><input type="checkbox" name="chronic" value="Respiratory Disease"> Respiratory Disease</label>
       <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
       <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery (last 12 months)</label>
+      <label><input type="checkbox" name="chronic" value="Diabetes"> Diabetes</label>
       <label><input type="checkbox" name="chronic" value="Other"> Other</label>
-      <label><input type="checkbox" name="chronic" value="None"> None</label>
+      
     </div>
 
     <!-- Weekly Physical Activity -->
@@ -218,6 +219,7 @@ form.addEventListener('submit', async e=>{
 
   try {
     const response = await fetch("https://script.google.com/macros/s/AKfycbzRe4_B1ACOA8B8Ehc6wq8O4UzaEPLAXN0AArfZ3etZDFzXKweZ63Wp5kJxTeOS93gh/exec", {
+
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
@@ -240,6 +242,7 @@ document.getElementById('newForm').addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
 
 
 
