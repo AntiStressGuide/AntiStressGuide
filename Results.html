@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,31 +24,14 @@ nav a { margin:0 10px; text-decoration:none; color:#2E5D3D; font-weight:bold; }
 nav a:hover { color:#27623e; }
 </style>
 </head>
+
 <body>
 <div class="container">
   <nav>
-  <a href="index.html">Home</a>
-  <a href="results.html">Assessment</a>
-  <a href="recommendations.html">Recommendations</a>
-</nav>
-
-<style>
-nav { 
-  text-align: center; 
-  margin-bottom: 20px; 
-}
-nav a { 
-  margin: 0 15px; 
-  text-decoration: underline; /* Unterstreichung */
-  color: #007bff; /* Blau */
-  font-weight: bold; 
-  font-size: 16px;
-}
-nav a:hover { 
-  color: #27623e; /* dunkler beim Hover */
-}
-</style>
-
+    <a href="index.html">Home</a>
+    <a href="results.html">Assessment</a>
+    <a href="recommendations.html">Recommendations</a>
+  </nav>
 
   <h1>Complete Health Assessment</h1>
 
@@ -188,7 +171,7 @@ form.addEventListener('submit', async e=>{
     age: form.age.value,
     gender: form.gender.value,
     chronic: Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value),
-    physical: form.querySelector('input[name="physical"]:checked') ? form.querySelector('input[name="physical"]:checked').value : "",
+    physical: form.querySelector('input[name="physical"]:checked')?.value || "",
     alcohol: form.alcohol.value,
     tobacco: form.tobacco.value,
     drugs: form.drugs.value,
@@ -196,8 +179,21 @@ form.addEventListener('submit', async e=>{
     email: form.email.value,
     stress: stressQuestions.map((q,i)=>({title:q, answer: form.querySelector(`input[name="q${i}"]`).value}))
   };
-  console.log(formData);
-  alert("Form submitted! Check console for data.");
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzRe4_B1ACOA8B8Ehc6wq8O4UzaEPLAXN0AArfZ3etZDFzXKweZ63Wp5kJxTeOS93gh/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.text();
+    alert("Form submitted successfully!");
+    console.log("Response from WebApp:", result);
+  } catch (err) {
+    console.error("Error submitting form:", err);
+    alert("There was an error submitting the form. Please try again.");
+  }
 });
 
 document.getElementById('newForm').addEventListener('click', ()=>{
