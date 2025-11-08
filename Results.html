@@ -147,17 +147,14 @@ nav a:hover {
       <label><input type="radio" name="drugs" value="Very high"> Very high (severe)</label>
     </div>
 
-    <div class="question">
-      <label>7. Gambling (pathological/problematic)</label>
-      <select name="gambling" required>
-        <option value="" disabled selected>Select one</option>
-        <option value="None">None</option>
-        <option value="Low">Low (occasional, minimal problems)</option>
-        <option value="Moderate">Moderate (regular, some problems)</option>
-        <option value="High">High (frequent, significant problems)</option>
-        <option value="Very high">Very high (pathological)</option>
-      </select>
-    </div>
+<div class="question">
+  <label>7. Gambling (pathological/problematic)</label>
+  <label><input type="radio" name="gambling" value="None" required> None</label>
+  <label><input type="radio" name="gambling" value="Low"> Low (occasional, minimal problems)</label>
+  <label><input type="radio" name="gambling" value="Moderate"> Moderate (regular, some problems)</label>
+  <label><input type="radio" name="gambling" value="High"> High (frequent, significant problems)</label>
+  <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
+</div>
 
     <!-- Stress & Well-Being -->
     <h2>Stress & Well-Being (0–4 Likert)</h2>
@@ -243,6 +240,7 @@ document.getElementById('newForm').addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
 
 
 
