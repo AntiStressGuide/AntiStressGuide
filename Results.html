@@ -158,41 +158,46 @@ stressQuestions.forEach((q,i)=>{
 form.addEventListener('submit', e=>{
   e.preventDefault();
 
+  // Stresspunkte
   let stressPoints = 0;
   stressQuestions.forEach((q,i)=>{
-    stressPoints += parseInt(form.querySelector(`input[name="q${i}"]`).value);
+    const el = form.querySelector(`input[name="q${i}"]`);
+    if(el && el.value !== "") stressPoints += parseInt(el.value);
   });
 
   // Physische Aktivität
   let physicalPoints = 0;
-  const phys = form.querySelector('input[name="physical"]:checked')?.value;
-  switch(phys){
-    case "<150 min/week, no strength": physicalPoints = 0; break;
-    case "150–300 min/week, 0–1 strength": physicalPoints = 1; break;
-    case "150–300 min/week, 2+ strength": physicalPoints = 2; break;
-    case ">300 min/week, 2+ strength": physicalPoints = 3; break;
-    case "Vigorous 75–150+ min/week": physicalPoints = 4; break;
+  const physEl = form.querySelector('input[name="physical"]:checked');
+  if(physEl){
+    switch(physEl.value){
+      case "<150 min/week, no strength": physicalPoints = 0; break;
+      case "150–300 min/week, 0–1 strength": physicalPoints = 1; break;
+      case "150–300 min/week, 2+ strength": physicalPoints = 2; break;
+      case ">300 min/week, 2+ strength": physicalPoints = 3; break;
+      case "Vigorous 75–150+ min/week": physicalPoints = 4; break;
+    }
   }
 
   // Schlechte Faktoren
   let badPoints = 0;
-  if(form.age.value === "31-50") badPoints +=1;
-  if(form.age.value === "51-70") badPoints +=2;
-  if(form.age.value === ">70") badPoints +=3;
+  switch(form.age.value){
+    case "31-50": badPoints +=1; break;
+    case "51-70": badPoints +=2; break;
+    case ">70": badPoints +=3; break;
+  }
 
   form.querySelectorAll('input[name="chronic"]:checked').forEach(c=>{
-    if(c.value !== "None") badPoints +=2;
+    if(c.value && c.value !== "None") badPoints +=2;
   });
 
   ["alcohol","tobacco","drugs","gambling"].forEach(name=>{
-    const val = form.querySelector(`input[name="${name}"]:checked`)?.value;
-    if(val && val !== "None") badPoints +=1;
+    const valEl = form.querySelector(`input[name="${name}"]:checked`);
+    if(valEl && valEl.value !== "None") badPoints +=1;
   });
 
   // Gesamtpunkte
   let totalPoints = stressPoints + badPoints - physicalPoints;
-  if(totalPoints <0) totalPoints=0;
-  if(totalPoints >63) totalPoints=63;
+  totalPoints = Math.max(0, Math.min(63, totalPoints));
 
   // Kategorie
   let category="", color="";
@@ -202,7 +207,7 @@ form.addEventListener('submit', e=>{
   else if(totalPoints<=48){ category="Hoch"; color="#FFA500"; }
   else{ category="Sehr Hoch"; color="#FF0000"; }
 
-  // Zeige Ergebnisse
+  // Ergebnisse anzeigen
   const resultsDiv = document.getElementById('results');
   resultsDiv.style.display = "block";
   resultsDiv.innerHTML = `
@@ -211,15 +216,19 @@ form.addEventListener('submit', e=>{
     <button id="newForm">Fill Again</button>
   `;
 
-  // Fetch optional: Daten an Google Web-App senden
-  const payload = {
-    stressPoints, badPoints, physicalPoints, totalPoints, category,
-    timestamp: new Date().toISOString()
-  };
+  // Payload nur mit vorhandenen Werten
+  const payload = {};
+  if(stressPoints) payload.stressPoints = stressPoints;
+  if(badPoints) payload.badPoints = badPoints;
+  if(physicalPoints) payload.physicalPoints = physicalPoints;
+  if(totalPoints) payload.totalPoints = totalPoints;
+  if(category) payload.category = category;
+  payload.timestamp = new Date().toISOString();
 
+  // Fetch an Google Web App
   fetch("https://script.google.com/macros/s/AKfycbyE4HgeG1_q_QdD0EblC0aqMDlS9qugNrAqeMdefkOVGiFTzQYzdjhVgcpPfjdJ_6lN/exec", {
     method: "POST",
-    mode: "no-cors", // verhindert CORS Fehler, Antwort wird ignoriert
+    mode: "no-cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   });
