@@ -18,7 +18,8 @@ input[type="checkbox"], input[type="radio"] { margin-right:5px; }
 select, input[type=email] { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
 button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
 button:hover { background:#27623e; }
-.score { margin-top:15px; padding:15px; border:1px solid #ccc; border-radius:5px; background:#d4efd5; text-align:center; }
+.score { margin-top:15px; padding:15px; border:1px solid #ccc; border-radius:5px; text-align:center; font-size:18px; }
+.color-dot { display:inline-block; width:25px; height:25px; border-radius:50%; margin-right:10px; vertical-align:middle; }
 nav { text-align:center; margin-bottom:20px; }
 nav a { margin:0 10px; text-decoration:underline; color:#007bff; font-weight:bold; }
 nav a:hover { color:#27623e; }
@@ -84,38 +85,38 @@ nav a:hover { color:#27623e; }
 
 <div class="question">
   <label>Alcohol consumption</label>
-  <label><input type="radio" name="alcohol" value="None" required> None (0 drinks/week)</label>
-  <label><input type="radio" name="alcohol" value="Low risk"> Low risk (Women:1–7, Men:1–14/week)</label>
-  <label><input type="radio" name="alcohol" value="Moderate risk"> Moderate risk (Women:8–14, Men:15–28/week)</label>
-  <label><input type="radio" name="alcohol" value="High risk"> High risk (Women:15–21, Men:29–42/week)</label>
-  <label><input type="radio" name="alcohol" value="Very high"> Very high (&gt;21 / &gt;42/week)</label>
+  <label><input type="radio" name="alcohol" value="None" required> None</label>
+  <label><input type="radio" name="alcohol" value="Low risk"> Low risk</label>
+  <label><input type="radio" name="alcohol" value="Moderate risk"> Moderate risk</label>
+  <label><input type="radio" name="alcohol" value="High risk"> High risk</label>
+  <label><input type="radio" name="alcohol" value="Very high"> Very high</label>
 </div>
 
 <div class="question">
-  <label>Tobacco use (smoking/chewing)</label>
+  <label>Tobacco use</label>
   <label><input type="radio" name="tobacco" value="None" required> None</label>
-  <label><input type="radio" name="tobacco" value="Low"> Low (&lt;5/day)</label>
-  <label><input type="radio" name="tobacco" value="Moderate"> Moderate (5–19/day)</label>
-  <label><input type="radio" name="tobacco" value="High"> High (20/day)</label>
-  <label><input type="radio" name="tobacco" value="Very high"> Very high (&ge;30/day)</label>
+  <label><input type="radio" name="tobacco" value="Low"> Low</label>
+  <label><input type="radio" name="tobacco" value="Moderate"> Moderate</label>
+  <label><input type="radio" name="tobacco" value="High"> High</label>
+  <label><input type="radio" name="tobacco" value="Very high"> Very high</label>
 </div>
 
 <div class="question">
-  <label>Drug use (prescription misuse or illegal substances)</label>
+  <label>Drug use</label>
   <label><input type="radio" name="drugs" value="None" required> None</label>
-  <label><input type="radio" name="drugs" value="Low"> Low (occasional)</label>
-  <label><input type="radio" name="drugs" value="Moderate"> Moderate (regular, risk)</label>
-  <label><input type="radio" name="drugs" value="High"> High (dependence / health risk)</label>
-  <label><input type="radio" name="drugs" value="Very high"> Very high (severe)</label>
+  <label><input type="radio" name="drugs" value="Low"> Low</label>
+  <label><input type="radio" name="drugs" value="Moderate"> Moderate</label>
+  <label><input type="radio" name="drugs" value="High"> High</label>
+  <label><input type="radio" name="drugs" value="Very high"> Very high</label>
 </div>
 
 <div class="question">
-  <label>Gambling (pathological/problematic)</label>
+  <label>Gambling</label>
   <label><input type="radio" name="gambling" value="None" required> None</label>
-  <label><input type="radio" name="gambling" value="Low"> Low (occasional, minimal problems)</label>
-  <label><input type="radio" name="gambling" value="Moderate"> Moderate (regular, some problems)</label>
-  <label><input type="radio" name="gambling" value="High"> High (frequent, significant problems)</label>
-  <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
+  <label><input type="radio" name="gambling" value="Low"> Low</label>
+  <label><input type="radio" name="gambling" value="Moderate"> Moderate</label>
+  <label><input type="radio" name="gambling" value="High"> High</label>
+  <label><input type="radio" name="gambling" value="Very high"> Very high</label>
 </div>
 
   <!-- Stress & Well-Being -->
@@ -131,15 +132,9 @@ nav a:hover { color:#27623e; }
   <button type="submit">Submit</button>
 </form>
 
-<div class="score" id="results" style="display:none;">
-  <p>Stress Score: <span id="stress"></span></p>
-  <p>Balance Score: <span id="balance"></span></p>
-  <p>Well-Being Score: <span id="wellbeing"></span></p>
-  <button id="newForm">Fill Again</button>
-</div>
+<div class="score" id="results" style="display:none;"></div>
 
 <script>
-// Likert Labels & Fragen
 const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions = [
   "In the past month, I felt that things were generally going my way.",
@@ -154,7 +149,7 @@ const stressQuestions = [
   "In the past month, I had sufficient control over how I completed my work tasks."
 ];
 
-// Render Stress Fragen
+// Render stress questions
 const questionsDiv = document.getElementById('questions');
 stressQuestions.forEach((q,i)=>{
   const div = document.createElement('div');
@@ -162,55 +157,69 @@ stressQuestions.forEach((q,i)=>{
   div.innerHTML = `
     <label>${i+1}. ${q}</label>
     <input type="range" min="0" max="4" value="2" name="q${i}" required>
-    <div class="range-labels">
-      ${likertLabels.map(label=>`<span>${label}</span>`).join('')}
-    </div>`;
+    <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>`;
   questionsDiv.appendChild(div);
 });
 
 const form = document.getElementById('assessmentForm');
-form.addEventListener('submit', async e=>{
+form.addEventListener('submit', e=>{
   e.preventDefault();
 
-  const formData = {timestamp: new Date().toISOString()};
+  // Berechne Punkte
+  let stressPoints = stressQuestions.reduce((sum, q, i)=>{
+    return sum + parseInt(form.querySelector(`input[name="q${i}"]`).value);
+  },0);
 
-  ["age","gender","physical","alcohol","tobacco","drugs","gambling","email"].forEach(name=>{
-    const el = form[name];
-    if(el && el.value) formData[name] = el.value;
+  let physicalPoints = 0;
+  switch(form.querySelector('input[name="physical"]:checked')?.value){
+    case "Little or no activity": physicalPoints=0; break;
+    case "150–300 min/week, 0–1 strength": physicalPoints=1; break;
+    case "150–300 min/week, 2+ strength": physicalPoints=2; break;
+    case ">300 min/week, 2+ strength": physicalPoints=3; break;
+    case "Vigorous 75–150+ min/week": physicalPoints=4; break;
+  }
+
+  let badPoints = 0;
+  const ageVal = form.age.value;
+  if(ageVal==="31-50") badPoints+=1;
+  if(ageVal==="51-70") badPoints+=2;
+  if(ageVal==">70") badPoints+=3;
+
+  form.querySelectorAll('input[name="chronic"]:checked').forEach(c=>{
+    if(c.value!=="None") badPoints+=2;
   });
 
-  const chronicChecked = Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value);
-  if(chronicChecked.length) formData.chronic = chronicChecked;
-
-  const stressData = [];
-  stressQuestions.forEach((q,i)=>{
-    const val = form.querySelector(`input[name="q${i}"]`)?.value;
-    if(val !== undefined && val !== "") stressData.push({question:q, answer:parseInt(val)});
-  });
-  if(stressData.length) formData.stress = stressData;
-
-  fetch("https://script.google.com/macros/s/AKfycbyE4HgeG1_q_QdD0EblC0aqMDlS9qugNrAqeMdefkOVGiFTzQYzdjhVgcpPfjdJ_6lN/exec", {
-    method:"POST",
-    mode:"no-cors",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify(formData)
+  ["alcohol","tobacco","drugs","gambling"].forEach(name=>{
+    const val = form.querySelector(`input[name="${name}"]:checked`)?.value;
+    if(val && val!=="None") badPoints+=1;
   });
 
-  const totalStress = stressData.reduce((sum,s)=>sum+s.answer,0);
-  const balance = 50; 
-  const wellbeing = 50; 
-  document.getElementById('stress').textContent = totalStress;
-  document.getElementById('balance').textContent = balance;
-  document.getElementById('wellbeing').textContent = wellbeing;
+  let totalPoints = stressPoints + badPoints - physicalPoints;
+  if(totalPoints<0) totalPoints=0;
+  if(totalPoints>63) totalPoints=63;
 
-  form.style.display='none';
-  document.getElementById('results').style.display='block';
-});
+  // Kategorie und Farbe
+  let category="", color="", emoji="";
+  if(totalPoints<=12){ category="Sehr gut / niedriges Risiko"; color="#006400"; emoji="🟢"; }
+  else if(totalPoints<=25){ category="Gut / mildes Risiko"; color="#32CD32"; emoji="🟢"; }
+  else if(totalPoints<=38){ category="Mäßig / mittleres Risiko"; color="#FFFF00"; emoji="🟡"; }
+  else if(totalPoints<=51){ category="Erhöht / auffälliges Risiko"; color="#FFA500"; emoji="🟠"; }
+  else{ category="Hoch / sehr hohes Risiko"; color="#FF0000"; emoji="🔴"; }
 
-document.getElementById('newForm').addEventListener('click', ()=>{
-  form.reset();
-  form.style.display='block';
-  document.getElementById('results').style.display='none';
+  // Zeige Ergebnisse
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.style.display="block";
+  resultsDiv.innerHTML = `
+    <p>Total Points: <strong>${totalPoints}</strong></p>
+    <p>Category: <span class="color-dot" style="background:${color}"></span>${category} ${emoji}</p>
+    <button id="newForm">Fill Again</button>
+  `;
+
+  // Formular zurücksetzen
+  document.getElementById('newForm').addEventListener('click', ()=>{
+    form.reset();
+    resultsDiv.style.display='none';
+  });
 });
 </script>
 </body>
