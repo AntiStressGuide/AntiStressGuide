@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhanced Stress Index (WHO-Based)</title>
+<style>
+body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; }
+.container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; }
+h1, h2 { color:#2E5D3D; text-align:center; }
+.question { margin:15px 0; padding:15px; border-radius:8px; }
+.question:nth-child(odd) { background:#e0f2e9; }
+.question:nth-child(even) { background:#f7fff8; }
+label { display:block; margin:5px 0; }
+input[type="range"] { width:100%; margin-top:5px; }
+.range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
+input[type="checkbox"], input[type="radio"] { margin-right:5px; }
+select, input[type=email] { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
+button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+button:hover { background:#27623e; }
+nav { text-align:center; margin-bottom:20px; }
+nav a { margin:0 10px; text-decoration:underline; color:#007bff; font-weight:bold; }
+nav a:hover { color:#27623e; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<nav>
+  <a href="index.html">Home</a>
+  <a href="results.html">Assessment</a>
+  <a href="recommendations.html">Recommendations</a>
+</nav>
+
+<h1>Enhanced Stress Index (WHO-Based)</h1>
+
+<form id="assessmentForm">
+  <!-- Demographics -->
+  <div class="question">
+    <label>Age:</label>
+    <select name="age" required>
+      <option value="" disabled selected>Select age</option>
+      <option value="18-30">18–30</option>
+      <option value="31-50">31–50</option>
+      <option value="51-70">51–70</option>
+      <option value=">70">>70</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <!-- Health Conditions -->
+  <h2>Health Conditions</h2>
+  <div class="question">
+    <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
+    <label><input type="checkbox" name="chronic" value="None"> None</label>
+    <label><input type="checkbox" name="chronic" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+    <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
+    <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery</label>
+    <label><input type="checkbox" name="chronic" value="Other"> Other</label>
+  </div>
+
+  <!-- Physical Activity -->
+  <div class="question">
+    <label>Weekly Physical Activity:</label>
+    <label><input type="radio" name="physical" value="Little or no activity" required> &lt;150 min/week, no strength</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength"> 150–300 min/week, strength 0–1 days</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength"> 150–300 min/week, strength 2+ days</label>
+    <label><input type="radio" name="physical" value=">300 min/week, 2+ strength"> &gt;300 min/week, strength 2+ days</label>
+    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week"> Vigorous 75–150+ min/week, strength 2+ days</label>
+  </div>
+
+  <!-- Email -->
+  <div class="question">
+    <label>Email (optional)</label>
+    <input type="email" name="email" placeholder="you@example.com">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+</div>
+
+<script>
+const GITHUB_USER = "DEIN_GITHUB_USERNAME"; // z. B. AntiStressGuide
+const GITHUB_REPO = "AntiStressGuide";       // dein Repository
+const FILE_PATH = "data/results.csv";        // Datei, in die gespeichert wird
+const TOKEN = "ghp_XXXXXXXXXXXXXXXXXXXX";    // dein GitHub Token (testweise hier!)
+
+async function saveToGitHub(dataObj) {
+  const csvRow = Object.values(dataObj).map(v => `"${v}"`).join(",") + "\n";
+  const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+  const headers = {
+    "Authorization": `token ${TOKEN}`,
+    "Accept": "application/vnd.github.v3+json"
+  };
+
+  // 1️⃣ Alte Datei laden
+  const res = await fetch(apiUrl, { headers });
+  const fileData = await res.json();
+  const oldContent = atob(fileData.content);
+
+  // 2️⃣ Neue Zeile anhängen
+  const newContent = oldContent + csvRow;
+  const encoded = btoa(unescape(encodeURIComponent(newContent)));
+
+  // 3️⃣ Datei aktualisieren
+  const update = await fetch(apiUrl, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({
+      message: "Neue Formularantwort",
+      content: encoded,
+      sha: fileData.sha
+    })
+  });
+
+  if (update.ok) {
+    alert("✅ Erfolgreich auf GitHub gespeichert!");
+  } else {
+    console.error(await update.text());
+    alert("❌ Fehler beim Speichern!");
+  }
+}
+
+document.getElementById("assessmentForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const obj = Object.fromEntries(formData.entries());
+  await saveToGitHub(obj);
+  e.target.reset();
+});
+</script>
+</body>
+</html>
 
