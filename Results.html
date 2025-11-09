@@ -35,7 +35,7 @@ nav a:hover { color:#27623e; }
 
 <h1>Enhanced Stress Index (WHO-Based)</h1>
 
-<form id="assessmentForm">
+<form id="assessmentForm" action="https://script.google.com/macros/s/AKfycbzcYLLWCRETJvq-ixcGoqamcoAYErZtk5C9YSCIxr3kef-RdBiKr5Mn9HfuaGzAqTQ0/exec" method="POST">
 
   <!-- Demographics -->
   <div class="question">
@@ -118,7 +118,7 @@ nav a:hover { color:#27623e; }
     <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
   </div>
 
-  <!-- Stress & Well-Being -->
+  <!-- Likert Stress Questions (0–4) -->
   <h2>Stress & Well-Being (0–4 Likert Scale)</h2>
   <div id="questions"></div>
 
@@ -128,13 +128,15 @@ nav a:hover { color:#27623e; }
     <input type="email" name="email" placeholder="you@example.com">
   </div>
 
+  <input type="hidden" name="responseID" id="responseIDField">
+
   <button type="submit">Submit</button>
 </form>
 
 <div class="score" id="results" style="display:none;">
-  <p id="responseID"></p>
-  <p id="totalPoints"></p>
-  <p id="categoryColor"></p>
+  <p id="responseIDDisplay"></p>
+  <p id="totalPointsDisplay"></p>
+  <p id="categoryColorDisplay"></p>
   <button id="newForm">Fill Again</button>
 </div>
 
@@ -177,9 +179,10 @@ function generateSequentialID(){
 
 // Form Submit
 const form=document.getElementById('assessmentForm');
-form.addEventListener('submit', async e=>{
+form.addEventListener('submit', e=>{
   e.preventDefault();
   const responseID = generateSequentialID();
+  document.getElementById('responseIDField').value = responseID;
 
   // Stresspunkte berechnen
   let stressPoints=0;
@@ -223,42 +226,12 @@ form.addEventListener('submit', async e=>{
   form.style.display='none';
   const resultsDiv=document.getElementById('results');
   resultsDiv.style.display='block';
-  document.getElementById('responseID').textContent=`Response ID: ${responseID}`;
-  document.getElementById('totalPoints').textContent=`Gesamtpunkte: ${totalPoints}`;
-  document.getElementById('categoryColor').textContent=`Kategorie: ${category} ${color}`;
+  document.getElementById('responseIDDisplay').textContent=`Response ID: ${responseID}`;
+  document.getElementById('totalPointsDisplay').textContent=`Gesamtpunkte: ${totalPoints}`;
+  document.getElementById('categoryColorDisplay').textContent=`Kategorie: ${category} ${color}`;
 
-  // Daten an Google Web App senden
-   const formData = {
-    responseID,
-    age: form.age.value || "",
-    gender: form.gender.value || "",
-    chronic: Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value),
-    physical: phys,
-    alcohol: form.alcohol.value || "",
-    tobacco: form.tobacco.value || "",
-    drugs: form.drugs.value || "",
-    gambling: form.gambling.value || "",
-    email: form.email.value || "",
-    stressPoints,
-    physicalPoints,
-    badPoints,
-    totalPoints,
-    category,
-    color,
-    paid: "",              // optional
-    paymentDate: "",       // optional
-    recommendations: ""    // optional
-  };
-
-
-  try{
-    await fetch("https://script.google.com/macros/s/AKfycbzcYLLWCRETJvq-ixcGoqamcoAYErZtk5C9YSCIxr3kef-RdBiKr5Mn9HfuaGzAqTQ0/exec",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      mode:"cors",
-      body:JSON.stringify(formData)
-    });
-  }catch(err){ console.error("Fehler beim Senden an Web App:",err); }
+  // Form direkt abschicken (POST)
+  form.submit();
 });
 
 // Reset form
@@ -270,25 +243,3 @@ document.getElementById('newForm').addEventListener('click', ()=>{
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
