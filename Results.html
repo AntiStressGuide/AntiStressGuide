@@ -141,7 +141,7 @@ nav a:hover { color:#27623e; }
 </div>
 
 <script>
-// Likert Fragen
+// Likert-Fragen
 const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions = [
   "In the past month, I felt that things were generally going my way.",
@@ -156,7 +156,7 @@ const stressQuestions = [
   "In the past month, I had sufficient control over how I completed my work tasks."
 ];
 
-// Render stress questions
+// Fragen dynamisch einfügen
 const questionsDiv = document.getElementById('questions');
 stressQuestions.forEach((q,i)=>{
   const div = document.createElement('div');
@@ -167,7 +167,7 @@ stressQuestions.forEach((q,i)=>{
   questionsDiv.appendChild(div);
 });
 
-// Steigende Response ID
+// Laufende Response-ID generieren
 function generateSequentialID(){
   const now = new Date();
   const y = now.getFullYear().toString();
@@ -177,69 +177,71 @@ function generateSequentialID(){
   return `ASG${y}${m}-${counter}`;
 }
 
-// Form Submit
-const form=document.getElementById('assessmentForm');
+// Formular-Submit
+const form = document.getElementById('assessmentForm');
 form.addEventListener('submit', e=>{
-  e.preventDefault();
+  // ❌ Kein preventDefault! Browser soll nativ POST absenden.
   const responseID = generateSequentialID();
   document.getElementById('responseIDField').value = responseID;
 
   // Stresspunkte berechnen
-  let stressPoints=0;
+  let stressPoints = 0;
   stressQuestions.forEach((q,i)=>{
-    stressPoints+=parseInt(form.querySelector(`input[name="q${i}"]`).value);
+    stressPoints += parseInt(form.querySelector(`input[name="q${i}"]`).value);
   });
 
   // Physische Aktivität
-  let physicalPoints=0;
-  const phys=form.querySelector('input[name="physical"]:checked')?.value;
+  let physicalPoints = 0;
+  const phys = form.querySelector('input[name="physical"]:checked')?.value;
   switch(phys){
-    case "Little or no activity": physicalPoints=0; break;
-    case "150–300 min/week, 0–1 strength": physicalPoints=1; break;
-    case "150–300 min/week, 2+ strength": physicalPoints=2; break;
-    case ">300 min/week, 2+ strength": physicalPoints=3; break;
-    case "Vigorous 75–150+ min/week": physicalPoints=4; break;
+    case "Little or no activity": physicalPoints = 0; break;
+    case "150–300 min/week, 0–1 strength": physicalPoints = 1; break;
+    case "150–300 min/week, 2+ strength": physicalPoints = 2; break;
+    case ">300 min/week, 2+ strength": physicalPoints = 3; break;
+    case "Vigorous 75–150+ min/week": physicalPoints = 4; break;
   }
 
-  // Schlechte Faktoren
-  let badPoints=0;
-  if(form.age.value==="31-50") badPoints+=1;
-  if(form.age.value==="51-70") badPoints+=2;
-  if(form.age.value==">70") badPoints+=3;
-  form.querySelectorAll('input[name="chronic"]:checked').forEach(c=>{ if(c.value!=="None") badPoints+=2; });
+  // Negative Faktoren
+  let badPoints = 0;
+  if(form.age.value==="31-50") badPoints += 1;
+  if(form.age.value==="51-70") badPoints += 2;
+  if(form.age.value==">70") badPoints += 3;
+  form.querySelectorAll('input[name="chronic"]:checked')
+      .forEach(c => { if(c.value!=="None") badPoints += 2; });
   ["alcohol","tobacco","drugs","gambling"].forEach(name=>{
-    const val=form.querySelector(`input[name="${name}"]:checked`)?.value;
-    if(val && val!=="None") badPoints+=1;
+    const val = form.querySelector(`input[name="${name}"]:checked`)?.value;
+    if(val && val!=="None") badPoints += 1;
   });
 
-  const totalPoints=Math.max(0, Math.min(63, stressPoints+badPoints-physicalPoints));
+  const totalPoints = Math.max(0, Math.min(63, stressPoints + badPoints - physicalPoints));
 
-  // Kategorie & Farbe
-  let category="", color="";
-  if(totalPoints<=12){ category="Sehr gut / niedriges Risiko"; color="🟢"; }
-  else if(totalPoints<=25){ category="Gut / mildes Risiko"; color="🟢"; }
-  else if(totalPoints<=38){ category="Mäßig / mittleres Risiko"; color="🟡"; }
-  else if(totalPoints<=51){ category="Erhöht / auffälliges Risiko"; color="🟠"; }
-  else{ category="Hoch / sehr hohes Risiko"; color="🔴"; }
+  // Kategorie und Farbe bestimmen
+  let category = "", color = "";
+  if(totalPoints <= 12){ category="Sehr gut / niedriges Risiko"; color="🟢"; }
+  else if(totalPoints <= 25){ category="Gut / mildes Risiko"; color="🟢"; }
+  else if(totalPoints <= 38){ category="Mäßig / mittleres Risiko"; color="🟡"; }
+  else if(totalPoints <= 51){ category="Erhöht / auffälliges Risiko"; color="🟠"; }
+  else { category="Hoch / sehr hohes Risiko"; color="🔴"; }
 
-  // Ergebnis anzeigen
-  form.style.display='none';
-  const resultsDiv=document.getElementById('results');
-  resultsDiv.style.display='block';
-  document.getElementById('responseIDDisplay').textContent=`Response ID: ${responseID}`;
-  document.getElementById('totalPointsDisplay').textContent=`Gesamtpunkte: ${totalPoints}`;
-  document.getElementById('categoryColorDisplay').textContent=`Kategorie: ${category} ${color}`;
+  // Ergebnis visuell anzeigen (vor dem Abschicken)
+  form.style.display = 'none';
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.style.display = 'block';
+  document.getElementById('responseIDDisplay').textContent = `Response ID: ${responseID}`;
+  document.getElementById('totalPointsDisplay').textContent = `Gesamtpunkte: ${totalPoints}`;
+  document.getElementById('categoryColorDisplay').textContent = `Kategorie: ${category} ${color}`;
 
-  // Form sauber abschicken ohne CORS-Fetch-Probleme
-  form.submit(); 
+  // ✅ Danach sendet der Browser das Formular automatisch via POST an Google Apps Script
 });
 
-// Reset form
+// Formular zurücksetzen
 document.getElementById('newForm').addEventListener('click', ()=>{
   form.reset();
-  form.style.display='block';
-  document.getElementById('results').style.display='none';
+  form.style.display = 'block';
+  document.getElementById('results').style.display = 'none';
 });
 </script>
+
 </body>
 </html>
+
