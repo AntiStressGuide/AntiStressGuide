@@ -255,6 +255,7 @@ form.addEventListener('submit', async e=>{
     await fetch("https://script.google.com/macros/s/AKfycbzcYLLWCRETJvq-ixcGoqamcoAYErZtk5C9YSCIxr3kef-RdBiKr5Mn9HfuaGzAqTQ0/exec",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
+      mode:cors
       body:JSON.stringify(formData)
     });
   }catch(err){ console.error("Fehler beim Senden an Web App:",err); }
@@ -269,6 +270,7 @@ document.getElementById('newForm').addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
 
 
 
