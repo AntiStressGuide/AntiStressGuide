@@ -230,8 +230,8 @@ form.addEventListener('submit', e=>{
   document.getElementById('totalPointsDisplay').textContent=`Gesamtpunkte: ${totalPoints}`;
   document.getElementById('categoryColorDisplay').textContent=`Kategorie: ${category} ${color}`;
 
-  // Form direkt abschicken (POST)
-  form.submit();
+  // Form sauber abschicken ohne CORS-Fetch-Probleme
+  form.submit(); 
 });
 
 // Reset form
