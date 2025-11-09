@@ -134,48 +134,48 @@ nav a:hover { color:#27623e; }
 </form>
 
 <script>
-// Likert-Fragen
-const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
-const stressQuestions = [
-  "In the past month, I felt that things were generally going my way.",
-  "During the last month, I felt confident about handling personal problems.",
-  "Over the past month, I felt physically and mentally healthy enough to meet daily demands.",
-  "In the past month, I was satisfied with my overall well-being and quality of life.",
-  "During the last month, I felt energetic and capable of handling both work and personal responsibilities.",
-  "Over the past month, I could take breaks and recover adequately during and between workdays.",
-  "In the last month, support from colleagues helped me cope with stress.",
-  "During the past month, my work schedule allowed me to maintain a healthy work-life balance.",
-  "Over the last month, my workload prevented me from completing important personal tasks.",
-  "In the past month, I had sufficient control over how I completed my work tasks."
-];
+// Likert-Fragen dynamisch bereits eingefügt oben
+const form = document.getElementById('assessmentForm');
 
-// Fragen dynamisch einfügen
-const questionsDiv = document.getElementById('questions');
-stressQuestions.forEach((q,i)=>{
-  const div = document.createElement('div');
-  div.className='question';
-  div.innerHTML = `<label>${i+1}. ${q}</label>
-    <input type="range" min="0" max="4" value="2" name="q${i}" required>
-    <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>`;
-  questionsDiv.appendChild(div);
-});
+form.addEventListener('submit', async (e) => {
+  e.preventDefault(); // Standard-Submit verhindern
 
-// Laufende Response-ID generieren
-function generateSequentialID(){
-  const now = new Date();
-  const y = now.getFullYear().toString();
-  const m = (now.getMonth()+1).toString().padStart(2,'0');
-  let counter = parseInt(localStorage.getItem('ASGCounter')||'0') + 1;
-  localStorage.setItem('ASGCounter', counter);
-  return `ASG${y}${m}-${counter}`;
-}
-
-// Nur ResponseID vor dem Submit setzen, sonst **kein JS-Interzept**
-document.getElementById('assessmentForm').addEventListener('submit', ()=>{
+  // ResponseID generieren
   const responseID = generateSequentialID();
   document.getElementById('responseIDField').value = responseID;
+
+  // FormData sammeln
+  const formData = new FormData(form);
+  const jsonData = {};
+
+  formData.forEach((value, key) => {
+    // Checkboxen: mehrere Werte als Array speichern
+    if(jsonData[key]) {
+      if(Array.isArray(jsonData[key])) jsonData[key].push(value);
+      else jsonData[key] = [jsonData[key], value];
+    } else {
+      jsonData[key] = value;
+    }
+  });
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(jsonData)
+    });
+
+    const text = await res.text();
+    alert("Formular gesendet! Antwort: " + text);
+    form.reset();
+  } catch(err) {
+    console.error("Fehler beim Senden:", err);
+    alert("Fehler beim Senden. Siehe Konsole.");
+  }
 });
 </script>
 
+
 </body>
 </html>
+
