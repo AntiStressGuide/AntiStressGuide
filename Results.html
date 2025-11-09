@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Complete Health Assessment</title>
+<title>Enhanced Stress Index (WHO-Based)</title>
 <style>
 body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; }
 .container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; }
@@ -20,150 +20,126 @@ button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; bor
 button:hover { background:#27623e; }
 .score { margin-top:15px; padding:15px; border:1px solid #ccc; border-radius:5px; background:#d4efd5; text-align:center; }
 nav { text-align:center; margin-bottom:20px; }
-nav a { margin:0 10px; text-decoration:none; color:#2E5D3D; font-weight:bold; }
+nav a { margin:0 10px; text-decoration:underline; color:#007bff; font-weight:bold; }
 nav a:hover { color:#27623e; }
 </style>
 </head>
 <body>
+
 <div class="container">
-  <nav>
+<nav>
   <a href="index.html">Home</a>
   <a href="results.html">Assessment</a>
   <a href="recommendations.html">Recommendations</a>
 </nav>
 
-<style>
-nav { 
-  text-align: center; 
-  margin-bottom: 20px; 
-}
-nav a { 
-  margin: 0 15px; 
-  text-decoration: underline; /* Unterstreichung */
-  color: #007bff; /* Blau */
-  font-weight: bold; 
-  font-size: 16px;
-}
-nav a:hover { 
-  color: #27623e; /* dunkler beim Hover */
-}
-</style>
+<h1>Enhanced Stress Index (WHO-Based)</h1>
 
+<form id="assessmentForm">
 
-  <h1>Complete Health Assessment</h1>
+  <!-- Demographics -->
+  <div class="question">
+    <label>Age:</label>
+    <select name="age" required>
+      <option value="" disabled selected>Select age</option>
+      <option value="18-30">18–30</option>
+      <option value="31-50">31–50</option>
+      <option value="51-70">51–70</option>
+      <option value=">70">>70</option>
+    </select>
+  </div>
 
-  <form id="assessmentForm">
-    <!-- Demographics -->
-    <div class="question">
-      <label>Age:</label>
-      <select name="age" required>
-        <option value="" disabled selected>Select age</option>
-        <option value="18-30">18–30</option>
-        <option value="31-50">31–50</option>
-        <option value="51-70">51–70</option>
-        <option value=">70">>70</option>
-      </select>
-    </div>
+  <div class="question">
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
 
-    <div class="question">
-      <label>Gender:</label>
-      <select name="gender" required>
-        <option value="" disabled selected>Select gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
+  <!-- Health Conditions -->
+  <h2>Health Conditions</h2>
+  <div class="question">
+    <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
+    <label><input type="checkbox" name="chronic" value="None"> None</label>
+    <label><input type="checkbox" name="chronic" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+    <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
+    <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery</label>
+    <label><input type="checkbox" name="chronic" value="Other"> Other</label>
+  </div>
 
-    <!-- Health Conditions -->
-    <h2>Health Conditions</h2>
-    <div class="question">
-      <label>Do you have any chronic diseases, medical conditions, or have you undergone surgery recently?</label>
-      <label><input type="checkbox" name="chronic" value="Diabetes"> Diabetes</label>
-      <label><input type="checkbox" name="chronic" value="Hypertension"> Hypertension</label>
-      <label><input type="checkbox" name="chronic" value="Heart Disease"> Heart Disease</label>
-      <label><input type="checkbox" name="chronic" value="Respiratory Disease"> Respiratory Disease</label>
-      <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
-      <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery (last 12 months)</label>
-      <label><input type="checkbox" name="chronic" value="Other"> Other</label>
-      <label><input type="checkbox" name="chronic" value="None"> None</label>
-    </div>
+  <!-- Physical Activity -->
+  <div class="question">
+    <label>Weekly Physical Activity:</label>
+    <label><input type="radio" name="physical" value="Little or no activity" required> &lt;150 min/week, no strength</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength"> 150–300 min/week, strength 0–1 days</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength"> 150–300 min/week, strength 2+ days</label>
+    <label><input type="radio" name="physical" value=">300 min/week, 2+ strength"> &gt;300 min/week, strength 2+ days</label>
+    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week"> Vigorous 75–150+ min/week, strength 2+ days</label>
+  </div>
 
-    <!-- Weekly Physical Activity -->
-    <div class="question">
-      <label>Which of the following best describes your weekly physical activity?</label>
-      <label><input type="radio" name="physical" value="Little or no activity" required> Little or no activity (&lt;150 min/week, no strength)</label>
-      <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength"> 150–300 min/week, strength 0–1 days</label>
-      <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength"> 150–300 min/week, strength 2+ days</label>
-      <label><input type="radio" name="physical" value=">300 min/week, 2+ strength"> &gt;300 min/week, strength 2+ days</label>
-      <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week"> Vigorous (75–150+ min/week) + strength 2+ days</label>
-    </div>
+  <!-- Harmful Habits -->
+  <h2>Harmful Habits</h2>
+  <div class="question">
+    <label>Alcohol consumption</label>
+    <label><input type="radio" name="alcohol" value="None" required> None (0 drinks/week)</label>
+    <label><input type="radio" name="alcohol" value="Low risk"> Low risk (Women:1–7, Men:1–14/week)</label>
+    <label><input type="radio" name="alcohol" value="Moderate risk"> Moderate risk (Women:8–14, Men:15–28/week)</label>
+    <label><input type="radio" name="alcohol" value="High risk"> High risk (Women:15–21, Men:29–42/week)</label>
+    <label><input type="radio" name="alcohol" value="Very high"> Very high (&gt;21 / &gt;42/week)</label>
+  </div>
 
-    <!-- Harmful Habits -->
-    <h2>Harmful Habits</h2>
-    <div class="question">
-      <label>Alcohol consumption</label>
-      <label><input type="radio" name="alcohol" value="None" required> None (0 drinks/week)</label>
-      <label><input type="radio" name="alcohol" value="Low risk"> Low risk (Women:1–7, Men:1–14/week)</label>
-      <label><input type="radio" name="alcohol" value="Moderate risk"> Moderate risk (Women:8–14, Men:15–28/week)</label>
-      <label><input type="radio" name="alcohol" value="High risk"> High risk (Women:15–21, Men:29–42/week)</label>
-      <label><input type="radio" name="alcohol" value="Very high"> Very high (&gt;21 / &gt;42/week)</label>
-    </div>
+  <div class="question">
+    <label>Tobacco use</label>
+    <label><input type="radio" name="tobacco" value="None" required> None</label>
+    <label><input type="radio" name="tobacco" value="Low"> Low (&lt;5/day)</label>
+    <label><input type="radio" name="tobacco" value="Moderate"> Moderate (5–19/day)</label>
+    <label><input type="radio" name="tobacco" value="High"> High (20/day)</label>
+    <label><input type="radio" name="tobacco" value="Very high"> Very high (&ge;30/day)</label>
+  </div>
 
-    <div class="question">
-      <label>Tobacco use (smoking / chewing)</label>
-      <label><input type="radio" name="tobacco" value="None" required> None</label>
-      <label><input type="radio" name="tobacco" value="Low"> Low (&lt;5/day)</label>
-      <label><input type="radio" name="tobacco" value="Moderate"> Moderate (5–19/day)</label>
-      <label><input type="radio" name="tobacco" value="High"> High (20/day)</label>
-      <label><input type="radio" name="tobacco" value="Very high"> Very high (&ge;30/day)</label>
-    </div>
+  <div class="question">
+    <label>Drug use</label>
+    <label><input type="radio" name="drugs" value="None" required> None</label>
+    <label><input type="radio" name="drugs" value="Low"> Low (occasional)</label>
+    <label><input type="radio" name="drugs" value="Moderate"> Moderate (regular, risk)</label>
+    <label><input type="radio" name="drugs" value="High"> High (dependence / health risk)</label>
+    <label><input type="radio" name="drugs" value="Very high"> Very high (severe)</label>
+  </div>
 
-    <div class="question">
-      <label>Drug use (prescription misuse or illegal substances)</label>
-      <label><input type="radio" name="drugs" value="None" required> None</label>
-      <label><input type="radio" name="drugs" value="Low"> Low (occasional)</label>
-      <label><input type="radio" name="drugs" value="Moderate"> Moderate (regular, risk)</label>
-      <label><input type="radio" name="drugs" value="High"> High (dependence / health risk)</label>
-      <label><input type="radio" name="drugs" value="Very high"> Very high (severe)</label>
-    </div>
+  <div class="question">
+    <label>Gambling</label>
+    <label><input type="radio" name="gambling" value="None" required> None</label>
+    <label><input type="radio" name="gambling" value="Low"> Low (occasional, minimal problems)</label>
+    <label><input type="radio" name="gambling" value="Moderate"> Moderate (regular, some problems)</label>
+    <label><input type="radio" name="gambling" value="High"> High (frequent, significant problems)</label>
+    <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
+  </div>
 
-    <div class="question">
-      <label>Gambling</label>
-      <label><input type="radio" name="gambling" value="None" required> None</label>
-      <label><input type="radio" name="gambling" value="Low"> Low</label>
-      <label><input type="radio" name="gambling" value="Moderate"> Moderate</label>
-      <label><input type="radio" name="gambling" value="High"> High</label>
-      <label><input type="radio" name="gambling" value="Very high"> Very high</label>
-    </div>
+  <!-- Stress & Well-Being -->
+  <h2>Stress & Well-Being (0–4 Likert Scale)</h2>
+  <div id="questions"></div>
 
-    <!-- Stress & Well-Being -->
-    <h2>Stress & Well-Being (0–4 Likert)</h2>
-    <div id="questions"></div>
+  <!-- Email -->
+  <div class="question">
+    <label>Email (optional)</label>
+    <input type="email" name="email" placeholder="you@example.com">
+  </div>
 
-    <!-- Email -->
-    <div class="question">
-      <label>Email (optional)</label>
-      <input type="email" name="email" placeholder="you@example.com">
-    </div>
+  <button type="submit">Submit</button>
+</form>
 
-    <button type="submit">Submit</button>
-  </form>
-
-
-<!-- Ergebnis -->
-<div id="results">
-  <div id="responseID"></div>
-  <div id="totalPoints"></div>
-  <div id="categoryColor"></div>
-  <button id="newFormBtn">Fill Again</button>
+<div class="score" id="results" style="display:none;">
+  <p id="responseID"></p>
+  <p id="totalPoints"></p>
+  <p id="categoryColor"></p>
+  <button id="newForm">Fill Again</button>
 </div>
 
 <script>
-// --- Web-App URL ---
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwcdawgMthaJdFh1l_1kqvctRpqRVPmhUkimJTLGuc2fnwmxoeHzMSaXVs12sPPXM0/exec";
-
-// Likert-Fragen
+// Likert Fragen
 const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions = [
   "In the past month, I felt that things were generally going my way.",
@@ -177,46 +153,31 @@ const stressQuestions = [
   "Over the last month, my workload prevented me from completing important personal tasks.",
   "In the past month, I had sufficient control over how I completed my work tasks."
 ];
+
+// Render stress questions
 const questionsDiv = document.getElementById('questions');
 stressQuestions.forEach((q,i)=>{
-  const div=document.createElement('div');
+  const div = document.createElement('div');
   div.className='question';
-  div.innerHTML=`<label>${i+1}. ${q}</label>
-  <input type="range" min="0" max="4" value="2" name="q${i}" required>
-  <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>`;
+  div.innerHTML = `<label>${i+1}. ${q}</label>
+    <input type="range" min="0" max="4" value="2" name="q${i}" required>
+    <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>`;
   questionsDiv.appendChild(div);
 });
 
-// Sequenzielle Response ID
-function generateSequentialID() {
-  const now=new Date();
-  const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
-  const storageKey=`internalID_${yearMonth}`;
-  let currentNumber=parseInt(localStorage.getItem(storageKey)||"0",10);
-  currentNumber+=1;
-  localStorage.setItem(storageKey,currentNumber);
-  return `ASG${yearMonth}${String(currentNumber).padStart(4,'0')}`;
-}
-
-// --- Web-App senden ---
-async function sendToWebApp(formData){
-  try {
-    const resp = await fetch(WEBAPP_URL, {
-      method: "POST",
-      mode: "cors",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(formData)
-    });
-    const result = await resp.json();
-    console.log("Web-App Response:", result);
-  } catch(err){
-    console.error("Fehler beim Senden:", err);
-  }
+// Steigende Response ID
+function generateSequentialID(){
+  const now = new Date();
+  const y = now.getFullYear().toString();
+  const m = (now.getMonth()+1).toString().padStart(2,'0');
+  let counter = parseInt(localStorage.getItem('ASGCounter')||'0') + 1;
+  localStorage.setItem('ASGCounter', counter);
+  return `ASG${y}${m}-${counter}`;
 }
 
 // Form Submit
 const form=document.getElementById('assessmentForm');
-form.addEventListener('submit', e=>{
+form.addEventListener('submit', async e=>{
   e.preventDefault();
   const responseID = generateSequentialID();
 
@@ -242,17 +203,15 @@ form.addEventListener('submit', e=>{
   if(form.age.value==="31-50") badPoints+=1;
   if(form.age.value==="51-70") badPoints+=2;
   if(form.age.value==">70") badPoints+=3;
-  form.querySelectorAll('input[name="chronic"]:checked').forEach(c=>{
-    if(c.value!=="None") badPoints+=2;
-  });
+  form.querySelectorAll('input[name="chronic"]:checked').forEach(c=>{ if(c.value!=="None") badPoints+=2; });
   ["alcohol","tobacco","drugs","gambling"].forEach(name=>{
     const val=form.querySelector(`input[name="${name}"]:checked`)?.value;
     if(val && val!=="None") badPoints+=1;
   });
 
-  const totalPoints = Math.max(0, Math.min(63, stressPoints + badPoints - physicalPoints));
+  const totalPoints=Math.max(0, Math.min(63, stressPoints+badPoints-physicalPoints));
 
-  // Kategorie & Farbpunkt
+  // Kategorie & Farbe
   let category="", color="";
   if(totalPoints<=12){ category="Sehr gut / niedriges Risiko"; color="🟢"; }
   else if(totalPoints<=25){ category="Gut / mildes Risiko"; color="🟢"; }
@@ -268,28 +227,26 @@ form.addEventListener('submit', e=>{
   document.getElementById('totalPoints').textContent=`Gesamtpunkte: ${totalPoints}`;
   document.getElementById('categoryColor').textContent=`Kategorie: ${category} ${color}`;
 
-  // --- Daten an Web-App senden ---
-  const formData = {
-    responseId: responseID,
-    age: form.age.value,
-    gender: form.gender.value,
+  // Daten an Google Web App senden
+  const formData={
+    responseID, age: form.age.value, gender: form.gender.value,
     chronic: Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value),
-    physical: phys,
-    alcohol: form.querySelector('input[name="alcohol"]:checked')?.value,
-    tobacco: form.querySelector('input[name="tobacco"]:checked')?.value,
-    drugs: form.querySelector('input[name="drugs"]:checked')?.value,
-    gambling: form.querySelector('input[name="gambling"]:checked')?.value,
-    stress: stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value)),
-    email: form.email.value,
-    totalPoints: totalPoints,
-    category: category,
-    color: color
+    physical: phys, alcohol: form.alcohol.value, tobacco: form.tobacco.value,
+    drugs: form.drugs.value, gambling: form.gambling.value, email: form.email.value,
+    stressPoints, physicalPoints, badPoints, totalPoints, category, color
   };
-  sendToWebApp(formData);
+
+  try{
+    await fetch("https://script.google.com/macros/s/AKfycbwcdawgMthaJdFh1l_1kqvctRpqRVPmhUkimJTLGuc2fnwmxoeHzMSaXVs12sPPXM0/exec",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(formData)
+    });
+  }catch(err){ console.error("Fehler beim Senden an Web App:",err); }
 });
 
-// Fill Again
-document.getElementById('newFormBtn').addEventListener('click', ()=>{
+// Reset form
+document.getElementById('newForm').addEventListener('click', ()=>{
   form.reset();
   form.style.display='block';
   document.getElementById('results').style.display='none';
@@ -297,6 +254,3 @@ document.getElementById('newFormBtn').addEventListener('click', ()=>{
 </script>
 </body>
 </html>
-
-
-
