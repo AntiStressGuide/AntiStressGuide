@@ -228,13 +228,28 @@ form.addEventListener('submit', async e=>{
   document.getElementById('categoryColor').textContent=`Kategorie: ${category} ${color}`;
 
   // Daten an Google Web App senden
-  const formData={
-  responseID, age: form.age.value, gender: form.gender.value,
-  chronic: Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value),
-  physical: phys, alcohol: form.alcohol.value, tobacco: form.tobacco.value,
-  drugs: form.drugs.value, gambling: form.gambling.value, email: form.email.value,
-  stressPoints, physicalPoints, badPoints, totalPoints, category, color
-};
+   const formData = {
+    responseID,
+    age: form.age.value || "",
+    gender: form.gender.value || "",
+    chronic: Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value),
+    physical: phys,
+    alcohol: form.alcohol.value || "",
+    tobacco: form.tobacco.value || "",
+    drugs: form.drugs.value || "",
+    gambling: form.gambling.value || "",
+    email: form.email.value || "",
+    stressPoints,
+    physicalPoints,
+    badPoints,
+    totalPoints,
+    category,
+    color,
+    paid: "",              // optional
+    paymentDate: "",       // optional
+    recommendations: ""    // optional
+  };
+
 
   try{
     await fetch("https://script.google.com/macros/s/AKfycbwR-DU0IZnIxM58aMtPpK8TpXGQEbxlxOZyhHqZQKREaSlnVr4ZSIl8V9fO7BWPKIok/exec",{
@@ -254,6 +269,7 @@ document.getElementById('newForm').addEventListener('click', ()=>{
 </script>
 </body>
 </html>
+
 
 
 
