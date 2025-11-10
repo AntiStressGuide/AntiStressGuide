@@ -6,70 +6,55 @@
 <title>Individual Recommendations - AntiStressGuide</title>
 <style>
 body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; }
-.container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; }
-h1, h2 { color:#2E5D3D; text-align:center; }
-nav { text-align:center; margin-bottom:20px; }
+nav { text-align:center; margin:0; padding:15px; background:#fff; border-bottom:1px solid #ccc; position:sticky; top:0; z-index:100; }
 nav a { margin:0 10px; text-decoration:underline; color:#007bff; font-weight:bold; }
 nav a:hover { color:#27623e; }
-label { display:block; margin:15px 0 5px; }
-input[type="text"] { width:100%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; }
-button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+.container { max-width:700px; margin:20px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+h1, h2 { color:#2E5D3D; text-align:center; }
+label { display:block; margin:10px 0; font-weight:500; }
+input[type="text"] { width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; font-size:16px; }
+button { margin-top:15px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
 button:hover { background:#27623e; }
-.result { margin-top:20px; padding:15px; background:#f0fff5; border-radius:8px; border:1px solid #cce6d0; }
+input[type="radio"], input[type="checkbox"] { width:20px; height:20px; margin-right:10px; vertical-align:middle; cursor:pointer; }
+.search-section { margin:20px 0; text-align:center; }
 </style>
 </head>
 <body>
 
+<!-- Navigation -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="Results.html">Enhanced Stress Index</a>
+</nav>
+
 <div class="container">
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="Results.html">Enhanced Stress Index</a>
-  </nav>
-
   <h1>Individual Recommendations</h1>
-  <p>Please enter your unique Response ID below to access your personalized stress management recommendations based on the latest WHO guidelines.</p>
+  <p>Please enter your unique assessment ID to retrieve personalized recommendations based on the latest WHO standards. Example ID: <strong>ASG-001234</strong></p>
 
-  <form id="searchForm">
-    <label for="responseID">Enter your Response ID:</label>
-    <input type="text" id="responseID" name="responseID" placeholder="e.g., ASG-001234" required>
-    <button type="submit">Search</button>
-  </form>
-
-  <div class="result" id="result">
-    <!-- Recommendations will appear here after searching -->
+  <!-- Search Form -->
+  <div class="search-section">
+    <form id="searchForm">
+      <input type="text" name="assessmentID" placeholder="Enter your assessment ID, e.g., ASG-001234" required>
+      <button type="submit">Retrieve Recommendations</button>
+    </form>
   </div>
+
+  <!-- Results placeholder -->
+  <div id="results" style="margin-top:30px; text-align:center; color:#333;"></div>
 </div>
 
 <script>
-const form = document.getElementById('searchForm');
-const resultDiv = document.getElementById('result');
-
-form.addEventListener('submit', async (e) => {
+document.getElementById('searchForm').addEventListener('submit', function(e){
   e.preventDefault();
-  const responseID = document.getElementById('responseID').value.trim();
-
-  if(!responseID) {
-    resultDiv.textContent = "Please enter a valid Response ID.";
-    return;
-  }
-
-  // Simulated loading effect / example response
-  resultDiv.textContent = "Fetching recommendations for Response ID: " + responseID + " ...";
-
-  setTimeout(() => {
-    resultDiv.innerHTML = `
-      <h2>Personalized Recommendations</h2>
-      <p>Based on your latest assessment and WHO guidelines, the following stress management strategies are recommended:</p>
-      <ul>
-        <li>Practice daily mindfulness meditation for 10–15 minutes.</li>
-        <li>Engage in at least 150 minutes of moderate physical activity per week.</li>
-        <li>Maintain a balanced diet rich in fruits and vegetables.</li>
-        <li>Ensure adequate sleep of 7–8 hours per night.</li>
-        <li>Limit alcohol and avoid tobacco or recreational drugs.</li>
-      </ul>
-      <p><strong>Note:</strong> Full individualized recommendations are available for €19,99.</p>
+  const id = e.target.assessmentID.value.trim();
+  if(id) {
+    // Placeholder logic: replace with actual API/fetch call
+    document.getElementById('results').innerHTML = `
+      <h2>Recommendations for ${id}</h2>
+      <p>Access to personalized recommendations requires payment: <strong>19,99 €</strong></p>
+      <p>After payment, detailed recommendations based on the latest WHO stress guidelines will be displayed here.</p>
     `;
-  }, 1000);
+  }
 });
 </script>
 
