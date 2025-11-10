@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Individual Recommendations Based on the Latest WHO Guidelines</title>
-<meta name="description" content="Retrieve your personalized recommendations based on the latest WHO stress management guidelines.">
+<meta name="description" content="Complete a stress assessment based on WHO standards and receive scientifically validated general and individualized recommendations.">
+<meta name="keywords" content="Stress, WHO, Assessment, Recommendations, Scientific">
+<meta name="author" content="AntiStressGuide">
 <style>
   body {
     font-family: 'Roboto', Arial, sans-serif;
@@ -22,7 +24,6 @@
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
   }
 
   /* Navigation */
@@ -42,10 +43,15 @@
   }
 
   /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
   header h1 {
     margin: 0;
     font-size: 2em;
     color: #2E5D3D;
+    line-height: 1.3;
   }
   header p {
     font-size: 1.6em;
@@ -54,9 +60,20 @@
     color: #2E5D3D;
   }
 
+  /* Main content */
+  h2 {
+    margin-top: 30px;
+    font-size: 1.4em;
+    color: #2E5D3D;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+
   /* Links */
   .links {
     margin-top: 30px;
+    text-align: center;
   }
   .links a {
     display: inline-block;
@@ -71,16 +88,6 @@
   }
   .links a:hover {
     background: #27623e;
-  }
-
-  /* Main Content */
-  h2 {
-    margin-top: 30px;
-    font-size: 1.4em;
-    color: #2E5D3D;
-  }
-  p {
-    margin-bottom: 20px;
   }
 
   /* Footer */
@@ -98,7 +105,6 @@
     margin-top: 30px;
     font-size: 0.9em;
     color: #444;
-    text-align: left;
   }
   .sources li {
     margin-bottom: 5px;
@@ -147,6 +153,24 @@
   .popup-content button:hover {
     background: #27623e;
   }
+
+  /* Form */
+  .search-section {
+    margin: 20px 0;
+    text-align: center;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  button[type="submit"] {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
 </style>
 </head>
 <body>
@@ -154,8 +178,8 @@
 <div class="container">
   <!-- Navigation -->
   <nav>
-     <a href="Results.html">Enhanced Stress Index</a>
-    <a href="Recommendations.html">Recommendations</a>
+    <a href="index.html">Home</a>
+    <a href="Results.html">Enhanced Stress Index</a>
   </nav>
 
   <!-- Header -->
@@ -166,12 +190,15 @@
 
   <!-- Main Content -->
   <main>
-    <p>Please enter your unique assessment ID to retrieve your personalized recommendations:</p>
+    <p>Welcome to the WHO-Based Stress Assessment Project. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.</p>
 
     <div class="links">
       <a href="Results.html">Enhanced Stress Index – General Recommendations (Free)</a>
       <a href="#" id="recommendationsLink">Individual Recommendations – 19,99 €</a>
     </div>
+
+    <h2>Project Overview</h2>
+    <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalized guidance tailored to your specific responses and the latest WHO data. All analyses are grounded in validated scientific studies.</p>
 
     <h2>Scientific Sources</h2>
     <ul class="sources">
@@ -180,6 +207,17 @@
       <li><a href="https://journals.sagepub.com/home/jsr" target="_blank">Smith et al., Journal of Stress Research, 2022</a></li>
       <li><a href="#" target="_blank">Additional peer-reviewed studies and WHO documentation are continually updated</a></li>
     </ul>
+
+    <!-- Search Form -->
+    <div class="search-section">
+      <form id="searchForm">
+        <input type="text" name="assessmentID" placeholder="Enter your assessment ID, e.g., ASG-001234" required>
+        <button type="submit">Retrieve Recommendations</button>
+      </form>
+    </div>
+
+    <!-- Results -->
+    <div id="results"></div>
   </main>
 
   <footer>
@@ -210,11 +248,4 @@
   });
 
   popup.addEventListener('click', function(e) {
-    if(e.target === popup) {
-      popup.style.display = 'none';
-    }
-  });
-</script>
-
-</body>
-</html>
+    i
