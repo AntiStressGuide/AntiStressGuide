@@ -3,16 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHO-Based Health Analysis Project</title>
-<meta name="description" content="Capture your health data based on WHO standards and receive scientifically grounded recommendations.">
-<meta name="keywords" content="Health, WHO, Analysis, Health Data, Recommendations, Scientific">
-<meta name="author" content="Your Name">
+<title>WHO-Based Stress Assessment & Personalized Recommendations</title>
+<meta name="description" content="Assess your stress level based on WHO standards and receive personalized, scientifically-backed recommendations to manage stress effectively.">
+<meta name="keywords" content="Stress Assessment, Stress Analysis, WHO Guidelines, Personalized Recommendations, Stress Management">
+<meta name="author" content="AntiStressGuide">
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WHO-Based Stress Assessment & Recommendations",
+  "url": "https://yourdomain.com",
+  "applicationCategory": "HealthApplication",
+  "description": "Assess your stress level based on WHO standards and receive personalized, evidence-based recommendations.",
+  "creator": {
+    "@type": "Organization",
+    "name": "AntiStressGuide"
+  }
+}
+</script>
+
 <style>
   body { font-family: 'Roboto', Arial, sans-serif; background:#eaf5e8; color:#222; margin:0; padding:0; line-height:1.6; }
   header { background:#f0fff4; border-bottom:1px solid #cce6d0; padding:20px 0; text-align:center; }
-  header h1 { margin:0; font-size:1.8em; color:#2E5D3D; }
+  header h1 { margin:0; font-size:2em; color:#2E5D3D; }
   main { max-width:800px; margin:40px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-  h2 { margin-top:30px; font-size:1.4em; color:#2E5D3D; }
+  h2 { margin-top:30px; font-size:1.5em; color:#2E5D3D; }
+  h3 { margin-top:20px; font-size:1.2em; color:#3A7047; }
   p { margin-bottom:20px; }
   .links { margin-top:30px; text-align:center; }
   .links a { display:inline-block; margin:10px; padding:12px 24px; background:#2E5D3D; color:#fff; text-decoration:none; border-radius:5px; font-weight:500; transition:background 0.3s; }
@@ -25,24 +43,38 @@
   .popup-content { background:#fff; padding:30px; border-radius:10px; max-width:400px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
   .popup-content button { margin-top:20px; padding:10px 20px; background:#2E5D3D; color:#fff; border:none; border-radius:5px; cursor:pointer; }
   .popup-content button:hover { background:#27623e; }
+  @media (max-width:600px) {
+    main { margin:20px; padding:15px; }
+    .links a { width:80%; padding:12px 0; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>WHO-Based Health Analysis Project</h1>
+  <h1>WHO-Based Stress Assessment & Personalized Recommendations</h1>
 </header>
 
 <main>
-  <p>Welcome to our health analysis project. This tool allows you to capture your health data based on WHO standards and receive scientifically grounded recommendations. Data is securely processed via a Google Web App and stored in Google Sheets. No Google login is required to fill out the form.</p>
+  <p>Welcome! This tool allows you to <strong>assess your stress level</strong> based on WHO standards and receive <strong>personalized, scientifically-backed recommendations</strong> to manage stress effectively. Your data is securely processed via a Google Web App and stored in Google Sheets. No Google login is required.</p>
 
   <div class="links">
-    <a href="Results.html">Fill out Health Form</a>
-    <a href="#" id="recommendationsLink">Recommendations</a>
+    <a href="Form.html" title="Fill out your stress assessment form">Fill out Stress Form</a>
+    <a href="#" id="recommendationsLink" title="See personalized stress management recommendations">Recommendations</a>
   </div>
 
   <h2>About the Project</h2>
-  <p>The project is designed to provide a reliable and scientific approach to health data collection and analysis. All recommendations are based on current WHO standards and validated research studies. The Recommendations section is currently under development and will be available soon.</p>
+  <p>This project provides a reliable and scientific approach to stress assessment and management. All recommendations are based on current WHO guidelines and validated research studies. Our goal is to help you understand your stress level and provide actionable steps for improvement.</p>
+
+  <h2>How It Works</h2>
+  <h3>Step 1: Fill Out Stress Form</h3>
+  <p>Input your stress-related data, lifestyle habits, and indicators affecting your stress levels.</p>
+
+  <h3>Step 2: Stress Assessment</h3>
+  <p>Your input is securely analyzed, and a stress index is calculated according to WHO standards.</p>
+
+  <h3>Step 3: Personalized Recommendations</h3>
+  <p>Receive individualized guidance based on your assessment, including stress management strategies, lifestyle adjustments, and evidence-based interventions.</p>
 
   <h2>Sources</h2>
   <ul class="sources">
@@ -54,13 +86,13 @@
 </main>
 
 <footer>
-  &copy; 2025 Your Name. All rights reserved.
+  &copy; 2025 AntiStressGuide. All rights reserved.
 </footer>
 
 <!-- Popup Overlay -->
-<div class="popup-overlay" id="popup">
+<div class="popup-overlay" id="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
   <div class="popup-content">
-    <p>Recommendations are coming soon. Stay tuned!</p>
+    <p id="popupTitle">Personalized recommendations are coming soon. Stay tuned!</p>
     <button id="closePopup">Close</button>
   </div>
 </div>
