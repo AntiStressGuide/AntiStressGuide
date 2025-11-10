@@ -10,8 +10,8 @@
 <style>
   body { font-family: 'Roboto', Arial, sans-serif; background:#eaf5e8; color:#222; margin:0; padding:0; line-height:1.6; }
   .container { max-width:800px; margin:40px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-  header h1 { margin:0; font-size:2em; color:#2E5D3D; text-align:center; }
-  header p { margin:10px 0 0 0; font-size:1.1em; color:#2E5D3D; text-align:center; }
+  h1 { margin:0; font-size:2em; color:#2E5D3D; text-align:center; }
+  header p { font-size:1.3em; font-weight:bold; margin-top:10px; color:#2E5D3D; text-align:center; }
   h2 { margin-top:30px; font-size:1.4em; color:#2E5D3D; }
   p { margin-bottom:20px; }
   .links { margin-top:30px; text-align:center; }
@@ -27,6 +27,9 @@
   .popup-content p { margin-bottom:20px; color:#222; }
   .popup-content button { margin-top:10px; padding:10px 20px; background:#2E5D3D; color:#fff; border:none; border-radius:5px; cursor:pointer; }
   .popup-content button:hover { background:#27623e; }
+  nav { text-align:center; margin-bottom:20px; }
+  nav a { margin:0 10px; text-decoration:underline; color:#007bff; font-weight:bold; }
+  nav a:hover { color:#27623e; }
 </style>
 </head>
 <body>
@@ -36,6 +39,11 @@
     <h1>Stress Management Project</h1>
     <p>Based on the Recommendations of the World Health Organisation (WHO)</p>
   </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="Results.html">Enhanced Stress Index</a>
+  </nav>
 
   <main>
     <p>Welcome to the WHO-Based Stress Assessment Project. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.</p>
@@ -57,11 +65,11 @@
       <li>Additional peer-reviewed studies and WHO documentation are continually updated.</li>
     </ul>
   </main>
-</div>
 
-<footer class="container">
-  &copy; 2025 AntiStressGuide. All rights reserved.
-</footer>
+  <footer>
+    &copy; 2025 AntiStressGuide. All rights reserved.
+  </footer>
+</div>
 
 <!-- Popup Overlay -->
 <div class="popup-overlay" id="popup">
