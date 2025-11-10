@@ -1,4 +1,4 @@
-mmendations<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -28,11 +28,11 @@ mmendations<!DOCTYPE html>
 
   /* Navigation */
   nav {
-    text-align: center;
+    text-align: center; /* zentriert die Links */
     margin-bottom: 30px;
   }
   nav a {
-    margin: 0 15px 0 0;
+    margin: 0 15px;
     text-decoration: underline;
     color: #007bff;
     font-weight: bold;
@@ -113,6 +113,13 @@ mmendations<!DOCTYPE html>
   .sources li {
     margin-bottom: 5px;
   }
+  .sources li a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  .sources li a:hover {
+    color: #27623e;
+  }
 
   /* Popup */
   .popup-overlay {
@@ -157,8 +164,9 @@ mmendations<!DOCTYPE html>
 <div class="container">
   <!-- Navigation -->
   <nav>
+    <a href="index.html">Home</a>
     <a href="Results.html">Enhanced Stress Index</a>
-    <a href="Recommendationa.html">Recommendations</a>
+    <a href="Recommendations.html">Recommendations</a>
   </nav>
 
   <!-- Header -->
@@ -174,17 +182,17 @@ mmendations<!DOCTYPE html>
     <div class="links">
       <a href="Results.html">Enhanced Stress Index – General Recommendations (Free)</a>
       <a href="#" id="recommendationsLink">Individual Recommendations – 19,99 €</a>
-          </div>
+    </div>
 
     <h2>Project Overview</h2>
     <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalized guidance tailored to your specific responses and the latest WHO data. All analyses are grounded in validated scientific studies.</p>
 
     <h2>Scientific Sources</h2>
     <ul class="sources">
-      <li>World Health Organisation. Global Health Observatory Data Repository.</li>
-      <li>WHO Guidelines on Stress and Health Management, 2023.</li>
-      <li>Smith et al., Journal of Stress Research, 2022.</li>
-      <li>Additional peer-reviewed studies and WHO documentation are continually updated.</li>
+      <li><a href="https://www.who.int/data/gho" target="_blank">World Health Organisation. Global Health Observatory Data Repository</a></li>
+      <li><a href="https://www.who.int/publications/guidelines" target="_blank">WHO Guidelines on Stress and Health Management, 2023</a></li>
+      <li><a href="https://journals.sagepub.com/home/jsr" target="_blank">Smith et al., Journal of Stress Research, 2022</a></li>
+      <li><a href="#" target="_blank">Additional peer-reviewed studies and WHO documentation are continually updated</a></li>
     </ul>
   </main>
 
@@ -224,5 +232,3 @@ mmendations<!DOCTYPE html>
 
 </body>
 </html>
-
-
