@@ -26,7 +26,7 @@
     text-align: center;
   }
 
-  /* Navigation */
+  /* Navigation (optional sticky top nav) */
   nav {
     text-align: center;
     margin: 0;
@@ -59,6 +59,23 @@
     font-weight: bold;
     margin-top: 10px;
     color: #2E5D3D;
+  }
+
+  /* Links im Container */
+  .links {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .links a {
+    display: inline-block;
+    margin-right: 15px;
+    text-decoration: underline;
+    color: #007bff;
+    font-weight: bold;
+  }
+  .links a:hover {
+    color: #27623e;
   }
 
   /* Form */
@@ -97,12 +114,19 @@
 <nav>
   <a href="index.html">Home</a>
   <a href="Results.html">Enhanced Stress Index</a>
- </nav>
+</nav>
 
 <div class="container">
   <!-- Header -->
   <h1>Individual Recommendations</h1>
   <p class="subtitle">Based on the Latest WHO Guidelines</p>
+
+  <!-- Links im weißen Container -->
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="Results.html">Enhanced Stress Index</a>
+    <a href="Recommendations.html">Recommendations</a>
+  </div>
 
   <p>Please enter your unique assessment ID to retrieve your personalised recommendations:</p>
 
@@ -132,4 +156,3 @@
 
 </body>
 </html>
-
