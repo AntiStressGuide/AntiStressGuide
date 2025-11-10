@@ -17,13 +17,15 @@
   .links { margin-top:30px; text-align:center; }
   .links a { display:inline-block; margin:10px; padding:12px 24px; background:#2E5D3D; color:#fff; text-decoration:none; border-radius:5px; font-weight:500; transition:background 0.3s; }
   .links a:hover { background:#27623e; }
+  .links p { font-size:0.9em; color:#555; margin-top:5px; }
   footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
   .sources { margin-top:30px; font-size:0.9em; color:#444; }
   .sources li { margin-bottom:5px; }
   /* Popup Styles */
   .popup-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(46,93,61,0.2); justify-content:center; align-items:center; z-index:1000; }
   .popup-content { background:#fff; padding:30px; border-radius:10px; max-width:400px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
-  .popup-content button { margin-top:20px; padding:10px 20px; background:#2E5D3D; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+  .popup-content p { margin-bottom:20px; color:#222; }
+  .popup-content button { margin-top:10px; padding:10px 20px; background:#2E5D3D; color:#fff; border:none; border-radius:5px; cursor:pointer; }
   .popup-content button:hover { background:#27623e; }
 </style>
 </head>
@@ -34,15 +36,16 @@
 </header>
 
 <main>
-  <p>Welcome to our health analysis project. This tool allows you to capture your health data based on WHO standards and receive scientifically grounded recommendations. Data is securely processed via a Google Web App and stored in Google Sheets. No Google login is required to fill out the form.</p>
+  <p>Welcome to our health analysis project. You can complete the assessment for free and receive a scientifically grounded evaluation of your health data based on WHO standards. Detailed recommendations are available as a one-time purchase.</p>
 
   <div class="links">
-    <a href="Results.html">Fill out Health Form</a>
-    <a href="#" id="recommendationsLink">Recommendations</a>
+    <a href="Results.html">Kostenloses Health Form</a>
+    <a href="#" id="recommendationsLink">Recommendations – 19,99€</a>
+    <p>Access to full recommendations requires a one-time payment of 19,99€.</p>
   </div>
 
   <h2>About the Project</h2>
-  <p>The project is designed to provide a reliable and scientific approach to health data collection and analysis. All recommendations are based on current WHO standards and validated research studies. The Recommendations section is currently under development and will be available soon.</p>
+  <p>This project provides a reliable and scientific approach to health data collection and analysis. All recommendations are based on current WHO standards and validated research studies. Free assessment is fully functional, while recommendations require payment.</p>
 
   <h2>Sources</h2>
   <ul class="sources">
@@ -60,7 +63,7 @@
 <!-- Popup Overlay -->
 <div class="popup-overlay" id="popup">
   <div class="popup-content">
-    <p>Recommendations are coming soon. Stay tuned!</p>
+    <p>Full recommendations are coming soon and will cost 19,99€ per report.</p>
     <button id="closePopup">Close</button>
   </div>
 </div>
