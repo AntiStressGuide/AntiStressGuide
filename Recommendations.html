@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Individual Recommendations - AntiStressGuide</title>
+<style>
+body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; }
+.container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; }
+h1, h2 { color:#2E5D3D; text-align:center; }
+label { display:block; margin:15px 0 5px; }
+input[type="text"] { width:100%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; }
+button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+button:hover { background:#27623e; }
+.result { margin-top:20px; padding:15px; background:#f0fff5; border-radius:8px; border:1px solid #cce6d0; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Individual Recommendations</h1>
+  <p>Please enter your unique Response ID below to access your personalized stress management recommendations based on the latest WHO guidelines.</p>
+
+  <form id="searchForm">
+    <label for="responseID">Enter your Response ID:</label>
+    <input type="text" id="responseID" name="responseID" placeholder="e.g., RSP-001234" required>
+    <button type="submit">Search</button>
+  </form>
+
+  <div class="result" id="result">
+    <!-- Recommendations will appear here after searching -->
+  </div>
+</div>
+
+<script>
+const form = document.getElementById('searchForm');
+const resultDiv = document.getElementById('result');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const responseID = document.getElementById('responseID').value.trim();
+
+  if(!responseID) {
+    resultDiv.textContent = "Please enter a valid Response ID.";
+    return;
+  }
+
+  // Hier würdest du die Abfrage an dein Google Sheet oder Backend machen
+  // Beispiel: Simulierte Antwort
+  resultDiv.textContent = "Fetching recommendations for Response ID: " + responseID + " ...";
+
+  // Simulierter Ladeeffekt / Beispielantwort
+  setTimeout(() => {
+    resultDiv.innerHTML = `
+      <h2>Personalized Recommendations</h2>
+      <p>Based on your latest assessment and WHO guidelines, the following stress management strategies are recommended:</p>
+      <ul>
+        <li>Practice daily mindfulness meditation for 10–15 minutes.</li>
+        <li>Engage in at least 150 minutes of moderate physical activity per week.</li>
+        <li>Maintain a balanced diet rich in fruits and vegetables.</li>
+        <li>Ensure adequate sleep of 7–8 hours per night.</li>
+        <li>Limit alcohol and avoid tobacco or recreational drugs.</li>
+      </ul>
+    `;
+  }, 1000);
+});
+</script>
+
+</body>
+</html>
