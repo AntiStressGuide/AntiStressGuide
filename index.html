@@ -9,18 +9,30 @@
 <meta name="author" content="AntiStressGuide">
 <style>
   body { font-family: 'Roboto', Arial, sans-serif; background:#eaf5e8; color:#222; margin:0; padding:0; line-height:1.6; }
-  header { background:#f0fff4; border-bottom:1px solid #cce6d0; padding:20px 0; text-align:center; }
-  header h1 { margin:0; font-size:1.8em; color:#2E5D3D; }
-  main { max-width:800px; margin:40px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-  h2 { margin-top:30px; font-size:1.4em; color:#2E5D3D; }
-  p { margin-bottom:20px; }
+  
+  /* Header */
+  header { background:#f0fff4; border-bottom:1px solid #cce6d0; padding:40px 20px; text-align:center; }
+  header h1 { margin:0; font-size:2.2em; color:#2E5D3D; font-weight:700; }
+  header p { margin-top:10px; font-size:1.1em; color:#27623e; }
+
+  /* Main Content */
+  main { max-width:850px; margin:40px auto; padding:30px; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+  h2 { margin-top:30px; font-size:1.5em; color:#2E5D3D; }
+  p { margin-bottom:20px; font-size:1em; }
+  
+  /* Links / Buttons */
   .links { margin-top:30px; text-align:center; }
-  .links a { display:inline-block; margin:10px; padding:12px 24px; background:#2E5D3D; color:#fff; text-decoration:none; border-radius:5px; font-weight:500; transition:background 0.3s; }
+  .links a { display:inline-block; margin:10px; padding:14px 28px; background:#2E5D3D; color:#fff; text-decoration:none; border-radius:5px; font-weight:500; transition:background 0.3s; }
   .links a:hover { background:#27623e; }
-  .links p { font-size:0.9em; color:#555; margin-top:5px; }
+  .links p { font-size:0.95em; color:#555; margin-top:5px; }
+
+  /* Footer */
   footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
+
+  /* Sources */
   .sources { margin-top:30px; font-size:0.9em; color:#444; }
   .sources li { margin-bottom:5px; }
+
   /* Popup Styles */
   .popup-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(46,93,61,0.2); justify-content:center; align-items:center; z-index:1000; }
   .popup-content { background:#fff; padding:30px; border-radius:10px; max-width:400px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
@@ -32,20 +44,21 @@
 <body>
 
 <header>
-  <h1>Stress Management Project Based on the Recommendations of the World Health Organisation (WHO)</h1>
+  <h1>Stress Management Project</h1>
+  <p>Based on the Recommendations of the World Health Organisation (WHO)</p>
 </header>
 
 <main>
-  <p>Welcome to the Stress Management Project. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels, in alignment with World Health Organisation standards.</p>
+  <p>Welcome to the WHO-based Stress Management Project. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.</p>
 
   <div class="links">
     <a href="Results.html">Enhanced Stress Index – General Recommendations (Free)</a>
     <a href="#" id="recommendationsLink">Individual Recommendations – 19,99 €</a>
-    <p>Access to personalised, WHO-informed recommendations requires a one-time payment of 19,99 €.</p>
+    <p>Access to individualized, WHO-informed recommendations requires a one-time payment of 19,99 €.</p>
   </div>
 
   <h2>Project Overview</h2>
-  <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalised guidance tailored to your specific responses and the latest WHO published data. All analyses are grounded in validated scientific studies.</p>
+  <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalised guidance tailored to your specific responses and the latest WHO data. All analyses are grounded in validated scientific studies.</p>
 
   <h2>Scientific Sources</h2>
   <ul class="sources">
