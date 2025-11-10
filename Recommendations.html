@@ -17,6 +17,7 @@ button { margin-top:15px; padding:12px 25px; color:#fff; background:#2E5D3D; bor
 button:hover { background:#27623e; }
 input[type="radio"], input[type="checkbox"] { width:20px; height:20px; margin-right:10px; vertical-align:middle; cursor:pointer; }
 .search-section { margin:20px 0; text-align:center; }
+#results { margin-top:30px; text-align:center; color:#333; }
 </style>
 </head>
 <body>
@@ -32,15 +33,13 @@ input[type="radio"], input[type="checkbox"] { width:20px; height:20px; margin-ri
   <p>Please enter your unique assessment ID to retrieve personalized recommendations based on the latest WHO standards. Example ID: <strong>ASG-001234</strong></p>
 
   <!-- Search Form -->
-  <div class="search-section">
-    <form id="searchForm">
-      <input type="text" name="assessmentID" placeholder="Enter your assessment ID, e.g., ASG-001234" required>
-      <button type="submit">Retrieve Recommendations</button>
-    </form>
-  </div>
+  <form id="searchForm" class="search-section">
+    <input type="text" name="assessmentID" placeholder="Enter your assessment ID, e.g., ASG-001234" required>
+    <button type="submit">Retrieve Recommendations</button>
+  </form>
 
-  <!-- Results placeholder -->
-  <div id="results" style="margin-top:30px; text-align:center; color:#333;"></div>
+  <!-- Results -->
+  <div id="results"></div>
 </div>
 
 <script>
@@ -48,7 +47,6 @@ document.getElementById('searchForm').addEventListener('submit', function(e){
   e.preventDefault();
   const id = e.target.assessmentID.value.trim();
   if(id) {
-    // Placeholder logic: replace with actual API/fetch call
     document.getElementById('results').innerHTML = `
       <h2>Recommendations for ${id}</h2>
       <p>Access to personalized recommendations requires payment: <strong>19,99 €</strong></p>
