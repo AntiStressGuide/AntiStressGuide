@@ -33,7 +33,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  /* Header mit Logo links / Text zentriert */
   header {
     display: flex;
     align-items: center;
@@ -66,32 +65,16 @@
     line-height: 1.2;
   }
 
-  /* Linksbereich */
-  .links-container {
+  /* Alle Links gleich als Buttons */
+  .links {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* top alignment */
+    flex-direction: column;
+    align-items: center;
     margin-top: 30px;
+    gap: 15px; /* Abstand zwischen Buttons */
   }
 
-  .links-center {
-    flex: 1;
-    text-align: center;
-  }
-
-  .links-center a {
-    text-decoration: underline;
-    font-weight: bold;
-    color: #007bff;
-  }
-
-  .links-right {
-    display: flex;
-    flex-direction: column; /* untereinander */
-    gap: 10px;
-  }
-
-  .links-right a {
+  .links a {
     background: #2E5D3D;
     color: #fff;
     padding: 12px 24px;
@@ -99,37 +82,39 @@
     text-decoration: none;
     font-weight: 500;
     text-align: center;
+    width: 100%; /* volle Breite optional */
+    max-width: 400px; /* max Breite */
     transition: background 0.3s;
   }
 
-  .links-right a:hover {
+  .links a:hover {
     background: #27623e;
   }
 
-  /* Symbolisches Bild zentriert */
   .symbol-img {
     text-align: center;
     margin: 20px 0;
   }
+
   .symbol-img img {
     max-width: 150px;
     height: auto;
   }
 
-  /* Project Overview */
   .project-overview {
     text-align: center;
     margin-top: 30px;
   }
+
   .project-overview h2 {
     font-size: 1.4em;
     color: #2E5D3D;
   }
+
   .project-overview p {
     margin: 10px 0 20px 0;
   }
 
-  /* Footer */
   footer {
     margin-top: 40px;
     padding: 20px;
@@ -139,7 +124,6 @@
     border-top: 1px solid #cce6d0;
   }
 
-  /* Responsive */
   @media (max-width: 600px) {
     header {
       flex-direction: column;
@@ -149,24 +133,16 @@
       margin-bottom: 10px;
       margin-right: 0;
     }
-    .links-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    .links-right {
-      flex-direction: column;
-      align-items: center;
+    .links a {
+      max-width: 90%;
     }
   }
-
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- Header mit Logo links / Text zentriert -->
   <header>
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
     <div class="header-text">
@@ -175,23 +151,17 @@
     </div>
   </header>
 
-  <!-- Links -->
-  <div class="links-container">
-    <div class="links-center">
-      <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
-    </div>
-    <div class="links-right">
-      <a href="#" id="recommendationsLinkFree">Enhanced Stress Index (Free)</a>
-      <a href="#" id="recommendationsLinkPaid">Individual Recommendations – 19,99 €</a>
-    </div>
+  <!-- Alle Links als Buttons untereinander -->
+  <div class="links">
+    <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
+    <a href="#" id="recommendationsLinkFree">Enhanced Stress Index (Free)</a>
+    <a href="#" id="recommendationsLinkPaid">Individual Recommendations – 19,99 €</a>
   </div>
 
-  <!-- Symbolisches Bild zentriert -->
   <div class="symbol-img">
     <img src="AntiStressGuide_Symbol.png" alt="AntiStressGuide Symbol">
   </div>
 
-  <!-- Project Overview -->
   <div class="project-overview">
     <h2>Project Overview</h2>
     <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalized guidance tailored to your specific responses and the latest WHO data. All analyses are grounded in validated scientific studies.</p>
