@@ -32,12 +32,35 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  /* Logo oben links */
-  .logo-top {
-    display: block;
-    max-width: 120px;
+  /* Logo-Left / Text-Centered Flexbox Header */
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  header img.logo {
+    max-width: 100px;
     height: auto;
-    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  header .header-text {
+    flex: 1;
+    text-align: center;
+  }
+
+  header .header-text h1 {
+    margin:0;
+    font-size: 2em;
+    color: #2E5D3D;
+  }
+
+  header .header-text p {
+    margin:5px 0 0 0;
+    font-size: 1.6em;
+    font-weight:bold;
+    color: #2E5D3D;
   }
 
   /* Navigation */
@@ -54,23 +77,6 @@
   }
   nav a:hover {
     color: #27623e;
-  }
-
-  /* Header */
-  header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 2em;
-    color: #2E5D3D;
-  }
-  header p {
-    font-size: 1.6em;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #2E5D3D;
   }
 
   /* Main content */
@@ -171,20 +177,20 @@
 <body>
 
 <div class="container">
-  <!-- Logo oben links -->
-  <img src="Logo%20AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo-top">
+  <!-- Header mit Logo links / Text zentriert -->
+  <header>
+    <img src="Logo%20AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <div class="header-text">
+      <h1>Stress Management Recommendations</h1>
+      <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
+    </div>
+  </header>
 
   <!-- Navigation -->
   <nav>
     <a href="Results.html">Enhanced Stress Index</a>
     <a href="Recommendations.html">Recommendations</a>
   </nav>
-
-  <!-- Header -->
-  <header>
-    <h1>Stress Management Recommendations</h1>
-    <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
-  </header>
 
   <!-- Main Content -->
   <main>
