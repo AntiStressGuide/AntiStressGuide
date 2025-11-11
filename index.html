@@ -10,8 +10,9 @@
 <meta name="robots" content="noindex, nofollow">
 
 <!-- Favicon -->
-<link rel="icon" href="AntiStressGuide.ico" type="image/x-icon">
-<link rel="shortcut icon" href="AntiStressGuide.png" type="image/png">
+<link rel="icon" type="image/png" href="Logo-AntiStressGuide.png">
+<link rel="shortcut icon" href="Logo-AntiStressGuide.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="Logo-AntiStressGuide.png">
 
 <style>
   body {
@@ -35,7 +36,7 @@
   /* Header mit Logo links / Text zentriert */
   header {
     display: flex;
-    align-items: center; /* vertikal zentriert */
+    align-items: center;
     margin-bottom: 40px;
   }
 
@@ -46,24 +47,23 @@
   }
 
   header .header-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Text vertikal mittig */
     flex: 1;
     text-align: center;
   }
 
   header .header-text h1 {
-    margin:0;
+    margin: 0;
     font-size: 2em;
     color: #2E5D3D;
+    line-height: 1.2;
   }
 
   header .header-text p {
-    margin:5px 0 0 0;
+    margin: 5px 0 0 0;
     font-size: 1.6em;
-    font-weight:bold;
+    font-weight: bold;
     color: #2E5D3D;
+    line-height: 1.2;
   }
 
   /* Navigation */
@@ -175,6 +175,18 @@
   .popup-content button:hover {
     background: #27623e;
   }
+
+  /* Responsive: Logo über Text auf kleinen Bildschirmen */
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      align-items: center;
+    }
+    header img.logo {
+      margin-bottom: 10px;
+      margin-right: 0;
+    }
+  }
 </style>
 </head>
 <body>
@@ -182,7 +194,7 @@
 <div class="container">
   <!-- Header mit Logo links / Text zentriert -->
   <header>
-    <img src="Logo%20AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <img src="Logo-AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
     <div class="header-text">
       <h1>Stress Management Recommendations</h1>
       <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
