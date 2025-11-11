@@ -25,7 +25,7 @@
   }
 
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 30px;
     background: #fff;
@@ -73,29 +73,32 @@
     font-size: 1.2em;
   }
 
-  /* Symbolisches Bild zentriert */
-  .symbol-img {
-    text-align: center;
-    margin: 20px 0;
-  }
-  .symbol-img img {
-    max-width: 150px;
-    height: auto;
-  }
-
-  /* Links in 2 Spalten */
+  /* Links in 2 Spalten mit Bild dazwischen */
   .links {
     margin-top: 30px;
   }
+
   .links-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
   }
+
+  .left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .links img {
+    max-width: 100px;
+    height: auto;
+    align-self: center;
+  }
+
   .links a {
     display: inline-block;
-    margin: 5px 0;
     padding: 12px 24px;
     background: #2E5D3D;
     color: #fff;
@@ -103,13 +106,11 @@
     border-radius: 5px;
     font-weight: 500;
     transition: background 0.3s;
+    text-align: center;
   }
+
   .links a:hover {
     background: #27623e;
-  }
-  .right-column {
-    display: flex;
-    flex-direction: column;
   }
 
   /* Project Overview zentriert */
@@ -149,8 +150,8 @@
       flex-direction: column;
       align-items: center;
     }
-    .right-column {
-      align-items: center;
+    .links img {
+      margin: 15px 0;
     }
   }
 
@@ -173,20 +174,21 @@
     Welcome to the WHO-Based Stress Management. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.
   </div>
 
-  <!-- Symbolisches Bild zentriert -->
-  <div class="symbol-img">
-    <img src="AntiStressGuide_Symbol.png" alt="AntiStressGuide Symbol">
-  </div>
-
-  <!-- Links in 2 Spalten -->
+  <!-- Links mit Bild zwischen den Spalten -->
   <div class="links">
     <div class="links-row">
       <!-- Linke Spalte -->
-      <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
+      <div class="left-column">
+        <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
+      </div>
+
+      <!-- Bild dazwischen -->
+      <img src="AntiStressGuide_Symbol.png" alt="AntiStressGuide Symbol">
+
       <!-- Rechte Spalte -->
       <div class="right-column">
         <a href="#" id="recommendationsLinkFree">Enhanced Stress Index (Free)</a>
-        <a href="#" id="recommendationsLinkPaid" style="margin-top:10px;">Individual Recommendations – 19,99 €</a>
+        <a href="#" id="recommendationsLinkPaid">Individual Recommendations – 19,99 €</a>
       </div>
     </div>
   </div>
@@ -205,18 +207,7 @@
 <script>
   const recommendationsLinkFree = document.getElementById('recommendationsLinkFree');
   const recommendationsLinkPaid = document.getElementById('recommendationsLinkPaid');
-  // Beispiel Popup-Funktionalität
+  // Popup-Beispiele (optional)
   /*
   recommendationsLinkFree.addEventListener('click', function(e) {
     e.preventDefault();
-    alert("Enhanced Stress Index (Free) clicked!");
-  });
-  recommendationsLinkPaid.addEventListener('click', function(e) {
-    e.preventDefault();
-    alert("Individual Recommendations clicked!");
-  });
-  */
-</script>
-
-</body>
-</html>
