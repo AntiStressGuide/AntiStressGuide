@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhanced Stress Index (WHO-Based)</title>
+
+<!-- Favicon -->
+<link rel="icon" href="AintiStressGuide.ico" type="image/x-icon">
+
+<style>
+body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; }
+.container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; }
+
+h1, h2 { color:#2E5D3D; text-align:center; }
+.question { margin:15px 0; padding:15px; border-radius:8px; }
+.question:nth-child(odd) { background:#e0f2e9; }
+.question:nth-child(even) { background:#f7fff8; }
+
+label { display:block; margin:5px 0; }
+input[type="range"] { width:100%; margin-top:5px; }
+.range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
+input[type="checkbox"], input[type="radio"] { margin-right:5px; }
+select, input[type=email] { width:100%; padding:8px; margin-top:30px; border-radius:30px; border:1px solid #ccc; }
+button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+button:hover { background:#27623e; }
+
+/* Header mit Logo und Navigation */
+.header {
+  display: flex;
+  align-items: center; /* vertikal zentrieren */
+  justify-content: space-between; /* Logo links, Nav rechts */
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #f7fff8;
+  border-radius: 10px 10px 0 0;
+}
+
+.header .logo {
+  height: 50px; /* Logo-Höhe */
+  width: auto;
+}
+
+.header nav a {
+  margin-left: 15px;
+  text-decoration:underline;
+  color:#007bff;
+  font-weight:bold;
+}
+.header nav a:hover {
+  color:#27623e;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <img src="AintiStressGuide.png" alt="Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Recommendations.html">Recommendations</a>
+    </nav>
+  </div>
+
+<h1>Enhanced Stress Index (WHO-Based)</h1>
+
+<form id="assessmentForm" action="https://script.google.com/macros/s/AKfycbx1b9gIJyqCUL7t_WPTC6trIQZOHnMrDoJo1weQZZTxi7oHR3gcc-9s4QPLYTlWlDn-/exec" method="POST">
+
+  <!-- Demographics -->
+  <div class="question">
+    <label>Age:</label>
+    <select name="age" required>
+      <option value="" disabled selected>Select age</option>
+      <option value="18-30">18–30</option>
+      <option value="31-50">31–50</option>
+      <option value="51-70">51–70</option>
+      <option value=">70">>70</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <!-- Health Conditions -->
+  <h2>Health Conditions</h2>
+  <div class="question">
+    <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
+    <label><input type="checkbox" name="chronic" value="None"> None</label>
+    <label><input type="checkbox" name="chronic" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+    <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
+    <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery</label>
+    <label><input type="checkbox" name="chronic" value="Other"> Other</label>
+  </div>
+
+  <!-- Physical Activity -->
+  <div class="question">
+    <label>Weekly Physical Activity:</label>
+    <label><input type="radio" name="physical" value="Little or no activity" required> &lt;150 min/week, no strength</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength"> 150–300 min/week, strength 0–1 days</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength"> 150–300 min/week, strength 2+ days</label>
+    <label><input type="radio" name="physical" value=">300 min/week, 2+ strength"> &gt;300 min/week, strength 2+ days</label>
+    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week"> Vigorous 75–150+ min/week, strength 2+ days</label>
+  </div>
+
+  <!-- Harmful Habits -->
+  <h2>Harmful Habits</h2>
+  <div class="question">
+    <label>Alcohol consumption</label>
+    <label><input type="radio" name="alcohol" value="None" required> None (0 drinks/week)</label>
+    <label><input type="radio" name="alcohol" value="Low risk"> Low risk (Women:1–7, Men:1–14/week)</label>
+    <label><input type="radio" name="alcohol" value="Moderate risk"> Moderate risk (Women:8–14, Men:15–28/week)</label>
+    <label><input type="radio" name="alcohol" value="High risk"> High risk (Women:15–21, Men:29–42/week)</label>
+    <label><input type="radio" name="alcohol" value="Very high"> Very high (&gt;21 / &gt;42/week)</label>
+  </div>
+
+  <div class="question">
+    <label>Tobacco use</label>
+    <label><input type="radio" name="tobacco" value="None" required> None</label>
+    <label><input type="radio" name="tobacco" value="Low"> Low (&lt;5/day)</label>
+    <label><input type="radio" name="tobacco" value="Moderate"> Moderate (5–19/day)</label>
+    <label><input type="radio" name="tobacco" value="High"> High (20/day)</label>
+    <label><input type="radio" name="tobacco" value="Very high"> Very high (&ge;30/day)</label>
+  </div>
+
+  <div class="question">
+    <label>Drug use</label>
+    <label><input type="radio" name="drugs" value="None" required> None</label>
+    <label><input type="radio" name="drugs" value="Low"> Low (occasional)</label>
+    <label><input type="radio" name="drugs" value="Moderate"> Moderate (regular, risk)</label>
+    <label><input type="radio" name="drugs" value="High"> High (dependence / health risk)</label>
+    <label><input type="radio" name="drugs" value="Very high"> Very high (severe)</label>
+  </div>
+
+  <div class="question">
+    <label>Gambling</label>
+    <label><input type="radio" name="gambling" value="None" required> None</label>
+    <label><input type="radio" name="gambling" value="Low"> Low (occasional, minimal problems)</label>
+    <label><input type="radio" name="gambling" value="Moderate"> Moderate (regular, some problems)</label>
+    <label><input type="radio" name="gambling" value="High"> High (frequent, significant problems)</label>
+    <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
+  </div>
+
+  <!-- Likert Stress Questions (0–4) -->
+  <h2>Stress & Well-Being (0–4 Likert Scale)</h2>
+  <div id="questions"></div>
+
+  <!-- Email -->
+  <div class="question">
+    <label>Email (optional)</label>
+    <input type="email" name="email" placeholder="you@example.com">
+  </div>
+
+  <!-- Hidden ResponseID -->
+  <input type="hidden" name="responseID" id="responseIDField">
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+// Likert-Fragen dynamisch bereits eingefügt oben
+const form = document.getElementById('assessmentForm');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault(); // Standard-Submit verhindern
+
+  // ResponseID generieren
+  const responseID = generateSequentialID();
+  document.getElementById('responseIDField').value = responseID;
+
+  // FormData sammeln
+  const formData = new FormData(form);
+  const jsonData = {};
+
+  formData.forEach((value, key) => {
+    // Checkboxen: mehrere Werte als Array speichern
+    if(jsonData[key]) {
+      if(Array.isArray(jsonData[key])) jsonData[key].push(value);
+      else jsonData[key] = [jsonData[key], value];
+    } else {
+      jsonData[key] = value;
+    }
+  });
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(jsonData)
+    });
+
+    const text = await res.text();
+    alert("Formular gesendet! Antwort: " + text);
+    form.reset();
+  } catch(err) {
+    console.error("Fehler beim Senden:", err);
+    alert("Fehler beim Senden. Siehe Konsole.");
+  }
+});
+
+// Dummy Funktion für ResponseID
+function generateSequentialID() {
+  return 'ID-' + Math.floor(Math.random() * 1000000);
+}
+</script>
+
+</div>
+</body>
+</html>
