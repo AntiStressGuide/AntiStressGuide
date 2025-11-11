@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>References – WHO and CDC Guidelines</title>
+<meta name="description" content="Scientific references and official guidelines from WHO, ACSM, and CDC on stress management, physical activity, harmful habits, and chronic diseases.">
+<meta name="keywords" content="WHO, CDC, Stress, Physical Activity, Health Guidelines, References">
+<meta name="author" content="AntiStressGuide">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="AntiStressGuide.ico" type="image/x-icon">
+
+<style>
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #eaf5e8;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header img.logo {
+    max-width: 120px;
+    margin-bottom: 10px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #2E5D3D;
+  }
+  header p {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #2E5D3D;
+  }
+  h2 {
+    margin-top: 30px;
+    font-size: 1.4em;
+    color: #2E5D3D;
+  }
+  ul {
+    margin-top: 15px;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+  a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: #27623e;
+  }
+  footer {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #444;
+    text-align: center;
+    border-top: 1px solid #cce6d0;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <!-- Logo -->
+    <img src="AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <h1>Scientific References</h1>
+    <p>Official Guidelines and Publications</p>
+  </header>
+
+  <main>
+    <h2>Stress</h2>
+    <ul>
+      <li><a href="https://www.who.int/publications/i/item/9789241505243" target="_blank">World Health Organization. Guidelines for the Management of Conditions Specifically Related to Stress. Geneva: WHO, 2013.</a></li>
+      <li><a href="https://www.who.int/publications/i/item/9789240055155" target="_blank">World Health Organization. WHO Guidelines on Mental Health at Work. Geneva: WHO, 2022.</a></li>
+    </ul>
+
+    <h2>Physical Activity</h2>
+    <ul>
+      <li><a href="https://www.who.int/publications/i/item/9789241599979" target="_blank">World Health Organization. Global Recommendations on Physical Activity for Health. Geneva: WHO, 2010.</a></li>
+      <li><a href="https://www.who.int/publications/i/item/9789240015128" target="_blank">World Health Organization. WHO Guidelines on Physical Activity and Sedentary Behaviour. Geneva: WHO, 2020.</a></li>
+      <li><a href="https://www.acsm.org/read-research/books/acsms-guidelines-for-exercise-testing-and-prescription" target="_blank">American College of Sports Medicine (ACSM). ACSM’s Guidelines for Exercise Testing and Prescription. 11th ed. Philadelphia: Wolters Kluwer, 2021.</a></li>
+    </ul>
+
+    <h2>Harmful Habits (Tobacco, Alcohol, Drugs, Sedentary Behaviour)</h2>
+    <ul>
+      <li><a href="https://www.who.int/publications/i/item/9789240102999" target="_blank">World Health Organization. WHO Clinical Treatment Guideline for Tobacco Cessation in Adults. Geneva: WHO, 2024.</a></li>
+      <li><a href="https://www.who.int/publications/i/item/9789241599931" target="_blank">World Health Organization. Global Strategy to Reduce the Harmful Use of Alcohol. Geneva: WHO, 2010.</a></li>
+      <li><a href="https://www.who.int/publications/i/item/9789240127802" target="_blank">World Health Organization. WHO Expert Committee on Drug Dependence: Thirty-sixth Report. Geneva: WHO, 2023.</a></li>
+      <li><a href="https://www.who.int/publications/i/item/9789240015128" target="_blank">World Health Organization. WHO Guidelines on Physical Activity and Sedentary Behaviour. Geneva: WHO, 2020.</a></li>
+    </ul>
+
+    <h2>Chronic Diseases and Post-Operative Conditions</h2>
+    <ul>
+      <li><a href="https://www.cdc.gov/physical-activity/guidelines/health-conditions.html" target="_blank">Centers for Disease Control and Prevention (CDC). Physical Activity Guidelines for Adults With Chronic Health Conditions and Disabilities. Atlanta: U.S. Department of Health and Human Services, 2018.</a></li>
+    </ul>
+  </main>
+
+  <footer>
+    &copy; 2025 AntiStressGuide. All rights reserved.
+  </footer>
+</div>
+
+</body>
+</html>
