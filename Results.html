@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enhanced Stress Index (WHO-Based)</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Logo AntiStressGuide.png">
+<link rel="shortcut icon" type="image/x-icon" href="Logo AntiStressGuide.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
+
 <style>
 body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; line-height:1.6; }
 .container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
-h1,h2 { text-align:center; color:#2E5D3D; }
+h1,h2 { color:#2E5D3D; text-align:center; }
 .question { margin:15px 0; padding:15px; border-radius:8px; }
 .question:nth-child(odd){ background:#e0f2e9; }
 .question:nth-child(even){ background:#f7fff8; }
@@ -19,11 +25,38 @@ select, input[type=email] { width:100%; padding:8px; margin-top:10px; border-rad
 button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px;}
 button:hover{ background:#27623e;}
 #results { display:none; margin-top:20px; text-align:center; padding:20px; background:#e0f2e9; border-radius:10px; }
+
+/* Header mit Flexbox */
+.header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #cce6d0;
+}
+.header img.logo {
+  height: 60px;
+  width: auto;
+  margin-right: 15px;
+}
+.header h1 { text-align:left; color:#2E5D3D; font-size:1.8em; margin:0; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header { flex-direction: column; align-items: center; }
+  .header h1 { text-align:center; margin-top:10px; }
+}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>Enhanced Stress Index (WHO-Based)</h1>
+
+<!-- Header mit Logo -->
+<div class="header">
+  <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+  <h1>Enhanced Stress Index (WHO-Based)</h1>
+</div>
+
 <form id="assessmentForm">
 
   <!-- Demographics -->
@@ -69,7 +102,7 @@ button:hover{ background:#27623e;}
     <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week, 2+ strength</label>
   </div>
 
- <!-- Harmful Habits -->
+  <!-- Harmful Habits -->
   <h2>Harmful Habits</h2>
   <div class="question">
     <label>Alcohol consumption</label>
@@ -106,7 +139,8 @@ button:hover{ background:#27623e;}
     <label><input type="radio" name="gambling" value="High"> High (frequent, significant problems)</label>
     <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
   </div>
-  <!-- Stress Questions -->
+
+  <!-- Stress & Well-Being -->
   <h2>Stress & Well-Being (0–4 Likert)</h2>
   <div id="questions"></div>
 
@@ -182,10 +216,13 @@ form.addEventListener('submit', e=>{
     const val=form.querySelector(`input[name="${name}"]:checked`)?.value;
     switch(val){
       case "None": return 0;
-      case "Occasionally": return 1;
-      case "Regularly": return 2;
-      case "Often": return 3;
-      case "Daily": return 4;
+      case "Low risk":
+      case "Low": return 1;
+      case "Moderate risk":
+      case "Moderate": return 2;
+      case "High risk":
+      case "High": return 3;
+      case "Very high": return 4;
       default: return 0;
     }
   });
@@ -230,8 +267,7 @@ form.addEventListener('submit', e=>{
   document.getElementById('responseID').textContent=`Response ID: ${responseID}`;
   document.getElementById('totalPoints').textContent=`Total Score: ${totalScore}`;
   document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
-  document.getElementById('breakdown').innerHTML=`
-    <b>Breakdown:</b><br>
+  document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b><br>
     Stress: ${stressScore.toFixed(2)}<br>
     Habits: ${habitsScore.toFixed(2)}<br>
     Chronic: ${chronicScore.toFixed(2)}<br>
@@ -246,5 +282,6 @@ document.getElementById('newFormBtn').addEventListener('click', ()=>{
   document.getElementById('results').style.display='none';
 });
 </script>
+</div>
 </body>
 </html>
