@@ -25,30 +25,30 @@
   }
 
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 30px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center; /* Alles zentriert */
+    text-align: center;
   }
 
-  /* Header mit Logo links / Text zentriert */
+  /* Header mit Flexbox */
   header {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    justify-content: center; /* zentriert horizontal */
+    gap: 20px; /* Abstand zwischen Logo und Text */
+    margin-bottom: 30px;
   }
 
   header img.logo {
-    max-width: 100px;
+    max-width: 120px;
     height: auto;
-    margin-right: 20px;
   }
 
   header .header-text {
-    flex: 1;
     text-align: center;
   }
 
@@ -61,66 +61,62 @@
 
   header .header-text p {
     margin: 5px 0 0 0;
-    font-size: 1.6em;
+    font-size: 1.2em;
     font-weight: bold;
     color: #2E5D3D;
     line-height: 1.2;
   }
 
-  /* Welcome Text zentriert */
+  /* Welcome Text */
   .welcome-text {
     margin: 20px 0;
     font-size: 1.1em;
   }
 
-  /* Symbolisches Bild zentriert */
-  .symbol-img {
-    text-align: center;
+  /* Links */
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
     margin: 20px 0;
   }
+
+  .links a {
+    background: #2E5D3D;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    width: 250px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .links a:hover {
+    background: #27623e;
+  }
+
+  .symbol-img {
+    margin: 30px 0;
+  }
+
   .symbol-img img {
     max-width: 150px;
     height: auto;
   }
 
-  /* Links zentriert, einspaltig, alle gleich */
-  .links {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  .links a {
-    display: inline-block;
-    width: 260px;
-    padding: 12px 24px;
-    background: #2E5D3D;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: background 0.3s;
-    text-align: center;
-  }
-  .links a:hover {
-    background: #27623e;
-  }
-
-  /* Project Overview zentriert */
-  .project-overview {
-    text-align: center;
-    margin-top: 30px;
-  }
   .project-overview h2 {
     font-size: 1.4em;
     color: #2E5D3D;
+    margin-top: 30px;
   }
+
   .project-overview p {
     margin: 10px 0 20px 0;
   }
 
-  /* Footer */
   footer {
     margin-top: 40px;
     padding: 20px;
@@ -130,18 +126,14 @@
     border-top: 1px solid #cce6d0;
   }
 
-  /* Responsive: Logo über Text auf kleinen Bildschirmen */
   @media (max-width: 600px) {
     header {
       flex-direction: column;
-      align-items: center;
+      gap: 10px;
     }
-    header img.logo {
-      margin-bottom: 10px;
-      margin-right: 0;
-    }
+
     .links a {
-      width: 90%;
+      width: 100%;
     }
   }
 
@@ -150,7 +142,8 @@
 <body>
 
 <div class="container">
-  <!-- Header mit Logo links / Text zentriert -->
+
+  <!-- Header mit Flexbox -->
   <header>
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
     <div class="header-text">
@@ -159,34 +152,33 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <div class="welcome-text">
-      Welcome to the WHO-Based Stress Management. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.
-    </div>
+  <!-- Welcome Text zentriert -->
+  <div class="welcome-text">
+    Welcome to the WHO-Based Stress Management. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.
+  </div>
 
-    <!-- Symbolisches Bild zentriert -->
-    <div class="symbol-img">
-      <img src="AntiStressGuide_Symbol.png" alt="AntiStressGuide Symbol">
-    </div>
+  <!-- Links in drei Zeilen -->
+  <div class="links">
+    <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
+    <a href="#" id="recommendationsLinkFree">Enhanced Stress Index (Free)</a>
+    <a href="#" id="recommendationsLinkPaid">Individual Recommendations – 19,99 €</a>
+  </div>
 
-    <!-- Links: alle gleich, zentriert, untereinander -->
-    <div class="links">
-      <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
-      <a href="#" id="recommendationsLinkFree">Enhanced Stress Index (Free)</a>
-      <a href="#" id="recommendationsLinkPaid">Individual Recommendations – 19,99 €</a>
-    </div>
+  <!-- Symbolbild -->
+  <div class="symbol-img">
+    <img src="AntiStressGuide_Symbol.png" alt="AntiStressGuide Symbol">
+  </div>
 
-    <!-- Project Overview zentriert -->
-    <div class="project-overview">
-      <h2>Project Overview</h2>
-      <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalized guidance tailored to your specific responses and the latest WHO data. All analyses are grounded in validated scientific studies.</p>
-    </div>
-  </main>
+  <!-- Project Overview -->
+  <div class="project-overview">
+    <h2>Project Overview</h2>
+    <p>This project provides a rigorous, research-based approach to personal stress assessment. The <strong>Enhanced Stress Index</strong> delivers general, evidence-informed recommendations based on the WHO framework. <strong>Individual Recommendations</strong> offer personalized guidance tailored to your specific responses and the latest WHO data. All analyses are grounded in validated scientific studies.</p>
+  </div>
 
   <footer>
     &copy; 2025 AntiStressGuide. All rights reserved.
   </footer>
+
 </div>
 
 </body>
