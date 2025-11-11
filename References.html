@@ -32,57 +32,52 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  /* Obere Zeile: Logo links, Links rechts */
-  .top-bar {
+  /* Header mit Logo links / Navigation rechts */
+  .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    background: #f7fff8;
+    border-radius: 10px 10px 0 0;
   }
 
-  .top-bar img.logo {
-    max-width: 100px;
-    height: auto;
+  .header img.logo {
+    height: 50px;
+    width: auto;
   }
 
-  .top-links a {
-    text-decoration: none;
-    color: #fff;
+  .header nav a {
+    margin-left: 15px;
+    text-decoration: underline;
+    color: #007bff;
     font-weight: bold;
-    font-size: 1em;
-    background: #2E5D3D;
-    padding: 8px 16px;
-    border-radius: 5px;
-    margin-left: 10px;
-    transition: background 0.3s;
-  }
-  .top-links a:hover {
-    background: #27623e;
   }
 
-  /* Header zentriert darunter */
-  header {
+  .header nav a:hover {
+    color: #27623e;
+  }
+
+  /* Responsive Header */
+  @media (max-width: 600px) {
+    .header {
+      flex-direction: column;
+      align-items: center;
+    }
+    .header nav {
+      margin-top: 10px;
+    }
+  }
+
+  h1, h2 {
+    color: #2E5D3D;
     text-align: center;
-    margin-bottom: 40px;
-  }
-
-  header h1 {
-    font-size: 2em;
-    color: #2E5D3D;
-    margin: 0;
-  }
-
-  header p {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #2E5D3D;
-    margin-top: 5px;
   }
 
   h2 {
     margin-top: 30px;
     font-size: 1.4em;
-    color: #2E5D3D;
   }
 
   ul {
@@ -111,39 +106,24 @@
     text-align: center;
     border-top: 1px solid #cce6d0;
   }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .top-bar {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    .top-links a {
-      margin-left: 0;
-    }
-  }
 </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- Top-Bar mit Logo links und Links rechts -->
-  <div class="top-bar">
+  <!-- Header mit Logo links / Navigation rechts -->
+  <div class="header">
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-    <div class="top-links">
+    <nav>
       <a href="index.html">Home</a>
-      <a href="results.html">Results</a>
-      <a href="recommendations.html">Recommendations</a>
-    </div>
+      <a href="Results.html">Results</a>
+      <a href="Recommendations.html">Recommendations</a>
+    </nav>
   </div>
 
-  <!-- Header zentriert -->
-  <header>
-    <h1>References for Evaluation</h1>
-    <p>Official Guidelines and Publications</p>
-  </header>
+  <h1>References for Evaluation</h1>
+  <p style="text-align:center; font-weight:bold; color:#2E5D3D;">Official Guidelines and Publications</p>
 
   <main>
     <h2>Stress</h2>
@@ -176,6 +156,7 @@
   <footer>
     &copy; 2025 AntiStressGuide. All rights reserved.
   </footer>
+
 </div>
 
 </body>
