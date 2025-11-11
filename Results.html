@@ -2,35 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enhanced Stress Index (WHO-Based)</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Logo AntiStressGuide.png">
+<link rel="shortcut icon" type="image/x-icon" href="Logo AntiStressGuide.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
+
 <style>
-body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; }
-.container { max-width:700px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; }
-h1, h2 { color:#2E5D3D; text-align:center; }
-.question { margin:15px 0; padding:15px; border-radius:8px; }
-.question:nth-child(odd) { background:#e0f2e9; }
-.question:nth-child(even) { background:#f7fff8; }
+body { 
+  font-family: Roboto, Arial, sans-serif; 
+  background:#eaf5e8; 
+  margin:0; 
+  padding:0; 
+  line-height:1.6;
+}
+
+.container { 
+  max-width:700px; 
+  margin:30px auto; 
+  background:#fff; 
+  padding:30px; 
+  border-radius:10px; 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Header mit Logo links / Navigation rechts */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #f7fff8;
+  border-radius: 10px 10px 0 0;
+}
+
+.header img.logo {
+  height: 50px;
+  width: auto;
+}
+
+.header nav a {
+  margin-left: 15px;
+  text-decoration:underline;
+  color:#007bff;
+  font-weight:bold;
+}
+
+.header nav a:hover {
+  color:#27623e;
+}
+
+h1, h2 { 
+  color:#2E5D3D; 
+  text-align:center; 
+}
+
+.question { 
+  margin:15px 0; 
+  padding:15px; 
+  border-radius:8px; 
+}
+
+.question:nth-child(odd) { 
+  background:#e0f2e9; 
+}
+
+.question:nth-child(even) { 
+  background:#f7fff8; 
+}
+
 label { display:block; margin:5px 0; }
+
 input[type="range"] { width:100%; margin-top:5px; }
-.range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
+
+.range-labels { 
+  display:flex; 
+  justify-content:space-between; 
+  font-size:14px; 
+  color:#555; 
+  margin-top:5px; 
+}
+
 input[type="checkbox"], input[type="radio"] { margin-right:5px; }
-select, input[type=email] { width:100%; padding:8px; margin-top:30px; border-radius:30px; border:1px solid #ccc; }
-button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+
+select, input[type=email] { 
+  width:100%; 
+  padding:8px; 
+  margin-top:30px; 
+  border-radius:30px; 
+  border:1px solid #ccc; 
+}
+
+button { 
+  margin-top:10px; 
+  padding:12px 25px; 
+  color:#fff; 
+  background:#2E5D3D; 
+  border:none; 
+  border-radius:5px; 
+  cursor:pointer; 
+  font-size:16px; 
+}
+
 button:hover { background:#27623e; }
+
 nav { text-align:center; margin-bottom:20px; }
+
 nav a { margin:0 10px; text-decoration:underline; color:#007bff; font-weight:bold; }
 nav a:hover { color:#27623e; }
+
+/* Responsive Header */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .header nav {
+    margin-top: 10px;
+  }
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-<nav>
-  <a href="index.html">Home</a>
-  <a href="Recommendations.html">Recommendations</a>
-  
-</nav>
+
+  <!-- Header mit Logo und Navigation -->
+  <div class="header">
+    <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Recommendations.html">Recommendations</a>
+    </nav>
+  </div>
 
 <h1>Enhanced Stress Index (WHO-Based)</h1>
 
@@ -134,22 +241,19 @@ nav a:hover { color:#27623e; }
 </form>
 
 <script>
-// Likert-Fragen dynamisch bereits eingefügt oben
+// Formular-Submit
 const form = document.getElementById('assessmentForm');
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault(); // Standard-Submit verhindern
+  e.preventDefault();
 
-  // ResponseID generieren
   const responseID = generateSequentialID();
   document.getElementById('responseIDField').value = responseID;
 
-  // FormData sammeln
   const formData = new FormData(form);
   const jsonData = {};
 
   formData.forEach((value, key) => {
-    // Checkboxen: mehrere Werte als Array speichern
     if(jsonData[key]) {
       if(Array.isArray(jsonData[key])) jsonData[key].push(value);
       else jsonData[key] = [jsonData[key], value];
@@ -173,9 +277,13 @@ form.addEventListener('submit', async (e) => {
     alert("Fehler beim Senden. Siehe Konsole.");
   }
 });
+
+// Dummy Funktion für ResponseID
+function generateSequentialID() {
+  return 'ID-' + Math.floor(Math.random() * 1000000);
+}
 </script>
 
-
+</div>
 </body>
 </html>
-
