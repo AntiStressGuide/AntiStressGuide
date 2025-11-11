@@ -9,9 +9,9 @@
 <meta name="author" content="AntiStressGuide">
 <meta name="robots" content="noindex, nofollow">
 
-<!-- Favicon: PNG fallback + ICO -->
-<link rel="icon" href="Logo AntiStressGuide.ico" type="image/x-icon">
-<link rel="shortcut icon" href="Logo AntiStressGuide.png" type="image/png">
+<!-- Favicon -->
+<link rel="icon" href="AntiStressGuide.ico" type="image/x-icon">
+<link rel="shortcut icon" href="AntiStressGuide.png" type="image/png">
 
 <style>
   body {
@@ -32,10 +32,11 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
+  /* Header */
   header {
     display: flex;
     align-items: center;
-    justify-content: center; /* Text zentrieren */
+    justify-content: center; /* Text zentriert */
     margin-bottom: 40px;
     position: relative;
   }
@@ -47,19 +48,33 @@
     left: 0; /* Logo links außen */
   }
 
-  header h1 {
-    margin: 0;
-    font-size: 2em;
-    color: #2E5D3D;
+  header h1, header p {
     text-align: center;
+    margin: 0;
+    color: #2E5D3D;
+  }
+
+  header h1 {
+    font-size: 2em;
   }
 
   header p {
     font-size: 1.2em;
     font-weight: bold;
     margin-top: 5px;
-    color: #2E5D3D;
-    text-align: center;
+  }
+
+  /* Responsive: Logo über Text auf kleinen Bildschirmen */
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    header img.logo {
+      position: static;
+      margin-bottom: 10px;
+    }
   }
 
   h2 {
@@ -94,14 +109,6 @@
     text-align: center;
     border-top: 1px solid #cce6d0;
   }
-
-  @media (max-width: 600px) {
-    header img.logo {
-      position: static;
-      display: block;
-      margin: 0 auto 10px auto;
-    }
-  }
 </style>
 </head>
 <body>
@@ -109,7 +116,7 @@
 <div class="container">
   <header>
     <!-- Logo links -->
-    <img src="AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <img src="Logo%20AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
     <div>
       <h1>Scientific References</h1>
       <p>Official Guidelines and Publications</p>
