@@ -7,9 +7,11 @@
 <meta name="description" content="Complete a stress assessment based on WHO standards and receive scientifically validated general and individualized recommendations.">
 <meta name="keywords" content="Stress, WHO, Assessment, Stress Data, Recommendations, Scientific">
 <meta name="author" content="AntiStressGuide">
-<!-- 🔒 Temporär: Seite soll nicht indexiert oder von Suchmaschinen verfolgt werden -->
 <meta name="robots" content="noindex, nofollow">
-<!-- 🔓 Entfernen, wenn Seite öffentlich werden soll -->
+
+<!-- Favicon -->
+<link rel="icon" href="AntiStressGuide.ico" type="image/x-icon">
+<link rel="shortcut icon" href="AntiStressGuide.png" type="image/png">
 
 <style>
   body {
@@ -32,7 +34,7 @@
 
   /* Navigation */
   nav {
-    text-align: center; /* zentriert die Links */
+    text-align: center;
     margin-bottom: 30px;
   }
   nav a {
@@ -46,10 +48,23 @@
     color: #27623e;
   }
 
-  /* Header */
+  /* Header mit Logo */
   header {
-    text-align: center;
     margin-bottom: 40px;
+  }
+  header .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  header img.logo {
+    max-width: 100px;
+    height: auto;
+    display: block;
+  }
+  header .header-text {
+    text-align: center;
   }
   header h1 {
     margin: 0;
@@ -61,6 +76,14 @@
     font-weight: bold;
     margin-top: 10px;
     color: #2E5D3D;
+  }
+  @media (max-width: 600px) {
+    header .header-content {
+      flex-direction: column;
+    }
+    header img.logo {
+      margin-bottom: 10px;
+    }
   }
 
   /* Main content */
@@ -91,11 +114,6 @@
   }
   .links a:hover {
     background: #27623e;
-  }
-  .links p {
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 5px;
   }
 
   /* Footer */
@@ -168,14 +186,19 @@
 <div class="container">
   <!-- Navigation -->
   <nav>
-     <a href="Results.html">Enhanced Stress Index</a>
+    <a href="Results.html">Enhanced Stress Index</a>
     <a href="Recommendations.html">Recommendations</a>
   </nav>
 
-  <!-- Header -->
+  <!-- Header mit Logo -->
   <header>
-    <h1>Stress Management Recommendations</h1>
-    <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
+    <div class="header-content">
+      <img src="Logo%20AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+      <div class="header-text">
+        <h1>Stress Management Recommendations</h1>
+        <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
+      </div>
+    </div>
   </header>
 
   <!-- Main Content -->
@@ -235,8 +258,3 @@
 
 </body>
 </html>
-
-
-
-
-
