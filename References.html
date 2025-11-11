@@ -9,8 +9,9 @@
 <meta name="author" content="AntiStressGuide">
 <meta name="robots" content="noindex, nofollow">
 
-<!-- Favicon -->
+<!-- Favicon: PNG fallback + ICO -->
 <link rel="icon" href="AntiStressGuide.ico" type="image/x-icon">
+<link rel="shortcut icon" href="AntiStressGuide.png" type="image/png">
 
 <style>
   body {
@@ -34,24 +35,23 @@
   header {
     display: flex;
     align-items: center;
+    justify-content: center; /* Text zentrieren */
     margin-bottom: 40px;
+    position: relative;
   }
 
   header img.logo {
     max-width: 100px;
     height: auto;
-    margin-right: 20px; /* Abstand zwischen Logo und Titel */
-  }
-
-  header .header-text {
-    display: flex;
-    flex-direction: column;
+    position: absolute;
+    left: 0; /* Logo links außen */
   }
 
   header h1 {
     margin: 0;
     font-size: 2em;
     color: #2E5D3D;
+    text-align: center;
   }
 
   header p {
@@ -59,6 +59,7 @@
     font-weight: bold;
     margin-top: 5px;
     color: #2E5D3D;
+    text-align: center;
   }
 
   h2 {
@@ -95,12 +96,10 @@
   }
 
   @media (max-width: 600px) {
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
     header img.logo {
-      margin-bottom: 10px;
+      position: static;
+      display: block;
+      margin: 0 auto 10px auto;
     }
   }
 </style>
@@ -111,7 +110,7 @@
   <header>
     <!-- Logo links -->
     <img src="AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-    <div class="header-text">
+    <div>
       <h1>Scientific References</h1>
       <p>Official Guidelines and Publications</p>
     </div>
