@@ -106,6 +106,17 @@
       margin-top: 10px;
     }
   }
+
+  .calculation-section {
+    background: #e0f2e9;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 10px;
+  }
+
+  .calculation-section p, .calculation-section li {
+    margin-bottom: 10px;
+  }
 </style>
 </head>
 <body>
@@ -150,6 +161,47 @@
     <ul>
       <li><a href="https://www.cdc.gov/physical-activity/guidelines/health-conditions.html" target="_blank" class="reference-link">Centers for Disease Control and Prevention (CDC). Physical Activity Guidelines for Adults With Chronic Health Conditions and Disabilities. Atlanta: U.S. Department of Health and Human Services, 2018.</a></li>
     </ul>
+
+    <!-- Basis of the Calculation -->
+    <div class="calculation-section">
+      <h2>Basis of the Calculation</h2>
+      <p>The Enhanced Stress Index is based on a combination of scientifically validated measures of stress, lifestyle habits, physical activity, and chronic health conditions. Its goal is to provide a composite risk score that reflects both psychological and physiological health factors.</p>
+      <ul>
+        <li><strong>1. Stress & Well-Being (40%)</strong>
+          <ul>
+            <li>Based on self-reported Likert-scale questions (0–4) about perceived stress, energy levels, coping, and life satisfaction.</li>
+            <li>Reflects psychological stress load and averages multiple dimensions to reduce bias.</li>
+            <li>Weighted 40% because stress is a primary driver of health outcomes.</li>
+          </ul>
+        </li>
+        <li><strong>2. Harmful Habits (20%)</strong>
+          <ul>
+            <li>Includes alcohol, tobacco, drug use, and gambling.</li>
+            <li>Each habit is scored from 0 (none) to 4 (very high risk).</li>
+            <li>High scores indicate behaviors that negatively impact health and increase stress vulnerability.</li>
+            <li>Weighted 20% to reflect lifestyle contribution to overall health risk.</li>
+          </ul>
+        </li>
+        <li><strong>3. Chronic Health Conditions (20%)</strong>
+          <ul>
+            <li>Counts existing chronic diseases, medical conditions, or post-operative conditions.</li>
+            <li>Each condition contributes points to the score (max 4), representing physiological vulnerability.</li>
+            <li>Weighted 20%; chronic conditions increase susceptibility to stress and reduce resilience.</li>
+          </ul>
+        </li>
+        <li><strong>4. Physical Activity (20%)</strong>
+          <ul>
+            <li>Scored inversely: more activity → lower score.</li>
+            <li>Improves stress resilience, cardiovascular health, and mental well-being.</li>
+            <li>Weighted 20% to emphasize protective effects.</li>
+          </ul>
+        </li>
+      </ul>
+      <p>The total score is calculated as:</p>
+      <pre>Total Score = (Stress × 0.4) + (Habits × 0.2) + (Chronic × 0.2) + (Physical × 0.2)</pre>
+      <p>Score ranges from 0 (Excellent / Low Risk) to 4 (High / Very High Risk).</p>
+    </div>
+
   </main>
 
   <footer>
