@@ -25,39 +25,33 @@
   }
 
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 30px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center; /* Alles zentriert */
   }
 
   header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   header img.logo {
-    max-width: 100px;
+    max-width: 120px;
     height: auto;
-    margin-right: 20px;
+    margin-bottom: 10px;
   }
 
-  header .header-text {
-    flex: 1;
-    text-align: center;
-  }
-
-  header .header-text h1 {
+  header h1 {
     margin: 0;
     font-size: 2em;
     color: #2E5D3D;
     line-height: 1.2;
   }
 
-  header .header-text p {
+  header p {
     margin: 5px 0 0 0;
     font-size: 1.2em;
     font-weight: bold;
@@ -65,13 +59,17 @@
     line-height: 1.2;
   }
 
-  /* Alle Links gleich als Buttons */
+  .welcome-text {
+    margin: 20px 0;
+    font-size: 1.1em;
+  }
+
   .links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
-    gap: 15px; /* Abstand zwischen Buttons */
+    gap: 15px;
+    margin: 20px 0;
   }
 
   .links a {
@@ -81,10 +79,9 @@
     border-radius: 5px;
     text-decoration: none;
     font-weight: 500;
-    text-align: center;
-    width: 100%; /* volle Breite optional */
-    max-width: 400px; /* max Breite */
+    width: 250px;
     transition: background 0.3s;
+    text-align: center;
   }
 
   .links a:hover {
@@ -92,8 +89,7 @@
   }
 
   .symbol-img {
-    text-align: center;
-    margin: 20px 0;
+    margin: 30px 0;
   }
 
   .symbol-img img {
@@ -101,14 +97,10 @@
     height: auto;
   }
 
-  .project-overview {
-    text-align: center;
-    margin-top: 30px;
-  }
-
   .project-overview h2 {
     font-size: 1.4em;
     color: #2E5D3D;
+    margin-top: 30px;
   }
 
   .project-overview p {
@@ -124,19 +116,12 @@
     border-top: 1px solid #cce6d0;
   }
 
-  @media (max-width: 600px) {
-    header {
-      flex-direction: column;
-      align-items: center;
-    }
-    header img.logo {
-      margin-bottom: 10px;
-      margin-right: 0;
-    }
+  @media (max-width: 500px) {
     .links a {
-      max-width: 90%;
+      width: 100%;
     }
   }
+
 </style>
 </head>
 <body>
@@ -145,13 +130,14 @@
 
   <header>
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-    <div class="header-text">
-      <h1>Stress Management Recommendations</h1>
-      <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
-    </div>
+    <h1>Stress Management Recommendations</h1>
+    <p>Based on the Guidelines of the World Health Organisation (WHO)</p>
   </header>
 
-  <!-- Alle Links als Buttons untereinander -->
+  <div class="welcome-text">
+    Welcome to the WHO-Based Stress Management. Complete the free stress assessment to receive an evidence-based evaluation of your current stress levels according to World Health Organisation standards.
+  </div>
+
   <div class="links">
     <a href="https://antistressguide.github.io/AntiStressGuide/References.html" target="_blank">References for Evaluation</a>
     <a href="#" id="recommendationsLinkFree">Enhanced Stress Index (Free)</a>
