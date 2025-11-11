@@ -69,41 +69,43 @@ button:hover{ background:#27623e;}
     <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week, 2+ strength</label>
   </div>
 
-  <!-- Harmful Habits -->
+ <!-- Harmful Habits -->
   <h2>Harmful Habits</h2>
   <div class="question">
-    <label>Alcohol consumption:</label>
-    <label><input type="radio" name="alcohol" value="None" required> None</label>
-    <label><input type="radio" name="alcohol" value="Occasionally"> Occasionally</label>
-    <label><input type="radio" name="alcohol" value="Regularly"> Regularly</label>
-    <label><input type="radio" name="alcohol" value="Often"> Often</label>
-    <label><input type="radio" name="alcohol" value="Daily"> Daily</label>
-  </div>
-  <div class="question">
-    <label>Tobacco use:</label>
-    <label><input type="radio" name="tobacco" value="None" required> None</label>
-    <label><input type="radio" name="tobacco" value="Occasionally"> Occasionally</label>
-    <label><input type="radio" name="tobacco" value="Regularly"> Regularly</label>
-    <label><input type="radio" name="tobacco" value="Often"> Often</label>
-    <label><input type="radio" name="tobacco" value="Daily"> Daily</label>
-  </div>
-  <div class="question">
-    <label>Drug use:</label>
-    <label><input type="radio" name="drugs" value="None" required> None</label>
-    <label><input type="radio" name="drugs" value="Occasionally"> Occasionally</label>
-    <label><input type="radio" name="drugs" value="Regularly"> Regularly</label>
-    <label><input type="radio" name="drugs" value="Often"> Often</label>
-    <label><input type="radio" name="drugs" value="Daily"> Daily</label>
-  </div>
-  <div class="question">
-    <label>Gambling:</label>
-    <label><input type="radio" name="gambling" value="None" required> None</label>
-    <label><input type="radio" name="gambling" value="Occasionally"> Occasionally</label>
-    <label><input type="radio" name="gambling" value="Regularly"> Regularly</label>
-    <label><input type="radio" name="gambling" value="Often"> Often</label>
-    <label><input type="radio" name="gambling" value="Daily"> Daily</label>
+    <label>Alcohol consumption</label>
+    <label><input type="radio" name="alcohol" value="None" required> None (0 drinks/week)</label>
+    <label><input type="radio" name="alcohol" value="Low risk"> Low risk (Women:1–7, Men:1–14/week)</label>
+    <label><input type="radio" name="alcohol" value="Moderate risk"> Moderate risk (Women:8–14, Men:15–28/week)</label>
+    <label><input type="radio" name="alcohol" value="High risk"> High risk (Women:15–21, Men:29–42/week)</label>
+    <label><input type="radio" name="alcohol" value="Very high"> Very high (&gt;21 / &gt;42/week)</label>
   </div>
 
+  <div class="question">
+    <label>Tobacco use</label>
+    <label><input type="radio" name="tobacco" value="None" required> None</label>
+    <label><input type="radio" name="tobacco" value="Low"> Low (&lt;5/day)</label>
+    <label><input type="radio" name="tobacco" value="Moderate"> Moderate (5–19/day)</label>
+    <label><input type="radio" name="tobacco" value="High"> High (20/day)</label>
+    <label><input type="radio" name="tobacco" value="Very high"> Very high (&ge;30/day)</label>
+  </div>
+
+  <div class="question">
+    <label>Drug use</label>
+    <label><input type="radio" name="drugs" value="None" required> None</label>
+    <label><input type="radio" name="drugs" value="Low"> Low (occasional)</label>
+    <label><input type="radio" name="drugs" value="Moderate"> Moderate (regular, risk)</label>
+    <label><input type="radio" name="drugs" value="High"> High (dependence / health risk)</label>
+    <label><input type="radio" name="drugs" value="Very high"> Very high (severe)</label>
+  </div>
+
+  <div class="question">
+    <label>Gambling</label>
+    <label><input type="radio" name="gambling" value="None" required> None</label>
+    <label><input type="radio" name="gambling" value="Low"> Low (occasional, minimal problems)</label>
+    <label><input type="radio" name="gambling" value="Moderate"> Moderate (regular, some problems)</label>
+    <label><input type="radio" name="gambling" value="High"> High (frequent, significant problems)</label>
+    <label><input type="radio" name="gambling" value="Very high"> Very high (pathological)</label>
+  </div>
   <!-- Stress Questions -->
   <h2>Stress & Well-Being (0–4 Likert)</h2>
   <div id="questions"></div>
