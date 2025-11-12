@@ -20,18 +20,21 @@ body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; pad
 .header nav a:hover { color:#27623e; }
 
 h1,h2 { text-align:center; color:#2E5D3D; }
+
 .question { margin:15px 0; padding:15px; border-radius:8px; }
 .question:nth-child(odd){ background:#e0f2e9; }
 .question:nth-child(even){ background:#f7fff8; }
-label { display:block; font-size:16px; margin:5px 0; }
+
+label { display:block; margin:5px 0; font-size:18px; }
 input[type="range"] { width:100%; margin-top:5px; }
 .range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
-input[type="checkbox"], input[type="radio"] { width:20px; height:20px; vertical-align:middle; margin-right:10px; }
-select, input[type=email] { width:100%; padding:10px 12px; font-size:16px; margin-top:10px; border-radius:30px; border:1px solid #ccc; }
+input[type="checkbox"], input[type="radio"] { margin-right:10px; transform:scale(1.2); }
+select, input[type=email] { width:100%; padding:12px; margin-top:10px; border-radius:30px; border:1px solid #ccc; font-size:18px; }
+button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+button:hover{ background:#27623e; }
 
-.submit-container { display:flex; justify-content:space-between; margin-top:20px; }
-button.long-button { padding:12px 25px; font-size:16px; width:48%; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; }
-button.long-button:hover{ background:#27623e; }
+.submit-container { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.submit-container button { flex:1; text-align:center; }
 
 #results { display:none; margin-top:20px; text-align:center; padding:20px; background:#e0f2e9; border-radius:10px; }
 
@@ -39,7 +42,7 @@ button.long-button:hover{ background:#27623e; }
 .bar { height:100%; border-radius:10px; text-align:right; padding-right:5px; color:#fff; font-weight:bold; line-height:25px; }
 
 footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
-@media (max-width: 600px){ .header { flex-direction:column; align-items:center; } .header nav { margin-top:10px; } .submit-container { flex-direction:column; gap:10px; } button.long-button { width:100%; } }
+@media (max-width: 600px){ .header { flex-direction:column; align-items:center; } .header nav { margin-top:10px; } }
 </style>
 </head>
 <body>
@@ -82,15 +85,15 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
     </select>
   </div>
 
-  <!-- Health Conditions -->
+  <!-- Medical Conditions -->
   <h2>Medical Conditions</h2>
   <div class="question">
     <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
-    <label><input type="checkbox" name="chronic" value="None"> None</label>
-    <label><input type="checkbox" name="chronic" value="Cardiovascular Disease"> Cardiovascular Disease</label>
-    <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
-    <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery</label>
-    <label><input type="checkbox" name="chronic" value="Other"> Other</label>
+    <label><input type="checkbox" name="medical" value="None"> None</label>
+    <label><input type="checkbox" name="medical" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+    <label><input type="checkbox" name="medical" value="Mental Health Condition"> Mental Health Condition</label>
+    <label><input type="checkbox" name="medical" value="Recent Surgery"> Recent Surgery</label>
+    <label><input type="checkbox" name="medical" value="Other"> Other</label>
   </div>
 
   <!-- Physical Activity -->
@@ -100,7 +103,7 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
     <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
     <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
     <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
-    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week, 2+ strength</label>
+    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week</label>
   </div>
 
   <!-- Harmful Habits -->
@@ -147,10 +150,11 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
 
   <!-- Submit Buttons -->
   <div class="submit-container">
-    <button type="submit" name="action" value="index" class="long-button">
+    <button type="submit" name="action" value="index">
       <b>Submit for <br>Index Value</b>
     </button>
-    <button type="submit" name="action" value="individual" class="long-button" formaction="Recommendations.html">
+
+    <button type="submit" name="action" value="individual">
       <b>Submit for <br>Individual Recommendations</b>
     </button>
   </div>
@@ -164,7 +168,7 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
   <p id="categoryColor"></p>
   <div id="breakdown"></div>
   <div id="barChart"></div>
-  <button id="newFormBtn" class="action">Fill Out Again</button>
+  <button id="newFormBtn">Fill Out Again</button>
 </div>
 
 <footer>
@@ -221,12 +225,11 @@ form.addEventListener('submit', e=>{
   const stressAnswers = stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
   const stressScore = avg(stressAnswers);
 
-  // Habits individually
-  const habitNames = ["alcohol","tobacco","drugs","gambling"];
-  const habitsValues = habitNames.map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
+  // Habits
+  const habitsValues = ["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
   const habitsScore = avg(habitsValues);
 
-  // Physical Activity (positive!)
+  // Physical Activity (invert)
   const phys=form.querySelector('input[name="physical"]:checked')?.value;
   let physicalRaw=0;
   switch(phys){
@@ -236,16 +239,14 @@ form.addEventListener('submit', e=>{
     case ">300 min/week, 2+ strength": physicalRaw=3; break;
     case "Vigorous 75–150+ min/week": physicalRaw=4; break;
   }
-  const physicalScore = physicalRaw;
+  const physicalScore = 4 - physicalRaw; // positive
 
   // Medical
-  const chronicList=Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value).filter(v=>v!=="None");
-  const medicalScore = Math.min(4, chronicList.length*2);
+  const medicalList=Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
+  const medicalScore = Math.min(4, medicalList.length);
 
-  
-// Weighted total: all equal
-const totalScore = ((stressScore + habitsScore + medicalScore + physicalScore)/4).toFixed(2);
-
+  // Total Score (average)
+  const totalScore = ((stressScore + habitsScore + medicalScore + physicalScore)/4).toFixed(2);
 
   // Category & color
   let category="", color="";
@@ -262,8 +263,7 @@ const totalScore = ((stressScore + habitsScore + medicalScore + physicalScore)/4
   document.getElementById('totalPoints').textContent=`Total Score: ${totalScore}`;
   document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
 
-  document.getElementById('breakdown').innerHTML=`
-    <b>Breakdown:</b><br>
+  document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b><br>
     Stress: ${stressScore.toFixed(2)}<br>
     Habits: ${habitsScore.toFixed(2)}<br>
     Medical: ${medicalScore.toFixed(2)}<br>
@@ -274,10 +274,10 @@ const totalScore = ((stressScore + habitsScore + medicalScore + physicalScore)/4
   const barChart = document.getElementById('barChart');
   barChart.innerHTML='';
   const sections = [
-    {label:"Stress", value:stressScore, color:"#2E5D3D"},
+    {label:"Stress", value:stressScore, color:"#ff6347"},
     {label:"Habits", value:habitsScore, color:"#ff6347"},
-    {label:"Medical", value:medicalScore, color:"#ffa500"},
-    {label:"Physical", value:physicalScore, color:"#1e90ff"} // positive color
+    {label:"Medical", value:medicalScore, color:"#ff6347"},
+    {label:"Physical Activity", value:physicalScore, color:"#2E5D3D"} // positive grün
   ];
   sections.forEach(s=>{
     const perc = (s.value/4*100).toFixed(0);
@@ -296,3 +296,6 @@ document.getElementById('newFormBtn').addEventListener('click', ()=>{
   document.getElementById('barChart').innerHTML='';
 });
 </script>
+
+</body>
+</html>
