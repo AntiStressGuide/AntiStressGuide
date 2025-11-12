@@ -28,8 +28,12 @@ input[type="range"] { width:100%; margin-top:5px; }
 .range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
 input[type="checkbox"], input[type="radio"] { margin-right:5px; }
 select, input[type=email] { width:100%; padding:8px; margin-top:10px; border-radius:30px; border:1px solid #ccc; }
-button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+
+button { padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
 button:hover{ background:#27623e; }
+
+.submit-container { display:flex; justify-content:space-between; margin-top:20px; gap:10px; flex-wrap:wrap; }
+.submit-container button { flex:1; text-align:center; }
 
 #results { display:none; margin-top:20px; text-align:center; padding:20px; background:#e0f2e9; border-radius:10px; }
 
@@ -38,188 +42,147 @@ button:hover{ background:#27623e; }
 
 footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
 
-/* ✅ Neue Styles für die beiden Submit-Buttons */
-.submit-container {
-  display: flex;
-  justify-content: space-between;  /* linker & rechter Button */
-  align-items: center;
-  width: 100%;
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 40px;
-  gap: 20px;                       /* Abstand zwischen Buttons */
-  flex-wrap: wrap;                 /* Umbruch bei kleiner Breite */
-}
-
-.long-button {
-  flex: 1;                         /* beide gleich breit */
-  height: 80px;                    /* gleiche Höhe */
-  font-size: 18px;
-  padding: 15px 20px;
-  background: #2E5D3D;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  line-height: 1.3;
-  text-align: center;
-  min-width: 250px;
-}
-
-.long-button:hover {
-  background: #27623e;
-  transform: scale(1.03);
-}
-
-@media (max-width: 600px){
-  .header { flex-direction:column; align-items:center; }
+@media (max-width: 600px){ 
+  .header { flex-direction:column; align-items:center; } 
   .header nav { margin-top:10px; }
-
-  .submit-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .long-button {
-    width: 80%;
-  }
+  .submit-container { flex-direction:column; }
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-<!-- Header -->
-<div class="header">
-  <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="Recommendations.html">Recommendations</a>
-  </nav>
+  <!-- Header -->
+  <div class="header">
+    <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Recommendations.html">Recommendations</a>
+    </nav>
+  </div>
+
+  <h1>Enhanced Stress Index (WHO-Based)</h1>
+
+  <form id="assessmentForm">
+
+    <!-- Demographics -->
+    <h2>Demographics</h2>
+    <div class="question">
+      <label>Age:</label>
+      <select name="age" required>
+        <option value="" disabled selected>Select age</option>
+        <option value="18-30">18–30</option>
+        <option value="31-50">31–50</option>
+        <option value="51-70">51–70</option>
+        <option value=">70">>70</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>Gender:</label>
+      <select name="gender" required>
+        <option value="" disabled selected>Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Health Conditions -->
+    <h2>Health Conditions</h2>
+    <div class="question">
+      <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
+      <label><input type="checkbox" name="chronic" value="None"> None</label>
+      <label><input type="checkbox" name="chronic" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+      <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
+      <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery</label>
+      <label><input type="checkbox" name="chronic" value="Other"> Other</label>
+    </div>
+
+    <!-- Physical Activity -->
+    <div class="question">
+      <label>Weekly Physical Activity:</label>
+      <label><input type="radio" name="physical" value="Little or no activity" required>&lt;150 min/week, no strength</label>
+      <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
+      <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
+      <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
+      <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week, 2+ strength</label>
+    </div>
+
+    <!-- Harmful Habits -->
+    <h2>Harmful Habits</h2>
+    <div class="question">
+      <label>Alcohol consumption</label>
+      <label><input type="radio" name="alcohol" value="0" required> None (0 drinks/week)</label>
+      <label><input type="radio" name="alcohol" value="1"> Low risk (Women:1–7, Men:1–14/week)</label>
+      <label><input type="radio" name="alcohol" value="2"> Moderate risk (Women:8–14, Men:15–28/week)</label>
+      <label><input type="radio" name="alcohol" value="3"> High risk (Women:15–21, Men:29–42/week)</label>
+      <label><input type="radio" name="alcohol" value="4"> Very high (Women:21 / Men:42/week)</label>
+    </div>
+
+    <div class="question">
+      <label>Tobacco use</label>
+      <label><input type="radio" name="tobacco" value="0" required> None</label>
+      <label><input type="radio" name="tobacco" value="1"> Low (&lt;5/day)</label>
+      <label><input type="radio" name="tobacco" value="2"> Moderate (5–19/day)</label>
+      <label><input type="radio" name="tobacco" value="3"> High (20/day)</label>
+      <label><input type="radio" name="tobacco" value="4"> Very high (&ge;30/day)</label>
+    </div>
+
+    <div class="question">
+      <label>Drug use</label>
+      <label><input type="radio" name="drugs" value="0" required> None</label>
+      <label><input type="radio" name="drugs" value="1"> Low (occasional)</label>
+      <label><input type="radio" name="drugs" value="2"> Moderate (regular, risk)</label>
+      <label><input type="radio" name="drugs" value="3"> High (dependence / health risk)</label>
+      <label><input type="radio" name="drugs" value="4"> Very high (severe)</label>
+    </div>
+
+    <div class="question">
+      <label>Gambling</label>
+      <label><input type="radio" name="gambling" value="0" required> None</label>
+      <label><input type="radio" name="gambling" value="1"> Low (occasional, minimal problems)</label>
+      <label><input type="radio" name="gambling" value="2"> Moderate (regular, some problems)</label>
+      <label><input type="radio" name="gambling" value="3"> High (frequent, significant problems)</label>
+      <label><input type="radio" name="gambling" value="4"> Very high (pathological)</label>
+    </div>
+
+    <!-- Stress & Well-Being -->
+    <h2>Stress (0–4 Likert)</h2>
+    <div id="questions"></div>
+
+    <!-- Submit Buttons -->
+    <div class="submit-container">
+      <button type="submit" class="long-button" name="action" value="index">
+        <b>Submit for <br>Index Value</b>
+      </button>
+
+      <button type="submit" class="long-button" formaction="Recommendations.html" name="action" value="individual">
+        <b>Submit for <br>Individual Recommendations</b>
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Results -->
+  <div id="results">
+    <p id="responseID"></p>
+    <p id="totalPoints"></p>
+    <p id="categoryColor"></p>
+    <div id="breakdown"></div>
+    <div id="barChart"></div>
+    <button id="newFormBtn">Fill Out Again</button>
+  </div>
+
+  <footer>
+    &copy; 2025 AntiStressGuide. All rights reserved.
+  </footer>
+
 </div>
-
-<h1>Enhanced Stress Index (WHO-Based)</h1>
-
-<form id="assessmentForm">
-
-  <!-- Demographics -->
-  <h2>Demographics</h2>
-  <div class="question">
-    <label>Age:</label>
-    <select name="age" required>
-      <option value="" disabled selected>Select age</option>
-      <option value="18-30">18–30</option>
-      <option value="31-50">31–50</option>
-      <option value="51-70">51–70</option>
-      <option value=">70">>70</option>
-    </select>
-  </div>
-
-  <div class="question">
-    <label>Gender:</label>
-    <select name="gender" required>
-      <option value="" disabled selected>Select gender</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-      <option value="Other">Other</option>
-    </select>
-  </div>
-
-  <!-- Health Conditions -->
-  <h2>Health Conditions</h2>
-  <div class="question">
-    <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
-    <label><input type="checkbox" name="chronic" value="None"> None</label>
-    <label><input type="checkbox" name="chronic" value="Cardiovascular Disease"> Cardiovascular Disease</label>
-    <label><input type="checkbox" name="chronic" value="Mental Health Condition"> Mental Health Condition</label>
-    <label><input type="checkbox" name="chronic" value="Recent Surgery"> Recent Surgery</label>
-    <label><input type="checkbox" name="chronic" value="Other"> Other</label>
-  </div>
-
-  <!-- Physical Activity -->
-  <div class="question">
-    <label>Weekly Physical Activity:</label>
-    <label><input type="radio" name="physical" value="Little or no activity" required>&lt;150 min/week, no strength</label>
-    <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
-    <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
-    <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
-    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week, 2+ strength</label>
-  </div>
-
-  <!-- Harmful Habits -->
-  <h2>Harmful Habits</h2>
-  <div class="question">
-    <label>Alcohol consumption</label>
-    <label><input type="radio" name="alcohol" value="0" required> None (0 drinks/week)</label>
-    <label><input type="radio" name="alcohol" value="1"> Low risk (Women:1–7, Men:1–14/week)</label>
-    <label><input type="radio" name="alcohol" value="2"> Moderate risk (Women:8–14, Men:15–28/week)</label>
-    <label><input type="radio" name="alcohol" value="3"> High risk (Women:15–21, Men:29–42/week)</label>
-    <label><input type="radio" name="alcohol" value="4"> Very high (Women:21 / Men:42/week)</label>
-  </div>
-
-  <div class="question">
-    <label>Tobacco use</label>
-    <label><input type="radio" name="tobacco" value="0" required> None</label>
-    <label><input type="radio" name="tobacco" value="1"> Low (&lt;5/day)</label>
-    <label><input type="radio" name="tobacco" value="2"> Moderate (5–19/day)</label>
-    <label><input type="radio" name="tobacco" value="3"> High (20/day)</label>
-    <label><input type="radio" name="tobacco" value="4"> Very high (&ge;30/day)</label>
-  </div>
-
-  <div class="question">
-    <label>Drug use</label>
-    <label><input type="radio" name="drugs" value="0" required> None</label>
-    <label><input type="radio" name="drugs" value="1"> Low (occasional)</label>
-    <label><input type="radio" name="drugs" value="2"> Moderate (regular, risk)</label>
-    <label><input type="radio" name="drugs" value="3"> High (dependence / health risk)</label>
-    <label><input type="radio" name="drugs" value="4"> Very high (severe)</label>
-  </div>
-
-  <div class="question">
-    <label>Gambling</label>
-    <label><input type="radio" name="gambling" value="0" required> None</label>
-    <label><input type="radio" name="gambling" value="1"> Low (occasional, minimal problems)</label>
-    <label><input type="radio" name="gambling" value="2"> Moderate (regular, some problems)</label>
-    <label><input type="radio" name="gambling" value="3"> High (frequent, significant problems)</label>
-    <label><input type="radio" name="gambling" value="4"> Very high (pathological)</label>
-  </div>
-
-  <!-- Stress & Well-Being -->
-  <h2>Stress (0–4 Likert)</h2>
-  <div id="questions"></div>
-
-  <!-- ✅ Zwei gleich große Submit-Buttons -->
-  <div class="submit-container">
-    <button type="submit" name="action" value="index" class="long-button">
-      <b>Submit for <br>Index Value</b>
-    </button>
-
-    <button type="submit" name="action" value="individual" class="long-button">
-      <b>Submit for <br>Individual Recommendations</b>
-    </button>
-  </div>
-
-</form>
-
-<!-- Results -->
-<div id="results">
-  <p id="responseID"></p>
-  <p id="totalPoints"></p>
-  <p id="categoryColor"></p>
-  <div id="breakdown"></div>
-  <div id="barChart"></div>
-  <button id="newFormBtn">Fill Out Again</button>
-</div>
-
-<footer>
-  &copy; 2025 AntiStressGuide. All rights reserved.
-</footer>
 
 <script>
-/* JavaScript bleibt unverändert – Likert-Fragen, Berechnung, etc. */
+// Likert Questions
 const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions = [
   "In the past month, I felt that things were generally going my way.",
@@ -244,57 +207,100 @@ stressQuestions.forEach((q,i)=>{
   questionsDiv.appendChild(div);
 });
 
-function generateSequentialID(){
+// Generate sequential ID
+function generateSequentialID() {
   const now=new Date();
-  const ym=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
-  const key=`internalID_${ym}`;
-  let num=parseInt(localStorage.getItem(key)||"0",10);
-  num+=1;
-  localStorage.setItem(key,num);
-  return `ASG${ym}${String(num).padStart(4,'0')}`;
+  const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
+  const storageKey=`internalID_${yearMonth}`;
+  let currentNumber=parseInt(localStorage.getItem(storageKey)||"0",10);
+  currentNumber+=1;
+  localStorage.setItem(storageKey,currentNumber);
+  return `ASG${yearMonth}${String(currentNumber).padStart(4,'0')}`;
 }
 
-function avg(arr){const nums=arr.map(Number).filter(n=>!isNaN(n));return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:0;}
+// Average helper
+function avg(arr){ const nums=arr.map(Number).filter(n=>!isNaN(n)); return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:0; }
 
-const form=document.getElementById('assessmentForm');
-form.addEventListener('submit',e=>{
+// Form submit
+const form = document.getElementById('assessmentForm');
+form.addEventListener('submit', e=>{
   e.preventDefault();
-  const id=generateSequentialID();
-  const stress=avg(stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value)));
-  const habits=avg(["alcohol","tobacco","drugs","gambling"].map(n=>parseInt(form.querySelector(`input[name="${n}"]:checked`).value)));
-  const physVal=form.querySelector('input[name="physical"]:checked')?.value;
-  const physScore=physVal==="Little or no activity"?4:physVal==="150–300 min/week, 0–1 strength"?3:physVal==="150–300 min/week, 2+ strength"?2:physVal===">300 min/week, 2+ strength"?1:0;
+  const responseID = generateSequentialID();
+
+  // Stress
+  const stressAnswers = stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
+  const stressScore = avg(stressAnswers);
+
+  // Habits
+  const habitsValues = ["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
+  const habitsScore = avg(habitsValues);
+
+  // Physical Activity (inverse)
+  const phys=form.querySelector('input[name="physical"]:checked')?.value;
+  let physicalRaw=0;
+  switch(phys){
+    case "Little or no activity": physicalRaw=4; break;
+    case "150–300 min/week, 0–1 strength": physicalRaw=3; break;
+    case "150–300 min/week, 2+ strength": physicalRaw=2; break;
+    case ">300 min/week, 2+ strength": physicalRaw=1; break;
+    case "Vigorous 75–150+ min/week": physicalRaw=0; break;
+  }
+  const physicalScore=physicalRaw;
+
+  // Chronic
   const chronicList=Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value).filter(v=>v!=="None");
-  const chronicScore=Math.min(4,chronicList.length*2);
-  const total=(stress*0.4+habits*0.2+chronicScore*0.2+physScore*0.2).toFixed(2);
-  let cat="",col="";
-  if(total<1)cat="Excellent / Low Risk",col="🟢";
-  else if(total<2)cat="Mild Risk",col="🟡";
-  else if(total<3)cat="Elevated Risk",col="🟠";
-  else cat="High / Very High Risk",col="🔴";
+  const chronicScore = Math.min(4, chronicList.length*2);
 
+  // Weighted total
+  const totalScore = (stressScore*0.4 + habitsScore*0.2 + chronicScore*0.2 + physicalScore*0.2).toFixed(2);
+
+  // Category & color
+  let category="", color="";
+  if(totalScore < 1.0){ category="Excellent / Low Risk"; color="🟢"; }
+  else if(totalScore < 2.0){ category="Mild Risk"; color="🟡"; }
+  else if(totalScore < 3.0){ category="Elevated Risk"; color="🟠"; }
+  else{ category="High / Very High Risk"; color="🔴"; }
+
+  // Show results
   form.style.display='none';
-  const res=document.getElementById('results');
-  res.style.display='block';
-  document.getElementById('responseID').textContent=`Response ID: ${id}`;
-  document.getElementById('totalPoints').textContent=`Total Score: ${total}`;
-  document.getElementById('categoryColor').textContent=`Category: ${cat} ${col}`;
-  document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b><br>Stress: ${stress.toFixed(2)}<br>Habits: ${habits.toFixed(2)}<br>Chronic: ${chronicScore.toFixed(2)}<br>Physical Activity: ${physScore.toFixed(2)}`;
+  const resultsDiv=document.getElementById('results');
+  resultsDiv.style.display='block';
+  document.getElementById('responseID').textContent=`Response ID: ${responseID}`;
+  document.getElementById('totalPoints').textContent=`Total Score: ${totalScore}`;
+  document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
 
-  const chart=document.getElementById('barChart');
-  chart.innerHTML='';
-  [{label:"Stress",value:stress,color:"#2E5D3D"},{label:"Habits",value:habits,color:"#ff6347"},{label:"Chronic",value:chronicScore,color:"#ffa500"},{label:"Physical",value:physScore,color:"#1e90ff"}]
-  .forEach(s=>{
-    const perc=(s.value/4*100).toFixed(0);
-    const div=document.createElement('div');
+  document.getElementById('breakdown').innerHTML=`
+    <b>Breakdown:</b><br>
+    Stress: ${stressScore.toFixed(2)}<br>
+    Habits: ${habitsScore.toFixed(2)}<br>
+    Chronic: ${chronicScore.toFixed(2)}<br>
+    Physical Activity: ${physicalScore.toFixed(2)}
+  `;
+
+  // Bar chart
+  const barChart = document.getElementById('barChart');
+  barChart.innerHTML='';
+  const sections = [
+    {label:"Stress", value:stressScore, color:"#2E5D3D"},
+    {label:"Habits", value:habitsScore, color:"#ff6347"},
+    {label:"Chronic", value:chronicScore, color:"#ffa500"},
+    {label:"Physical", value:physicalScore, color:"#1e90ff"}
+  ];
+  sections.forEach(s=>{
+    const perc = (s.value/4*100).toFixed(0);
+    const div = document.createElement('div');
     div.className='bar-container';
-    div.innerHTML=`<div class="bar" style="width:${perc}%;background:${s.color}">${s.label} ${s.value.toFixed(2)}</div>`;
-    chart.appendChild(div);
+    div.innerHTML=`<div class="bar" style="width:${perc}%; background:${s.color}">${s.label} ${s.value.toFixed(2)}</div>`;
+    barChart.appendChild(div);
   });
 });
 
-document.getElementById('newFormBtn').addEventListener('click',()=>{
-  form.reset();form.style.display='block';document.getElementById('results').style.display='none';document.getElementById('barChart').innerHTML='';
+// Reset form
+document.getElementById('newFormBtn').addEventListener('click', ()=>{
+  form.reset();
+  form.style.display='block';
+  document.getElementById('results').style.display='none';
+  document.getElementById('barChart').innerHTML='';
 });
 </script>
 
