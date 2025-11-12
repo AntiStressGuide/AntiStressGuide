@@ -206,20 +206,31 @@ stressQuestions.forEach((q,i)=>{
 function avg(arr){const nums=arr.map(Number).filter(n=>!isNaN(n));return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:0;}
 function generateSequentialID(){const now=new Date();const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;const key=`internalID_${yearMonth}`;let n=parseInt(localStorage.getItem(key)||"0",10);n+=1;localStorage.setItem(key,n);return`ASG${yearMonth}${String(n).padStart(4,'0')}`;}
 const form=document.getElementById('assessmentForm');
-form.addEventListener('submit',e=>{
+form.addEventListener('submit', e => {
   e.preventDefault();
   const error=document.getElementById('errorMessage');
+
   if(!form.checkValidity()){
     error.style.display='block';
     alert("⚠️ Please answer all required questions before submitting.");
     return;
   }
+
   error.style.display='none';
+
+  const action = e.submitter?.value; // erkennt, welcher Button gedrückt wurde
+  if (action === "individual") {
+    window.location.href = "payment.html"; // direkt weiter zur Payment-Seite
+    return;
+  }
+
+  // Wenn Index-Button gewählt → normale Auswertung
   const responseID=generateSequentialID();
   const stressAnswers=stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
   const stressScore=avg(stressAnswers);
   const habitsValues=["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
   const habitsScore=avg(habitsValues);
+
   const phys=form.querySelector('input[name="physical"]:checked')?.value;
   let physicalRaw=0;
   switch(phys){
@@ -234,11 +245,13 @@ form.addEventListener('submit',e=>{
   const medicalList=Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
   const medicalScore=Math.min(4,medicalList.length);
   const totalScore=((stressScore+habitsScore+medicalScore+nutritionScore+physicalScore)/5).toFixed(2);
+
   let category="",color="";
   if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
   else if(totalScore<2){category="Mild Risk";color="🟡";}
   else if(totalScore<3){category="Elevated Risk";color="🟠";}
   else{category="High / Very High Risk";color="🔴";}
+
   form.style.display='none';
   const results=document.getElementById('results');
   results.style.display='block';
@@ -267,6 +280,7 @@ form.addEventListener('submit',e=>{
     barChart.appendChild(div);
   });
 });
+
 document.getElementById('newFormBtn').addEventListener('click',()=>{
   form.reset();
   form.style.display='block';
