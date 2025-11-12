@@ -242,8 +242,10 @@ form.addEventListener('submit', e=>{
   const chronicList=Array.from(form.querySelectorAll('input[name="chronic"]:checked')).map(c=>c.value).filter(v=>v!=="None");
   const medicalScore = Math.min(4, chronicList.length*2);
 
-  // Weighted total: Medical 0.4, others 0.2
-  const totalScore = (stressScore*0.2 + habitsScore*0.2 + medicalScore*0.4 + physicalScore*0.2).toFixed(2);
+  
+// Weighted total: all equal
+const totalScore = ((stressScore + habitsScore + medicalScore + physicalScore)/4).toFixed(2);
+
 
   // Category & color
   let category="", color="";
