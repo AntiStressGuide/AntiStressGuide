@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enhanced Stress Index (WHO-Based)</title>
 
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="Logo AntiStressGuide.png">
 <link rel="shortcut icon" type="image/x-icon" href="Logo AntiStressGuide.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
@@ -13,7 +12,6 @@
 <style>
 body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; line-height:1.6; }
 .container { max-width:800px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-
 .header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; background:#f7fff8; padding:10px 20px; border-radius:10px 10px 0 0; }
 .header img.logo { height:50px; width:auto; }
 .header nav a { margin-left:15px; text-decoration:underline; color:#007bff; font-weight:bold; }
@@ -28,7 +26,7 @@ h1,h2 { text-align:center; color:#2E5D3D; }
 label { display:block; margin:5px 0; font-size:18px; }
 input[type="range"] { width:100%; margin-top:5px; }
 .range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
-input[type="checkbox"], input[type="radio"] { margin-right:10px; transform:scale(1.2); }
+input[type="checkbox"], input[type="radio"] { margin-right:10px; transform:scale(1.3); }
 select, input[type=email] { width:100%; padding:12px; margin-top:10px; border-radius:30px; border:1px solid #ccc; font-size:18px; }
 button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
 button:hover{ background:#27623e; }
@@ -43,6 +41,8 @@ button:hover{ background:#27623e; }
 
 footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
 @media (max-width: 600px){ .header { flex-direction:column; align-items:center; } .header nav { margin-top:10px; } }
+.action { background:#2E5D3D; color:#fff; padding:12px 25px; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+.action:hover { background:#27623e; }
 </style>
 </head>
 <body>
@@ -96,63 +96,65 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
     <label><input type="checkbox" name="medical" value="Other"> Other</label>
   </div>
 
-  <!-- Nutrition (0=very healthy, 4=very unhealthy) -->
-  <h2>Nutrition (0–4)</h2>
+  <!-- Nutrition Factor -->
+  <h2>Nutrition (0–4, positive framing)</h2>
   <div class="question">
-    <label>Nutrition</label>
-    <label><input type="radio" name="nutrition" value="0" required> Very healthy diet (Sugar <5%, Salt <3g, Sat. fat <5%)</label>
-    <label><input type="radio" name="nutrition" value="1"> Healthy diet (Sugar 5–7%, Salt 3–5g, Sat. fat 5–7%)</label>
-    <label><input type="radio" name="nutrition" value="2"> Average diet (Sugar 5–10%, Salt 5–7g, Sat. fat 7–10%)</label>
-    <label><input type="radio" name="nutrition" value="3"> Unhealthy diet (Sugar 10–15%, Salt 7–10g, Sat. fat 10–15%)</label>
-    <label><input type="radio" name="nutrition" value="4"> Very unhealthy diet (Sugar >15%, Salt >10g, Sat. fat >15%)</label>
+    <label>How healthy is your diet?</label>
+    <label><input type="radio" name="nutrition" value="0" required> Very unhealthy: sugar>15%, salt>10g/day, saturated fat>15%</label>
+    <label><input type="radio" name="nutrition" value="1"> Unhealthy: sugar 10–15%, salt 7–10g, saturated fat 10–15%</label>
+    <label><input type="radio" name="nutrition" value="2"> Average: sugar 5–10%, salt 5–7g, saturated fat 7–10%</label>
+    <label><input type="radio" name="nutrition" value="3"> Healthy: sugar 5–7%, salt 3–5g, saturated fat 5–7%</label>
+    <label><input type="radio" name="nutrition" value="4"> Very healthy: sugar<5%, salt<3g, saturated fat<5%</label>
   </div>
 
   <!-- Physical Activity -->
+  <h2>Physical Activity</h2>
   <div class="question">
     <label>Weekly Physical Activity:</label>
-    <label><input type="radio" name="physical" value="Little or no activity" required>&lt;150 min/week, no strength</label>
-    <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
-    <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
-    <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
-    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week</label>
+    <label><input type="radio" name="physical" value="0" required>&lt;150 min/week, no strength</label>
+    <label><input type="radio" name="physical" value="1">150–300 min/week, 0–1 strength</label>
+    <label><input type="radio" name="physical" value="2">150–300 min/week, 2+ strength</label>
+    <label><input type="radio" name="physical" value="3">&gt;300 min/week, 2+ strength</label>
+    <label><input type="radio" name="physical" value="4">Vigorous 75–150+ min/week</label>
   </div>
 
   <!-- Harmful Habits -->
   <h2>Harmful Habits</h2>
+
   <div class="question">
     <label>Alcohol consumption</label>
     <label><input type="radio" name="alcohol" value="0" required> None (0 drinks/week)</label>
-    <label><input type="radio" name="alcohol" value="1"> Low risk</label>
-    <label><input type="radio" name="alcohol" value="2"> Moderate risk</label>
-    <label><input type="radio" name="alcohol" value="3"> High risk</label>
-    <label><input type="radio" name="alcohol" value="4"> Very high risk</label>
+    <label><input type="radio" name="alcohol" value="1"> Low risk (Women: 1–7, Men: 1–14/week)</label>
+    <label><input type="radio" name="alcohol" value="2"> Moderate risk (Women: 8–14, Men: 15–28/week)</label>
+    <label><input type="radio" name="alcohol" value="3"> High risk (Women: 15–21, Men: 29–42/week)</label>
+    <label><input type="radio" name="alcohol" value="4"> Very high (Women: 21+, Men: 42+/week)</label>
   </div>
 
   <div class="question">
     <label>Tobacco use</label>
     <label><input type="radio" name="tobacco" value="0" required> None</label>
-    <label><input type="radio" name="tobacco" value="1"> Low</label>
-    <label><input type="radio" name="tobacco" value="2"> Moderate</label>
-    <label><input type="radio" name="tobacco" value="3"> High</label>
-    <label><input type="radio" name="tobacco" value="4"> Very high</label>
+    <label><input type="radio" name="tobacco" value="1"> Low (&lt;5/day)</label>
+    <label><input type="radio" name="tobacco" value="2"> Moderate (5–19/day)</label>
+    <label><input type="radio" name="tobacco" value="3"> High (20/day)</label>
+    <label><input type="radio" name="tobacco" value="4"> Very high (≥30/day)</label>
   </div>
 
   <div class="question">
     <label>Drug use</label>
     <label><input type="radio" name="drugs" value="0" required> None</label>
-    <label><input type="radio" name="drugs" value="1"> Low</label>
-    <label><input type="radio" name="drugs" value="2"> Moderate</label>
-    <label><input type="radio" name="drugs" value="3"> High</label>
-    <label><input type="radio" name="drugs" value="4"> Very high</label>
+    <label><input type="radio" name="drugs" value="1"> Low (occasional)</label>
+    <label><input type="radio" name="drugs" value="2"> Moderate (regular, some risk)</label>
+    <label><input type="radio" name="drugs" value="3"> High (dependence / health risk)</label>
+    <label><input type="radio" name="drugs" value="4"> Very high (severe)</label>
   </div>
 
   <div class="question">
     <label>Gambling</label>
     <label><input type="radio" name="gambling" value="0" required> None</label>
-    <label><input type="radio" name="gambling" value="1"> Low</label>
-    <label><input type="radio" name="gambling" value="2"> Moderate</label>
-    <label><input type="radio" name="gambling" value="3"> High</label>
-    <label><input type="radio" name="gambling" value="4"> Very high</label>
+    <label><input type="radio" name="gambling" value="1"> Low (occasional, minimal problems)</label>
+    <label><input type="radio" name="gambling" value="2"> Moderate (regular, some problems)</label>
+    <label><input type="radio" name="gambling" value="3"> High (frequent, significant problems)</label>
+    <label><input type="radio" name="gambling" value="4"> Very high (pathological)</label>
   </div>
 
   <!-- Stress & Well-Being -->
@@ -164,7 +166,6 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
     <button type="submit" name="action" value="index">
       <b>Submit for <br>Index Value</b>
     </button>
-
     <button type="submit" name="action" value="individual">
       <b>Submit for <br>Individual Recommendations</b>
     </button>
@@ -229,13 +230,6 @@ function avg(arr){ const nums=arr.map(Number).filter(n=>!isNaN(n)); return nums.
 const form = document.getElementById('assessmentForm');
 form.addEventListener('submit', e=>{
   e.preventDefault();
-  const action = e.submitter.value; // "index" oder "individual"
-
-  if(action==="individual"){
-    window.location.href="Recommendations.html";
-    return;
-  }
-
   const responseID = generateSequentialID();
 
   // Stress
@@ -246,26 +240,18 @@ form.addEventListener('submit', e=>{
   const habitsValues = ["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
   const habitsScore = avg(habitsValues);
 
-  // Nutrition (risk factor)
-  const nutritionScore = parseInt(form.querySelector('input[name="nutrition"]:checked').value);
+  // Physical Activity (positive factor)
+  const physicalRaw = parseInt(form.querySelector('input[name="physical"]:checked')?.value || 0);
+  const physicalScore = physicalRaw; // higher = more protective
 
-  // Physical Activity (protective)
-  const phys=form.querySelector('input[name="physical"]:checked')?.value;
-  let physicalRaw=0;
-  switch(phys){
-    case "Little or no activity": physicalRaw=0; break;
-    case "150–300 min/week, 0–1 strength": physicalRaw=1; break;
-    case "150–300 min/week, 2+ strength": physicalRaw=2; break;
-    case ">300 min/week, 2+ strength": physicalRaw=3; break;
-    case "Vigorous 75–150+ min/week": physicalRaw=4; break;
-  }
-  const physicalScore = 4 - physicalRaw; // positive factor
+  // Nutrition (risk factor)
+  const nutritionScore = parseInt(form.querySelector('input[name="nutrition"]:checked')?.value || 0);
 
   // Medical
-  const medicalList=Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
+  const medicalList = Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
   const medicalScore = Math.min(4, medicalList.length);
 
-  // Total Score (Risk factors minus protective)
+  // Total Score = Risk factors (Stress + Habits + Medical + Nutrition) - Physical Activity
   const totalScore = (stressScore + habitsScore + medicalScore + nutritionScore - physicalScore).toFixed(2);
 
   // Category & color
@@ -279,45 +265,4 @@ form.addEventListener('submit', e=>{
   form.style.display='none';
   const resultsDiv=document.getElementById('results');
   resultsDiv.style.display='block';
-  document.getElementById('responseID').textContent=`Response ID: ${responseID}`;
-  document.getElementById('totalPoints').textContent=`Total Score: ${totalScore}`;
-  document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
-
-  document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b><br>
-    Stress: ${stressScore.toFixed(2)}<br>
-    Habits: ${habitsScore.toFixed(2)}<br>
-    Medical: ${medicalScore.toFixed(2)}<br>
-    Nutrition: ${nutritionScore.toFixed(2)}<br>
-    Physical Activity: ${physicalScore.toFixed(2)}
-  `;
-
-  // Bar chart
-  const barChart = document.getElementById('barChart');
-  barChart.innerHTML='';
-  const sections = [
-    {label:"Stress", value:stressScore, color:"#ff6347"},
-    {label:"Habits", value:habitsScore, color:"#ff6347"},
-    {label:"Medical", value:medicalScore, color:"#ff6347"},
-    {label:"Nutrition", value:nutritionScore, color:"#ff6347"},
-    {label:"Physical Activity", value:physicalScore, color:"#2E5D3D"} // positive
-  ];
-  sections.forEach(s=>{
-    const perc = (s.value/4*100).toFixed(0);
-    const div = document.createElement('div');
-    div.className='bar-container';
-    div.innerHTML=`<div class="bar" style="width:${perc}%; background:${s.color}">${s.label} ${s.value.toFixed(2)}</div>`;
-    barChart.appendChild(div);
-  });
-});
-
-// Reset form
-document.getElementById('newFormBtn').addEventListener('click', ()=>{
-  form.reset();
-  form.style.display='block';
-  document.getElementById('results').style.display='none';
-  document.getElementById('barChart').innerHTML='';
-});
-</script>
-
-</body>
-</html>
+  document.getEleme
