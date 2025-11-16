@@ -324,5 +324,14 @@ document.getElementById('newFormBtn').addEventListener('click',()=>{
   document.getElementById('assessmentForm').reset();
 });
 </script>
+  <div id="footer-placeholder"></div>
+<script>
+  fetch('Footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+    });
+</script>
+
 </body>
 </html>
