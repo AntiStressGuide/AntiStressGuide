@@ -5,11 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Individual Audio Affirmations Based on the Enhanced Stress Index</title>
 <meta name="description" content="Retrieve your personalized affirmations based on the Enhanced Stress Index.">
-
-<!-- Favicon -->
-<link rel="icon" href="Logo AntiStressGuide.ico" type="image/x-icon">
-<link rel="shortcut icon" href="Logo AntiStressGuide.png" type="image/png">
-
 <style>
   body {
     font-family: 'Roboto', Arial, sans-serif;
@@ -20,15 +15,21 @@
     line-height: 1.6;
   }
 
-  /* Header mit Flexbox */
+  .container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Header im Container mit Flexbox */
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background: #f7fff8;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   .header img.logo {
@@ -61,27 +62,19 @@
     }
   }
 
-  .container {
-    max-width: 700px;
-    margin: 0 auto 40px auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-
   h1 {
     max-width: 500px;
     margin: 0 auto;
     line-height: 1.3;
     color: #2E5D3D;
+    text-align: center;
   }
   p.subtitle {
     font-size: 1.4em;
     font-weight: bold;
     margin-top: 10px;
     color: #2E5D3D;
+    text-align: center;
   }
 
   .affirmation-note {
@@ -133,17 +126,17 @@
 </head>
 <body>
 
-<!-- Flexbox Header -->
-<div class="header">
-  <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="Results.html">Enhanced Stress Index</a>
-    <a href="Recommendations.html">Recommendations</a>
-  </nav>
-</div>
-
 <div class="container">
+
+  <!-- Header mit Logo und Navigation im Container -->
+  <div class="header">
+    <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Results.html">Enhanced Stress Index</a>
+     
+    </nav>
+  </div>
 
   <h1>Individual Audio Affirmations</h1>
   <p class="subtitle">Based on Your Enhanced Stress Index</p>
@@ -162,6 +155,11 @@
   </form>
 
   <div id="results"></div>
+
+  <footer>
+    &copy; 2025 AntiStressGuide. All rights reserved.
+  </footer>
+
 </div>
 
 <script>
@@ -177,10 +175,6 @@
     }
   });
 </script>
-
-<footer>
-  &copy; 2025 AntiStressGuide. All rights reserved.
-</footer>
 
 </body>
 </html>
