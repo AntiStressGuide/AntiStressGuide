@@ -6,12 +6,14 @@
 <title>Contact / Chat – AntiStressGuide</title>
 <link rel="icon" type="image/png" href="Logo AntiStressGuide.png">
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
+
 <style>
 body {
   font-family: 'Roboto', Arial, sans-serif;
   background: #eaf5e8;
   margin: 0; padding: 0; line-height: 1.6;
 }
+
 .container {
   max-width: 900px;
   margin: 30px auto;
@@ -20,21 +22,49 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
+/* Header */
 header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
+
 header img.logo {
   max-width: 120px;
   height: auto;
-  margin-right: 15px;
 }
+
 header h1 {
+  flex: 1;
+  text-align: center;
   font-size: 1.8em;
   color: #2E5D3D;
   margin: 0;
 }
+
+/* Navigation */
+.main-nav {
+  display: flex;
+  gap: 15px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #2E5D3D;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.main-nav a:hover {
+  background: #27623e;
+  color: #fff;
+}
+
+/* Chat */
 .chat-container {
   border: 1px solid #ccc;
   border-radius: 15px;
@@ -42,7 +72,10 @@ header h1 {
   max-height: 400px;
   overflow-y: auto;
   background: #f7fff8;
+  display: flex;
+  flex-direction: column;
 }
+
 .chat-message {
   max-width: 80%;
   margin: 10px;
@@ -51,6 +84,7 @@ header h1 {
   word-wrap: break-word;
   line-height: 1.4;
 }
+
 .chat-message.user {
   background: #2E5D3D;
   color: #fff;
@@ -58,17 +92,21 @@ header h1 {
   margin-left: auto;
   text-align: right;
 }
+
 .chat-message.bot {
   background: #d9f0e0;
   color: #27623e;
   align-self: flex-start;
 }
+
+/* Input area */
 .input-area {
   display: flex;
   margin-top: 10px;
   gap: 10px;
   flex-wrap: wrap;
 }
+
 input[type=text] {
   flex: 1;
   padding: 12px 15px;
@@ -76,6 +114,7 @@ input[type=text] {
   border: 1px solid #ccc;
   font-size: 16px;
 }
+
 button {
   padding: 12px 20px;
   background: #2E5D3D;
@@ -85,7 +124,10 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
+
 button:hover { background: #27623e; }
+
+/* Footer */
 footer {
   margin-top: 30px;
   padding: 15px;
@@ -94,8 +136,18 @@ footer {
   text-align: center;
   border-top: 1px solid #cce6d0;
 }
+
+/* Responsive */
 @media(max-width:600px){
-  header { flex-direction: column; align-items: center; gap: 10px; }
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   input[type=text] { width: 100%; }
   button { width: 100%; }
 }
@@ -108,9 +160,14 @@ footer {
   <header>
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
     <h1>Contact / Chat</h1>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="Results.html">Enhanced Stress Index</a>
+      <a href="Affirmations.html">Affirmations</a>
+    </nav>
   </header>
 
-  <div class="chat-container" id="chat" style="display:flex; flex-direction:column;"></div>
+  <div class="chat-container" id="chat"></div>
 
   <div class="input-area">
     <input type="text" id="userInput" placeholder="Type your question here..." />
@@ -119,6 +176,8 @@ footer {
 
   <footer>
     &copy; 2025 AntiStressGuide. All rights reserved.
+    <br>
+    <a href="Contact.html">Contact / Chat</a>
   </footer>
 
 </div>
