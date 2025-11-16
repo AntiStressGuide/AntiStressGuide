@@ -15,7 +15,6 @@
     line-height: 1.6;
   }
 
-  /* Container */
   .container {
     max-width: 700px;
     margin: 40px auto;
@@ -26,21 +25,19 @@
     text-align: center;
   }
 
-  /* Links direkt im Container */
-  .container nav {
+  nav {
     margin-bottom: 20px;
   }
-  .container nav a {
+  nav a {
     margin: 0 15px;
     text-decoration: underline;
     color: #007bff;
     font-weight: bold;
   }
-  .container nav a:hover {
+  nav a:hover {
     color: #27623e;
   }
 
-  /* Header */
   h1 {
     max-width: 500px;
     margin: 0 auto;
@@ -54,7 +51,6 @@
     color: #2E5D3D;
   }
 
-  /* Highlight Text for Affirmations */
   .affirmation-note {
     background: #d6f0e2;
     padding: 15px;
@@ -65,7 +61,6 @@
     line-height: 1.5;
   }
 
-  /* Form */
   form input[type="text"] {
     width: 100%;
     padding: 12px;
@@ -88,48 +83,46 @@
     background: #27623e;
   }
 
-  /* Results */
   #results {
     margin-top: 30px;
     color: #333;
   }
+
   footer {
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 0.9em;
-  color: #444;
-  text-align: center;
-  border-top: 1px solid #cce6d0;
-}
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #444;
+    text-align: center;
+    border-top: 1px solid #cce6d0;
+  }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Links direkt über H1/P -->
+
   <nav>
     <a href="index.html">Home</a>
     <a href="Results.html">Enhanced Stress Index</a>
   </nav>
 
-  <!-- Header -->
-  <h1>Individual Recommendations</h1>
+  <h1>Individual Affirmations</h1>
   <p class="subtitle">Based on the Latest WHO Guidelines</p>
 
-  <!-- Highlighted Note -->
   <div class="affirmation-note">
-    Discover personalized affirmations tailored to your stress index. Created by a medical professional and based on WHO guidelines, these affirmations help you manage and prevent stress.
+    Discover personalized affirmations tailored to your stress index.  
+    Created by a medical professional and guided by WHO principles,  
+    these affirmations support emotional balance and stress resilience.
   </div>
 
-  <p>Please enter your unique assessment ID to retrieve your personalised recommendations:</p>
+  <p>Please enter your unique assessment ID to retrieve your personalised affirmations:</p>
 
-  <!-- Search Form -->
   <form id="searchForm">
     <input type="text" name="assessmentID" placeholder="Enter your assessment ID, e.g., ASG-001234" required>
-    <button type="submit">Retrieve Recommendations</button>
+    <button type="submit">Retrieve Affirmations</button>
   </form>
 
-  <!-- Results -->
   <div id="results"></div>
 </div>
 
@@ -139,9 +132,9 @@
     const id = e.target.assessmentID.value.trim();
     if(id) {
       document.getElementById('results').innerHTML = `
-        <h2>Recommendations for ${id}</h2>
-        <p>Access to personalized recommendations requires a one-time payment: <strong>19,99 €</strong></p>
-        <p>After payment, detailed recommendations based on the latest WHO stress guidelines will be displayed here.</p>
+        <h2>Affirmations for ${id}</h2>
+        <p>Access to your personalised affirmations requires a one-time payment: <strong>19,99 €</strong></p>
+        <p>After payment, your tailored affirmations based on your Enhanced Stress Index will be displayed here.</p>
       `;
     }
   });
