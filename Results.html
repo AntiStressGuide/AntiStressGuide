@@ -10,10 +10,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
 
 <style>
-body { font-family: Roboto, Arial, sans-serif; background:#eaf5e8; margin:0; padding:0; line-height:1.6; }
-.container { max-width:800px; margin:30px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+body { 
+  font-family: Roboto, Arial, sans-serif; 
+  background:#eaf5e8; 
+  margin:0; 
+  padding:0; 
+  line-height:1.6; 
+}
+.container { 
+  max-width:800px; 
+  margin:30px auto; 
+  background:#fff; 
+  padding:30px; 
+  border-radius:10px; 
+  box-shadow:0 2px 6px rgba(0,0,0,0.1); 
+}
 
-.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; background:#f7fff8; padding:10px 20px; border-radius:10px 10px 0 0; }
+.header { 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  margin-bottom:20px; 
+  background:#f7fff8; 
+  padding:10px 20px; 
+  border-radius:10px 10px 0 0; 
+}
 .header img.logo { height:50px; width:auto; }
 .header nav a { margin-left:15px; text-decoration:underline; color:#007bff; font-weight:bold; }
 .header nav a:hover { color:#27623e; }
@@ -41,6 +62,16 @@ button:hover{ background:#27623e; }
 
 .bar-container { width:100%; background:#d9f0e0; border-radius:10px; margin:10px 0; height:28px; position:relative; overflow:hidden; }
 .bar { height:100%; border-radius:10px; line-height:28px; color:#fff; font-weight:bold; padding-right:8px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+footer { 
+  text-align:center; 
+  padding:20px; 
+  background:#f7fff8; 
+  border-radius:0 0 10px 10px;
+  margin-top:30px;
+  font-size:14px;
+  color:#2E5D3D;
+}
 
 @media (max-width: 600px){ 
   .header { flex-direction:column; align-items:center; } 
@@ -71,14 +102,13 @@ button:hover{ background:#27623e; }
   <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
   <nav>
     <a href="index.html">Home</a>
-    <a href="Affimations.html">Affimations</a>
+    <a href="Affirmations.html">Affirmations</a>
   </nav>
 </div>
 
 <h1>Enhanced Stress Index (WHO-Based)</h1>
 
 <form id="assessmentForm">
-
   <!-- Demographics -->
   <h2>Demographics</h2>
   <div class="question">
@@ -179,7 +209,7 @@ button:hover{ background:#27623e; }
 
   <div class="submit-container">
     <button type="submit" name="action" value="index"><b>Submit for<br>Index Value</b></button>
-    <button type="submit" name="action" value="individual"><b>Submit for<br>Individual Affimations</b></button>
+    <button type="submit" name="action" value="individual"><b>Submit for<br>Individual Affirmations</b></button>
   </div>
   <div id="errorMessage">⚠️ Please answer all required questions before submitting.</div>
 </form>
@@ -303,13 +333,15 @@ form.addEventListener('submit', e => {
   document.getElementById('newFormBtn').onclick=()=>{form.reset();form.style.display='block';results.style.display='none';};
 });
 
+// Footer laden
 fetch('footer.html')
   .then(response => response.text())
   .then(data => {
     const placeholder = document.getElementById('footer-placeholder');
-    placeholder.outerHTML = data; // ersetzt das div komplett durch den echten Footer
+    placeholder.outerHTML = data; // ersetzt den div komplett durch den echten Footer
   })
   .catch(err => console.error('Footer konnte nicht geladen werden:', err));
 
+</script>
 </body>
 </html>
