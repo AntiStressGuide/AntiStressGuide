@@ -3,29 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact / Info – AntiStressGuide</title>
-<meta name="description" content="Information page about AntiStressGuide. No direct contact, only official references and guidance.">
-<meta name="keywords" content="Stress, Assessment, AntiStressGuide, WHO, Guidelines, Info">
-<meta name="author" content="AntiStressGuide">
-
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="Logo AntiStressGuide.ico">
+<title>Contact / Chat – AntiStressGuide</title>
 <link rel="icon" type="image/png" href="Logo AntiStressGuide.png">
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
-
 <style>
 body {
   font-family: 'Roboto', Arial, sans-serif;
   background: #eaf5e8;
-  color: #222;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
+  margin: 0; padding: 0; line-height: 1.6;
 }
 .container {
   max-width: 900px;
-  margin: 40px auto;
-  padding: 30px;
+  margin: 30px auto;
+  padding: 20px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -33,58 +23,81 @@ body {
 header {
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 header img.logo {
   max-width: 120px;
   height: auto;
-  margin-right: 20px;
+  margin-right: 15px;
 }
 header h1 {
   font-size: 1.8em;
   color: #2E5D3D;
   margin: 0;
 }
-.info-text {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 1.2em;
+.chat-container {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: #f7fff8;
 }
-.links {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+.chat-message {
+  max-width: 80%;
+  margin: 10px;
+  padding: 12px 15px;
+  border-radius: 20px;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
-.links a {
-  display: inline-block;
-  padding: 12px 24px;
+.chat-message.user {
   background: #2E5D3D;
   color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 500;
-  text-align: center;
-  transition: background 0.3s;
+  align-self: flex-end;
+  margin-left: auto;
+  text-align: right;
 }
-.links a:hover {
-  background: #27623e;
+.chat-message.bot {
+  background: #d9f0e0;
+  color: #27623e;
+  align-self: flex-start;
 }
+.input-area {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+input[type=text] {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+button {
+  padding: 12px 20px;
+  background: #2E5D3D;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover { background: #27623e; }
 footer {
-  margin-top: 40px;
-  padding: 20px;
+  margin-top: 30px;
+  padding: 15px;
   font-size: 0.9em;
   color: #444;
   text-align: center;
   border-top: 1px solid #cce6d0;
 }
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+@media(max-width:600px){
+  header { flex-direction: column; align-items: center; gap: 10px; }
+  input[type=text] { width: 100%; }
+  button { width: 100%; }
 }
 </style>
 </head>
@@ -94,19 +107,14 @@ footer {
 
   <header>
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-    <h1>Contact / Info</h1>
+    <h1>Contact / Chat</h1>
   </header>
 
-  <div class="info-text">
-    <p>This page provides information about <strong>AntiStressGuide</strong>.</p>
-    <p>We do not offer direct contact. For questions or guidance, please use our official references and resources.</p>
-    <p>Learn more about stress management, the <strong>Enhanced Stress Index</strong>, and individual audio affirmations on our site.</p>
-  </div>
+  <div class="chat-container" id="chat" style="display:flex; flex-direction:column;"></div>
 
-  <div class="links">
-    <a href="References.html" target="_blank">References</a>
-    <a href="Results.html" target="_blank">Enhanced Stress Index (Free)</a>
-    <a href="Affirmations.html" target="_blank">Individual Audio Affirmations<br>(from Feb. 2026 · 19,99 €)</a>
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Type your question here..." />
+    <button onclick="sendMessage()">Send</button>
   </div>
 
   <footer>
@@ -114,6 +122,51 @@ footer {
   </footer>
 
 </div>
+
+<script>
+// Keywords for critical messages
+const criticalKeywords = ["problem","urgent","error","emergency","critical"];
+const chat = document.getElementById('chat');
+
+function appendMessage(text, sender){
+  const div = document.createElement('div');
+  div.className = 'chat-message ' + sender;
+  div.innerHTML = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// Initialize chat
+appendMessage("👋 Hello! Ask your questions here. For urgent or critical issues, our team will be notified automatically.", "bot");
+
+function sendMessage(){
+  const input = document.getElementById('userInput');
+  let text = input.value.trim();
+  if(!text) return;
+  appendMessage(text, 'user');
+  input.value = '';
+
+  // Check if message contains critical keywords
+  let isCritical = criticalKeywords.some(word => text.toLowerCase().includes(word));
+
+  if(isCritical){
+    // Send email to admin (server-side)
+    fetch('sendEmail.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({message:text})
+    }).then(res => res.json())
+      .then(data => console.log('Email sent:', data))
+      .catch(err => console.error('Email error:', err));
+
+    appendMessage("✅ Thank you. Your message has been received. Our team will review it shortly.", 'bot');
+  } else {
+    // Simulated AI response
+    let reply = "💡 Here's some guidance: " + text + "<br> For detailed info, see our <a href='References.html' target='_blank'>References</a>.";
+    appendMessage(reply, 'bot');
+  }
+}
+</script>
 
 </body>
 </html>
