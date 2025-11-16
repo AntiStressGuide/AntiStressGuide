@@ -135,6 +135,25 @@
     margin-top: 30px;
     color: #333;
   }
+
+  footer {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #444;
+    text-align: center;
+    border-top: 1px solid #cce6d0;
+    background-color: #f5f5f5;
+  }
+
+  footer a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  footer a:hover {
+    color: #27623e;
+  }
 </style>
 </head>
 
@@ -160,12 +179,11 @@
     self-regulation, and long-term resilience.
   </div>
 
-  <!-- Important: first complete the Stress Index -->
   <div class="important-step">
     To receive your personalised audio affirmations, you must first complete the  
     <a href="Results.html" style="color:#007bff; font-weight:bold; text-decoration:underline;">
       Enhanced Stress Index Assessment
-    </a>.
+    </a>.<br>
     After completing the assessment, you will receive your unique ID number.
   </div>
 
@@ -180,15 +198,11 @@
 
 </div> <!-- END container -->
 
-<!-- Footer from external file -->
-<div id="footer-placeholder"></div>
-<script>
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-placeholder').innerHTML = data;
-    });
-</script>
+<!-- Footer direkt eingebunden -->
+<footer>
+  &copy; 2025 AntiStressGuide. All rights reserved. | 
+  <a href="contact.html">Contact</a>
+</footer>
 
 <!-- Form script -->
 <script>
