@@ -212,9 +212,16 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   const error=document.getElementById('errorMessage');
 
+  // iPhone-Erkennung
+  const isiPhone = /iPhone/i.test(navigator.userAgent);
+
   if(!form.checkValidity()){
     error.style.display='block';
-    alert("⚠️ Please answer all required questions before submitting.");
+    if(isiPhone){
+      alert("⚠️ iPhone users: Please ensure all fields are filled before submitting. Some inputs may not register properly on iOS Safari.");
+    } else {
+      alert("⚠️ Please answer all required questions before submitting.");
+    }
     return;
   }
 
