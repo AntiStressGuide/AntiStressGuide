@@ -31,7 +31,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
 
-  /* Header im Container mit Flexbox */
   .header {
     display: flex;
     justify-content: space-between;
@@ -97,6 +96,16 @@
     text-align: center;
   }
 
+  .important-step {
+    background: #fff8d1;
+    border-left: 5px solid #ffcc00;
+    padding: 12px;
+    margin: 25px 0;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #5a4b00;
+  }
+
   form input[type="text"] {
     width: 100%;
     padding: 12px;
@@ -138,7 +147,7 @@
 
 <div class="container">
 
-  <!-- Header mit Logo und Navigation im Container -->
+  <!-- Header -->
   <div class="header">
     <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
     <nav>
@@ -152,12 +161,20 @@
 
   <div class="affirmation-note">
     Discover personalised affirmations tailored to your stress index.  
-    Developed by medical professionals, these affirmations are crafted  
-    to support emotional balance, self-regulation, and long-term resilience.  
-    This does not replace professional medical advice or treatment.
+    Developed by medical professionals, these affirmations support  
+    emotional balance, self-regulation, and long-term resilience.  
   </div>
 
-  <p>Please enter your unique assessment ID to retrieve your personalised affirmations:</p>
+  <!-- WICHTIGER HINWEIS: zuerst Stress Index ausfüllen -->
+  <div class="important-step">
+    To receive your personalised audio affirmations, you must first complete the  
+    <a href="Results.html" style="color:#007bff; font-weight:bold; text-decoration:underline;">
+      Enhanced Stress Index Assessment
+    </a>.
+    After completing the assessment, you will receive your unique ID number.
+  </div>
+
+  <p>Once you have completed the assessment, enter your personal ID below:</p>
 
   <form id="searchForm">
     <input type="text" name="assessmentID" placeholder="Enter your assessment ID, e.g., ASG-001234" required>
@@ -188,4 +205,3 @@
 
 </body>
 </html>
-
