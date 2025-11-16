@@ -13,24 +13,28 @@
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
 
 <style>
-  body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background: #eaf5e8;
-    color: #222;
+  /* Grundstruktur */
+  html, body {
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #eaf5e8;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .container {
     max-width: 700px;
-    margin: 40px auto;
+    margin: 40px auto 0 auto;
     padding: 30px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex: 1;
   }
 
+  /* Header */
   .header {
     display: flex;
     justify-content: space-between;
@@ -70,6 +74,7 @@
     }
   }
 
+  /* Überschriften */
   h1 {
     max-width: 500px;
     margin: 0 auto;
@@ -107,6 +112,7 @@
     color: #5a4b00;
   }
 
+  /* Formulare */
   form input[type="text"] {
     width: 100%;
     padding: 12px;
@@ -136,8 +142,9 @@
     color: #333;
   }
 
+  /* Footer fixieren unten */
   footer {
-    margin-top: 40px;
+    margin-top: auto;
     padding: 20px;
     font-size: 0.9em;
     color: #444;
@@ -198,7 +205,7 @@
 
 </div> <!-- END container -->
 
-<!-- Footer direkt eingebunden -->
+<!-- Footer -->
 <footer>
   &copy; 2025 AntiStressGuide. All rights reserved. | 
   <a href="contact.html">Contact</a>
