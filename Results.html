@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enhanced Stress Index (WHO-Based)</title>
 
-<!-- Favicon & Icons -->
 <link rel="icon" type="image/png" href="Logo AntiStressGuide.png">
 <link rel="shortcut icon" type="image/x-icon" href="Logo AntiStressGuide.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
@@ -26,10 +25,10 @@ h1,h2 { text-align:center; color:#2E5D3D; }
 .question:nth-child(even){ background:#f7fff8; }
 
 label { display:block; margin:5px 0; font-size:18px; }
-input[type="range"] { width:100%; margin-top:5px; }
-.range-labels { display:flex; justify-content:space-between; font-size:14px; color:#555; margin-top:5px; }
-input[type="checkbox"], input[type="radio"] { margin-right:10px; transform:scale(1.2); }
 select, input[type=email] { width:100%; padding:12px; margin-top:10px; border-radius:30px; border:1px solid #ccc; font-size:18px; }
+
+input[type="checkbox"], input[type="radio"] { margin-right:10px; transform:scale(1.2); }
+
 button { margin-top:10px; padding:12px 25px; color:#fff; background:#2E5D3D; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
 button:hover{ background:#27623e; }
 
@@ -37,7 +36,6 @@ button:hover{ background:#27623e; }
 .submit-container button { flex:1; text-align:center; }
 
 #errorMessage { color:red; text-align:center; margin-top:10px; display:none; }
-#iPhoneNotice { color:#d9534f; text-align:center; margin-top:10px; font-weight:bold; display:none; }
 
 #results { display:none; margin-top:20px; text-align:center; padding:20px; background:#e0f2e9; border-radius:10px; }
 
@@ -45,140 +43,182 @@ button:hover{ background:#27623e; }
 .bar { height:100%; border-radius:10px; text-align:right; padding-right:5px; color:#fff; font-weight:bold; line-height:25px; }
 
 footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
-@media (max-width: 600px){ .header { flex-direction:column; align-items:center; } .header nav { margin-top:10px; } }
+
+/* Slider optimiert für iPhone */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 18px;
+  background: #d9f0e0;
+  border-radius: 10px;
+  outline: none;
+  margin-top: 5px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  background: #2E5D3D;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #27623e;
+  margin-top: -5px;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  background: #2E5D3D;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #27623e;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px; /* kleiner für iPhone */
+  color: #555;
+  margin-top: 5px;
+}
+
+@media (max-width: 600px){ 
+  .header { flex-direction:column; align-items:center; } 
+  .header nav { margin-top:10px; } 
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">
-    <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="Affimations.html">Affimations</a>
-    </nav>
+<div class="header">
+  <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="Affimations.html">Affimations</a>
+  </nav>
+</div>
+
+<h1>Enhanced Stress Index (WHO-Based)</h1>
+
+<form id="assessmentForm">
+
+  <!-- Demographics -->
+  <h2>Demographics</h2>
+  <div class="question">
+    <label>Age:</label>
+    <select name="age" required>
+      <option value="" disabled selected>Select age</option>
+      <option value="18-30">18–30</option>
+      <option value="31-50">31–50</option>
+      <option value="51-70">51–70</option>
+      <option value=">70">>70</option>
+    </select>
   </div>
 
-  <h1>Enhanced Stress Index (WHO-Based)</h1>
-
-  <form id="assessmentForm">
-    <!-- Demographics -->
-    <h2>Demographics</h2>
-    <div class="question">
-      <label>Age:</label>
-      <select name="age" required>
-        <option value="" disabled selected>Select age</option>
-        <option value="18-30">18–30</option>
-        <option value="31-50">31–50</option>
-        <option value="51-70">51–70</option>
-        <option value=">70">>70</option>
-      </select>
-    </div>
-
-    <div class="question">
-      <label>Gender:</label>
-      <select name="gender" required>
-        <option value="" disabled selected>Select gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-
-    <!-- Medical -->
-    <h2>Medical Conditions</h2>
-    <div class="question">
-      <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
-      <label><input type="checkbox" name="medical" value="None"> None</label>
-      <label><input type="checkbox" name="medical" value="Cardiovascular Disease"> Cardiovascular Disease</label>
-      <label><input type="checkbox" name="medical" value="Mental Health Condition"> Mental Health Condition</label>
-      <label><input type="checkbox" name="medical" value="Recent Surgery"> Recent Surgery</label>
-      <label><input type="checkbox" name="medical" value="Other"> Other</label>
-    </div>
-
-    <!-- Nutrition -->
-    <h2>Nutrition </h2>
-    <div class="question">
-      <label>Overall diet quality</label>
-      <label><input type="radio" name="nutrition" value="0" required> Very healthy diet — Sugar &lt;5%, Salt &lt;3 g/day, Saturated fat &lt;5%</label>
-      <label><input type="radio" name="nutrition" value="1"> Healthy diet — Sugar 5–7%, Salt 3–5 g, Saturated fat 5–7%</label>
-      <label><input type="radio" name="nutrition" value="2"> Average diet — Sugar 5–10%, Salt 5–7 g, Saturated fat 7–10%</label>
-      <label><input type="radio" name="nutrition" value="3"> Unhealthy diet — Sugar 10–15%, Salt 7–10 g, Saturated fat 10–15%</label>
-      <label><input type="radio" name="nutrition" value="4"> Very unhealthy diet — Sugar &gt;15%, Salt &gt;10 g, Saturated fat &gt;15%</label>
-    </div>
-
-    <!-- Physical Activity -->
-    <h2>Physical Activity</h2>
-    <div class="question">
-      <label>Weekly physical activity level:</label>
-      <label><input type="radio" name="physical" value="Little or no activity" required>&lt;150 min/week, no strength training</label>
-      <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
-      <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
-      <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
-      <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week</label>
-    </div>
-
-    <!-- Harmful Habits -->
-    <h2>Harmful Habits</h2>
-    <div class="question">
-      <label>Alcohol consumption (per week)</label>
-      <label><input type="radio" name="alcohol" value="0" required> None (0 drinks/week)</label>
-      <label><input type="radio" name="alcohol" value="1"> Low risk (Women:1–7, Men:1–14)</label>
-      <label><input type="radio" name="alcohol" value="2"> Moderate (Women:8–14, Men:15–28)</label>
-      <label><input type="radio" name="alcohol" value="3"> High (Women:15–21, Men:29–42)</label>
-      <label><input type="radio" name="alcohol" value="4"> Very high (Women:&gt;21, Men:&gt;42)</label>
-    </div>
-
-    <div class="question">
-      <label>Tobacco use</label>
-      <label><input type="radio" name="tobacco" value="0" required> None</label>
-      <label><input type="radio" name="tobacco" value="1"> Low (&lt;5 cigarettes/day)</label>
-      <label><input type="radio" name="tobacco" value="2"> Moderate (5–19/day)</label>
-      <label><input type="radio" name="tobacco" value="3"> High (20/day)</label>
-      <label><input type="radio" name="tobacco" value="4"> Very high (&ge;30/day)</label>
-    </div>
-
-    <div class="question">
-      <label>Drug use</label>
-      <label><input type="radio" name="drugs" value="0" required> None</label>
-      <label><input type="radio" name="drugs" value="1"> Low (occasional use)</label>
-      <label><input type="radio" name="drugs" value="2"> Moderate (regular use, risk present)</label>
-      <label><input type="radio" name="drugs" value="3"> High (dependence / health risk)</label>
-      <label><input type="radio" name="drugs" value="4"> Very high (severe dependence)</label>
-    </div>
-
-    <div class="question">
-      <label>Gambling</label>
-      <label><input type="radio" name="gambling" value="0" required> None</label>
-      <label><input type="radio" name="gambling" value="1"> Low (occasional, minimal issues)</label>
-      <label><input type="radio" name="gambling" value="2"> Moderate (regular, some issues)</label>
-      <label><input type="radio" name="gambling" value="3"> High (frequent, significant issues)</label>
-      <label><input type="radio" name="gambling" value="4"> Very high (pathological)</label>
-    </div>
-
-    <!-- Stress -->
-    <h2>Stress (0–4 Likert)</h2>
-    <div id="questions"></div>
-
-    <div class="submit-container">
-      <button type="submit" name="action" value="index"><b>Submit for<br>Index Value</b></button>
-      <button type="submit" name="action" value="individual"><b>Submit for<br>Individual Affimations</b></button>
-    </div>
-    <div id="errorMessage">⚠️ Please answer all required questions before submitting.</div>
-    <div id="iPhoneNotice">⚠️ iPhone users: Some inputs may not register properly on iOS Safari. Please double-check all fields.</div>
-  </form>
-
-  <!-- Results -->
-  <div id="results">
-    <p id="responseID"></p>
-    <p id="totalPoints"></p>
-    <p id="categoryColor"></p>
-    <div id="breakdown"></div>
-    <div id="barChart"></div>
-    <button id="newFormBtn" class="action">Fill Out Again</button>
+  <div class="question">
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
   </div>
 
-  <footer>&copy; 2025 AntiStressGuide. All rights reserved.</footer>
+  <!-- Medical -->
+  <h2>Medical Conditions</h2>
+  <div class="question">
+    <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
+    <label><input type="checkbox" name="medical" value="None"> None</label>
+    <label><input type="checkbox" name="medical" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+    <label><input type="checkbox" name="medical" value="Mental Health Condition"> Mental Health Condition</label>
+    <label><input type="checkbox" name="medical" value="Recent Surgery"> Recent Surgery</label>
+    <label><input type="checkbox" name="medical" value="Other"> Other</label>
+  </div>
+
+  <!-- Nutrition -->
+  <h2>Nutrition </h2>
+  <div class="question">
+    <label>Overall diet quality</label>
+    <label><input type="radio" name="nutrition" value="0" required> Very healthy diet — Sugar &lt;5%, Salt &lt;3 g/day, Saturated fat &lt;5%</label>
+    <label><input type="radio" name="nutrition" value="1"> Healthy diet — Sugar 5–7%, Salt 3–5 g, Saturated fat 5–7%</label>
+    <label><input type="radio" name="nutrition" value="2"> Average diet — Sugar 5–10%, Salt 5–7 g, Saturated fat 7–10%</label>
+    <label><input type="radio" name="nutrition" value="3"> Unhealthy diet — Sugar 10–15%, Salt 7–10 g, Saturated fat 10–15%</label>
+    <label><input type="radio" name="nutrition" value="4"> Very unhealthy diet — Sugar &gt;15%, Salt &gt;10 g, Saturated fat &gt;15%</label>
+  </div>
+
+  <!-- Physical Activity -->
+  <h2>Physical Activity</h2>
+  <div class="question">
+    <label>Weekly physical activity level:</label>
+    <label><input type="radio" name="physical" value="Little or no activity" required>&lt;150 min/week, no strength training</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
+    <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
+    <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
+    <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week</label>
+  </div>
+
+  <!-- Harmful Habits -->
+  <h2>Harmful Habits</h2>
+  <div class="question">
+    <label>Alcohol consumption (per week)</label>
+    <label><input type="radio" name="alcohol" value="0" required> None (0 drinks/week)</label>
+    <label><input type="radio" name="alcohol" value="1"> Low risk (Women:1–7, Men:1–14)</label>
+    <label><input type="radio" name="alcohol" value="2"> Moderate (Women:8–14, Men:15–28)</label>
+    <label><input type="radio" name="alcohol" value="3"> High (Women:15–21, Men:29–42)</label>
+    <label><input type="radio" name="alcohol" value="4"> Very high (Women:&gt;21, Men:&gt;42)</label>
+  </div>
+
+  <div class="question">
+    <label>Tobacco use</label>
+    <label><input type="radio" name="tobacco" value="0" required> None</label>
+    <label><input type="radio" name="tobacco" value="1"> Low (&lt;5 cigarettes/day)</label>
+    <label><input type="radio" name="tobacco" value="2"> Moderate (5–19/day)</label>
+    <label><input type="radio" name="tobacco" value="3"> High (20/day)</label>
+    <label><input type="radio" name="tobacco" value="4"> Very high (&ge;30/day)</label>
+  </div>
+
+  <div class="question">
+    <label>Drug use</label>
+    <label><input type="radio" name="drugs" value="0" required> None</label>
+    <label><input type="radio" name="drugs" value="1"> Low (occasional use)</label>
+    <label><input type="radio" name="drugs" value="2"> Moderate (regular use, risk present)</label>
+    <label><input type="radio" name="drugs" value="3"> High (dependence / health risk)</label>
+    <label><input type="radio" name="drugs" value="4"> Very high (severe dependence)</label>
+  </div>
+
+  <div class="question">
+    <label>Gambling</label>
+    <label><input type="radio" name="gambling" value="0" required> None</label>
+    <label><input type="radio" name="gambling" value="1"> Low (occasional, minimal issues)</label>
+    <label><input type="radio" name="gambling" value="2"> Moderate (regular, some issues)</label>
+    <label><input type="radio" name="gambling" value="3"> High (frequent, significant issues)</label>
+    <label><input type="radio" name="gambling" value="4"> Very high (pathological)</label>
+  </div>
+
+  <!-- Stress -->
+  <h2>Stress (0–4 Likert)</h2>
+  <div id="questions"></div>
+
+  <div class="submit-container">
+    <button type="submit" name="action" value="index"><b>Submit for<br>Index Value</b></button>
+    <button type="submit" name="action" value="individual"><b>Submit for<br>Individual Affimations</b></button>
+  </div>
+  <div id="errorMessage">⚠️ Please answer all required questions before submitting.</div>
+</form>
+
+<!-- Results -->
+<div id="results">
+  <p id="responseID"></p>
+  <p id="totalPoints"></p>
+  <p id="categoryColor"></p>
+  <div id="breakdown"></div>
+  <div id="barChart"></div>
+  <button id="newFormBtn" class="action">Fill Out Again</button>
+</div>
+
+<footer>&copy; 2025 AntiStressGuide. All rights reserved.</footer>
 </div>
 
 <script>
@@ -206,41 +246,33 @@ stressQuestions.forEach((q,i)=>{
   questionsDiv.appendChild(div);
 });
 
+function avg(arr){const nums=arr.map(Number).filter(n=>!isNaN(n));return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:0;}
+function generateSequentialID(){const now=new Date();const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;const key=`internalID_${yearMonth}`;let n=parseInt(localStorage.getItem(key)||"0",10);n+=1;localStorage.setItem(key,n);return`ASG${yearMonth}${String(n).padStart(4,'0')}`;}
+
 const form=document.getElementById('assessmentForm');
-const iPhoneNotice=document.getElementById('iPhoneNotice');
-const errorMsg=document.getElementById('errorMessage');
-
-form.addEventListener('submit', e=>{
+form.addEventListener('submit', e => {
   e.preventDefault();
-  const isiPhone=/iPhone/i.test(navigator.userAgent);
+  const error=document.getElementById('errorMessage');
 
-  // Zeige iPhone-Hinweis
-  iPhoneNotice.style.display = isiPhone ? 'block' : 'none';
+  // iPhone-Erkennung
+  const isiPhone = /iPhone/i.test(navigator.userAgent);
 
   if(!form.checkValidity()){
-    errorMsg.style.display='block';
+    error.style.display='block';
+    if(isiPhone){
+      alert("⚠️ iPhone users: Please ensure all fields are filled before submitting. Some inputs may not register properly on iOS Safari.");
+    } else {
+      alert("⚠️ Please answer all required questions before submitting.");
+    }
     return;
   }
-  errorMsg.style.display='none';
 
-  const action=e.submitter?.value || 'index';
-  if(action==="individual"){
-    window.location.href="https://antistressguide.github.io/AntiStressGuide/Payment.html";
+  error.style.display='none';
+  const action = e.submitter?.value; 
+  if (action === "individual") {
+    window.location.href = "https://antistressguide.github.io/AntiStressGuide/Payment.html"; 
     return;
   }
-
-  // Ergebnisse berechnen
-  const generateSequentialID=()=>{
-    const now=new Date();
-    const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
-    const key=`internalID_${yearMonth}`;
-    let n=parseInt(localStorage.getItem(key)||"0",10);
-    n+=1;
-    localStorage.setItem(key,n);
-    return `ASG${yearMonth}${String(n).padStart(4,'0')}`;
-  };
-
-  const avg=arr=>{const nums=arr.map(Number).filter(n=>!isNaN(n));return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:0;};
 
   const responseID=generateSequentialID();
   const stressAnswers=stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
@@ -272,8 +304,10 @@ form.addEventListener('submit', e=>{
   let totalScore=((stressScore+habitsScore+medicalScore+nutritionScore+physicalScore)/5).toFixed(2);
 
   let category="",color="";
-  if(highRiskTrigger){category="High / Very High Risk";color="🔴";}
-  else if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
+  if(highRiskTrigger){
+    category="High / Very High Risk";
+    color="🔴";
+  } else if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
   else if(totalScore<2){category="Mild Risk";color="🟡";}
   else if(totalScore<3){category="Elevated Risk";color="🟠";}
   else{category="High / Very High Risk";color="🔴";}
