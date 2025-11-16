@@ -180,7 +180,6 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
 </div>
 
 <script>
-// Alle Stressfragen komplett
 const likertLabels=["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions=[
 "In the past month, I felt that things were generally going my way.",
@@ -194,6 +193,7 @@ const stressQuestions=[
 "Over the last month, my workload prevented me from completing important personal tasks.",
 "In the past month, I had sufficient control over how I completed my work tasks."
 ];
+
 const questionsDiv=document.getElementById('questions');
 stressQuestions.forEach((q,i)=>{
   const div=document.createElement('div');
@@ -203,8 +203,10 @@ stressQuestions.forEach((q,i)=>{
   <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>`;
   questionsDiv.appendChild(div);
 });
+
 function avg(arr){const nums=arr.map(Number).filter(n=>!isNaN(n));return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:0;}
 function generateSequentialID(){const now=new Date();const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;const key=`internalID_${yearMonth}`;let n=parseInt(localStorage.getItem(key)||"0",10);n+=1;localStorage.setItem(key,n);return`ASG${yearMonth}${String(n).padStart(4,'0')}`;}
+
 const form=document.getElementById('assessmentForm');
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -217,17 +219,16 @@ form.addEventListener('submit', e => {
   }
 
   error.style.display='none';
-
-  const action = e.submitter?.value; // erkennt, welcher Button gedrückt wurde
+  const action = e.submitter?.value; 
   if (action === "individual") {
-    window.location.href = "https://antistressguide.github.io/AntiStressGuide/Payment.html"; // direkt weiter zur Payment-Seite
+    window.location.href = "https://antistressguide.github.io/AntiStressGuide/Payment.html"; 
     return;
   }
 
-  // Wenn Index-Button gewählt → normale Auswertung
   const responseID=generateSequentialID();
   const stressAnswers=stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
   const stressScore=avg(stressAnswers);
+
   const habitsValues=["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
   const habitsScore=avg(habitsValues);
 
@@ -242,12 +243,23 @@ form.addEventListener('submit', e => {
   }
   const physicalScore=4-physicalRaw;
   const nutritionScore=parseInt(form.querySelector('input[name="nutrition"]:checked').value);
+
   const medicalList=Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
   const medicalScore=Math.min(4,medicalList.length);
-  const totalScore=((stressScore+habitsScore+medicalScore+nutritionScore+physicalScore)/5).toFixed(2);
+
+  // High Risk Trigger für Alkohol, Drugs oder Medical Conditions
+  const alcohol=parseInt(form.querySelector('input[name="alcohol"]:checked').value);
+  const drugs=parseInt(form.querySelector('input[name="drugs"]:checked').value);
+  const highMedical = medicalScore>=3;
+  let highRiskTrigger = (alcohol>=3 || drugs>=3 || highMedical);
+
+  let totalScore=((stressScore+habitsScore+medicalScore+nutritionScore+physicalScore)/5).toFixed(2);
 
   let category="",color="";
-  if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
+  if(highRiskTrigger){
+    category="High / Very High Risk";
+    color="🔴";
+  } else if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
   else if(totalScore<2){category="Mild Risk";color="🟡";}
   else if(totalScore<3){category="Elevated Risk";color="🟠";}
   else{category="High / Very High Risk";color="🔴";}
@@ -264,6 +276,7 @@ form.addEventListener('submit', e => {
   Nutrition: ${nutritionScore.toFixed(2)}<br>
   Medical: ${medicalScore.toFixed(2)}<br>
   Physical Activity: ${physicalScore.toFixed(2)}`;
+
   const barChart=document.getElementById('barChart');
   barChart.innerHTML='';
   const sections=[
