@@ -42,8 +42,6 @@ button:hover{ background:#27623e; }
 .bar-container { width:100%; background:#d9f0e0; border-radius:10px; margin:10px 0; height:28px; position:relative; overflow:hidden; }
 .bar { height:100%; border-radius:10px; line-height:28px; color:#fff; font-weight:bold; padding-right:8px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:center; border-top:1px solid #cce6d0; }
-
 @media (max-width: 600px){ 
   .header { flex-direction:column; align-items:center; } 
   .header nav { margin-top:10px; } 
@@ -197,8 +195,10 @@ footer { margin-top:40px; padding:20px; font-size:0.9em; color:#444; text-align:
   <button id="newFormBtn" class="action">Fill Out Again</button>
 </div>
 
-<footer>&copy; 2025 AntiStressGuide. All rights reserved.</footer>
-</div>
+<!-- Footer-Platzhalter -->
+<div id="footer-placeholder"></div>
+
+</div> <!-- Ende Container -->
 
 <script>
 const likertLabels=["Never","Rarely","Sometimes","Often","Very Often"];
@@ -323,14 +323,14 @@ document.getElementById('newFormBtn').addEventListener('click',()=>{
   document.getElementById('results').style.display='none';
   document.getElementById('assessmentForm').reset();
 });
-</script>
-  <div id="footer-placeholder"></div>
-<script>
-  fetch('Footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-placeholder').innerHTML = data;
-    });
+
+// Footer laden
+fetch('Footer.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('footer-placeholder').innerHTML = data;
+  })
+  .catch(err => console.error('Footer konnte nicht geladen werden:', err));
 </script>
 
 </body>
