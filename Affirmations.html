@@ -77,6 +77,7 @@
     color: #2E5D3D;
     text-align: center;
   }
+
   p.subtitle {
     font-size: 1.4em;
     font-weight: bold;
@@ -114,6 +115,7 @@
     border: 1px solid #ccc;
     font-size: 16px;
   }
+
   form button {
     margin-top: 15px;
     padding: 12px 25px;
@@ -124,6 +126,7 @@
     cursor: pointer;
     font-size: 16px;
   }
+
   form button:hover {
     background: #27623e;
   }
@@ -132,10 +135,9 @@
     margin-top: 30px;
     color: #333;
   }
-
-  
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -153,12 +155,12 @@
   <p class="subtitle">Based on Your Enhanced Stress Index</p>
 
   <div class="affirmation-note">
-    Discover personalised affirmations tailored to your stress index.  
-    Developed by medical professionals, these affirmations support  
-    emotional balance, self-regulation, and long-term resilience.  
+    Discover personalised affirmations tailored to your stress index.<br>
+    Developed by medical professionals to support emotional balance,<br>
+    self-regulation, and long-term resilience.
   </div>
 
-  <!-- WICHTIGER HINWEIS: zuerst Stress Index ausfüllen -->
+  <!-- Important: first complete the Stress Index -->
   <div class="important-step">
     To receive your personalised audio affirmations, you must first complete the  
     <a href="Results.html" style="color:#007bff; font-weight:bold; text-decoration:underline;">
@@ -176,23 +178,9 @@
 
   <div id="results"></div>
 
+</div> <!-- END container -->
 
-
-</div>
-
-<script>
-  document.getElementById('searchForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const id = e.target.assessmentID.value.trim();
-    if(id) {
-      document.getElementById('results').innerHTML = `
-        <h2>Affirmations for ${id}</h2>
-        <p>Access to your personalised affirmations requires a one-time payment: <strong>19,99 €</strong></p>
-        <p>After payment, your tailored affirmations based on your Enhanced Stress Index will be displayed here.</p>
-      `;
-    }
-  });
-</script>
+<!-- Footer from external file -->
 <div id="footer-placeholder"></div>
 <script>
   fetch('footer.html')
@@ -201,7 +189,21 @@
       document.getElementById('footer-placeholder').innerHTML = data;
     });
 </script>
+
+<!-- Form script -->
+<script>
+  document.getElementById('searchForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const id = e.target.assessmentID.value.trim();
+    if(id) {
+      document.getElementById('results').innerHTML = `
+        <h2>Affirmations for ${id}</h2>
+        <p>Access to your personalised affirmations requires a one-time payment: <strong>19,99 €</strong></p>
+        <p>After payment, your tailored affirmations based on your Enhanced Stress Index will appear here.</p>
+      `;
+    }
+  });
+</script>
+
 </body>
 </html>
-
-
