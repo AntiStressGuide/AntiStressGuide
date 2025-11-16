@@ -20,25 +20,15 @@
     line-height: 1.6;
   }
 
-  .container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-
-  /* Header mit Logo links / Links rechts */
+  /* Header mit Flexbox */
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    margin-bottom: 20px;
     background: #f7fff8;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 20px;
   }
 
   .header img.logo {
@@ -46,8 +36,12 @@
     width: auto;
   }
 
+  .header nav {
+    display: flex;
+    gap: 15px;
+  }
+
   .header nav a {
-    margin-left: 15px;
     text-decoration: underline;
     color: #007bff;
     font-weight: bold;
@@ -65,6 +59,16 @@
     .header nav {
       margin-top: 10px;
     }
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
   }
 
   h1 {
@@ -129,7 +133,7 @@
 </head>
 <body>
 
-<!-- Header mit Logo & Navigation -->
+<!-- Flexbox Header -->
 <div class="header">
   <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
   <nav>
