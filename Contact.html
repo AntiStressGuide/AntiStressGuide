@@ -13,7 +13,6 @@ body {
   background: #eaf5e8;
   margin: 0; padding: 0; line-height: 1.6;
 }
-
 .container {
   max-width: 900px;
   margin: 30px auto;
@@ -30,38 +29,32 @@ header {
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
 header img.logo {
   max-width: 120px;
   height: auto;
+  margin-right: 15px;
 }
-
 header h1 {
-  flex: 1;
-  text-align: center;
   font-size: 1.8em;
   color: #2E5D3D;
   margin: 0;
 }
 
-/* Navigation */
+/* Navigation rechts oben */
 .main-nav {
   display: flex;
   gap: 15px;
 }
-
 .main-nav a {
-  text-decoration: none;
-  color: #2E5D3D;
+  text-decoration: underline;
+  color: #0000EE;
   font-weight: bold;
   padding: 8px 12px;
-  border-radius: 5px;
-  transition: background 0.3s;
+  transition: color 0.3s;
 }
-
 .main-nav a:hover {
-  background: #27623e;
-  color: #fff;
+  color: #551A8B;
+  background: none;
 }
 
 /* Chat */
@@ -75,7 +68,6 @@ header h1 {
   display: flex;
   flex-direction: column;
 }
-
 .chat-message {
   max-width: 80%;
   margin: 10px;
@@ -84,7 +76,6 @@ header h1 {
   word-wrap: break-word;
   line-height: 1.4;
 }
-
 .chat-message.user {
   background: #2E5D3D;
   color: #fff;
@@ -92,21 +83,17 @@ header h1 {
   margin-left: auto;
   text-align: right;
 }
-
 .chat-message.bot {
   background: #d9f0e0;
   color: #27623e;
   align-self: flex-start;
 }
-
-/* Input area */
 .input-area {
   display: flex;
   margin-top: 10px;
   gap: 10px;
   flex-wrap: wrap;
 }
-
 input[type=text] {
   flex: 1;
   padding: 12px 15px;
@@ -114,7 +101,6 @@ input[type=text] {
   border: 1px solid #ccc;
   font-size: 16px;
 }
-
 button {
   padding: 12px 20px;
   background: #2E5D3D;
@@ -124,7 +110,6 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
-
 button:hover { background: #27623e; }
 
 /* Footer */
@@ -139,17 +124,8 @@ footer {
 
 /* Responsive */
 @media(max-width:600px){
-  header {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .main-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  input[type=text] { width: 100%; }
-  button { width: 100%; }
+  header { flex-direction: column; align-items: center; gap: 10px; }
+  input[type=text], button { width: 100%; }
 }
 </style>
 </head>
