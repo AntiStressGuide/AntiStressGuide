@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact & Information | AntiStressGuide</title>
+<meta name="description" content="Learn about AntiStressGuide, explore stress management, personalized affirmations, and official WHO-based references. No active contact required.">
+<meta name="keywords" content="Contact, Stress Management, Personalized Affirmations, WHO Guidelines, Stress Assessment, Emotional Balance, AntiStressGuide">
+<meta name="author" content="AntiStressGuide">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact & Information | AntiStressGuide">
+<meta property="og:description" content="Explore AntiStressGuide resources on stress management, personalized affirmations, and WHO-based references.">
+<meta property="og:image" content="https://antistressguide.github.io/AntiStressGuide/AntiStressGuide_Symbol.png">
+<meta property="og:url" content="https://antistressguide.github.io/AntiStressGuide/Contact.html">
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://antistressguide.github.io/AntiStressGuide/index.html" },
+    { "@type": "ListItem", "position": 2, "name": "Contact & Information", "item": "https://antistressguide.github.io/AntiStressGuide/Contact.html" }
+  ]
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How can I access AntiStressGuide resources?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can explore all available resources directly on our website, including the Enhanced Stress Index, personalized affirmation packages, and WHO-based references for stress management."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I contact AntiStressGuide directly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Currently, there is no direct messaging or email contact. All necessary guidance is provided via our website resources."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the affirmations based on medical guidelines?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, our personalized affirmation packages are designed by medical professionals and follow WHO guidelines for stress management."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #eaf5e8;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header img.logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 2em;
+    color: #2E5D3D;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2E5D3D;
+}
+
+section {
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+section a {
+    color: #2E5D3D;
+    text-decoration: underline;
+}
+
+section a:hover {
+    color: #27623e;
+}
+
+h2 {
+    color: #2E5D3D;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #444;
+    text-align: center;
+    border-top: 1px solid #cce6d0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <img src="Logo AntiStressGuide.png" alt="AntiStressGuide Logo" class="logo">
+        <h1>Contact & Information</h1>
+        <p>AntiStressGuide – Stress Management & Personalized Affirmations</p>
+    </header>
+
+    <section>
+        <p>
+            Welcome to AntiStressGuide. All information and resources are available directly on our website. 
+            We provide a structured approach to understanding and managing stress through the 
+            <strong>Enhanced Stress Index</strong> and <strong>personalized affirmation packages</strong>.
+        </p>
+        <p>
+            Explore our main resources:
+            <ul>
+                <li><a href="Results.html">Enhanced Stress Index (Free Assessment)</a></li>
+                <li><a href="Affirmations.html">Individual Audio Affirmations (from Feb. 2026 · 19,99 €)</a></li>
+                <li><a href="References.html">Official References & WHO Guidelines</a></li>
+            </ul>
+        </p>
+        <p>
+            <strong>Please note:</strong> There is no active contact or messaging available. All guidance is provided via our website resources. 
+            Personalized affirmations are based on WHO guidelines and designed by medical professionals to support emotional wellbeing and stress reduction.
+        </p>
+    </section>
+
+    <section>
+        <h2>Why Choose AntiStressGuide?</h2>
+        <p>
+            Our approach is designed for practical stress management. By combining the Enhanced Stress Index with evidence-based affirmations, 
+            users can monitor stress, develop resilience, and improve daily emotional balance. The methods are grounded in WHO recommendations and medical expertise.
+        </p>
+    </section>
+
+    <footer>
+        &copy; 2025 AntiStressGuide. All rights reserved.
+    </footer>
+</div>
+
+</body>
+</html>
