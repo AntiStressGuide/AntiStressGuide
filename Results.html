@@ -47,7 +47,6 @@ button:hover{ background:#27623e; }
   .header nav { margin-top:10px; } 
 }
 
-/* Responsive Balken für iPhone & kleine Screens */
 @media (max-width: 480px){
   .bar-container { height:auto; padding:2px 0; }
   .bar { 
@@ -103,7 +102,7 @@ button:hover{ background:#27623e; }
     </select>
   </div>
 
-  <!-- Medical -->
+  <!-- Medical Conditions -->
   <h2>Medical Conditions</h2>
   <div class="question">
     <label>Do you have any chronic diseases, medical conditions, or recent surgeries?</label>
@@ -115,7 +114,7 @@ button:hover{ background:#27623e; }
   </div>
 
   <!-- Nutrition -->
-  <h2>Nutrition </h2>
+  <h2>Nutrition</h2>
   <div class="question">
     <label>Overall diet quality</label>
     <label><input type="radio" name="nutrition" value="0" required> Very healthy diet — Sugar &lt;5%, Salt &lt;3 g/day, Saturated fat &lt;5%</label>
@@ -195,12 +194,13 @@ button:hover{ background:#27623e; }
   <button id="newFormBtn" class="action">Fill Out Again</button>
 </div>
 
-<!-- Footer-Platzhalter -->
+<!-- Footer placeholder -->
 <div id="footer-placeholder"></div>
 
-</div> <!-- Ende Container -->
+</div> <!-- Ende container -->
 
 <script>
+// JS für Fragen, Scores, Charts, ID
 const likertLabels=["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions=[
 "In the past month, I felt that things were generally going my way.",
@@ -232,9 +232,7 @@ const form=document.getElementById('assessmentForm');
 form.addEventListener('submit', e => {
   e.preventDefault();
   const error=document.getElementById('errorMessage');
-
   const isiPhone = /iPhone/i.test(navigator.userAgent);
-
   if(!form.checkValidity()){
     error.style.display='block';
     if(isiPhone){
@@ -244,7 +242,6 @@ form.addEventListener('submit', e => {
     }
     return;
   }
-
   error.style.display='none';
   const action = e.submitter?.value; 
   if (action === "individual") {
@@ -255,7 +252,6 @@ form.addEventListener('submit', e => {
   const responseID=generateSequentialID();
   const stressAnswers=stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
   const stressScore=avg(stressAnswers);
-
   const habitsValues=["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
   const habitsScore=avg(habitsValues);
 
@@ -270,22 +266,17 @@ form.addEventListener('submit', e => {
   }
   const physicalScore=4-physicalRaw;
   const nutritionScore=parseInt(form.querySelector('input[name="nutrition"]:checked').value);
-
   const medicalList=Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
   const medicalScore=Math.min(4,medicalList.length);
-
   const alcohol=parseInt(form.querySelector('input[name="alcohol"]:checked').value);
   const drugs=parseInt(form.querySelector('input[name="drugs"]:checked').value);
   const highMedical = medicalScore>=3;
   let highRiskTrigger = (alcohol>=3 || drugs>=3 || highMedical);
-
   let totalScore=((stressScore+habitsScore+medicalScore+nutritionScore+physicalScore)/5).toFixed(2);
 
   let category="",color="";
-  if(highRiskTrigger){
-    category="High / Very High Risk";
-    color="🔴";
-  } else if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
+  if(highRiskTrigger){ category="High / Very High Risk"; color="🔴"; }
+  else if(totalScore<1){category="Excellent / Low Risk";color="🟢";}
   else if(totalScore<2){category="Mild Risk";color="🟡";}
   else if(totalScore<3){category="Elevated Risk";color="🟠";}
   else{category="High / Very High Risk";color="🔴";}
@@ -299,37 +290,23 @@ form.addEventListener('submit', e => {
   document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b> Stress:${stressScore.toFixed(2)}, Habits:${habitsScore.toFixed(2)}, Nutrition:${nutritionScore}, Physical:${physicalScore}, Medical:${medicalScore}`;
 
   const barChart=document.getElementById('barChart');
-  barChart.innerHTML="";
-  const sections=[
-    {label:"Stress",value:stressScore,color:"#4caf50"},
-    {label:"Habits",value:habitsScore,color:"#ff9800"},
-    {label:"Nutrition",value:nutritionScore,color:"#2196f3"},
-    {label:"Physical",value:physicalScore,color:"#9c27b0"},
-    {label:"Medical",value:medicalScore,color:"#f44336"}
-  ];
-  sections.forEach(s=>{
-    const perc=(s.value/4*100).toFixed(0);
-    const div=document.createElement('div');
-    div.className='bar-container';
-    div.innerHTML=`<div class="bar" style="width:${perc}%; background:${s.color}">
-      <span>${s.label}</span><span>${s.value.toFixed(2)}</span>
-    </div>`;
-    barChart.appendChild(div);
+  barChart.innerHTML='';
+  const bars=[stressScore*20,habitsScore*20,nutritionScore*20,physicalScore*20,medicalScore*20];
+  const labels=["Stress","Habits","Nutrition","Physical","Medical"];
+  bars.forEach((val,i)=>{
+    const barCont=document.createElement('div'); barCont.className='bar-container';
+    const bar=document.createElement('div'); bar.className='bar';
+    bar.style.width=val+'%'; bar.textContent=labels[i]+` (${val.toFixed(0)}%)`;
+    barCont.appendChild(bar); barChart.appendChild(barCont);
   });
-});
 
-document.getElementById('newFormBtn').addEventListener('click',()=>{
-  document.getElementById('assessmentForm').style.display='block';
-  document.getElementById('results').style.display='none';
-  document.getElementById('assessmentForm').reset();
+  document.getElementById('newFormBtn').onclick=()=>{form.reset();form.style.display='block';results.style.display='none';};
 });
 
 // Footer laden
 fetch('Footer.html')
   .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-placeholder').innerHTML = data;
-  })
+  .then(data => document.getElementById('footer-placeholder').innerHTML=data)
   .catch(err => console.error('Footer konnte nicht geladen werden:', err));
 </script>
 
