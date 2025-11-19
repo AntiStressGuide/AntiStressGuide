@@ -59,8 +59,31 @@ button:hover{ background:#27623e; }
 
 #results { display:none; margin-top:20px; text-align:center; padding:20px; background:#e0f2e9; border-radius:10px; }
 
-.bar-container { width:100%; background:#d9f0e0; border-radius:10px; margin:10px 0; height:28px; position:relative; overflow:hidden; }
-.bar { height:100%; border-radius:10px; line-height:28px; color:#000; font-weight:bold; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+/* Container für die Balken (Hintergrund) */
+.bar-container {  
+  width: 100%; 
+  background: #d9f0e0;  /* Farbe der leeren Balken */
+  border-radius: 10px; 
+  margin: 10px 0; 
+  height: 28px; 
+  position: relative; 
+  overflow: hidden; 
+}
+
+/* Gefüllter Balken */
+.bar { 
+  height: 100%; 
+  border-radius: 10px; 
+  line-height: 28px; 
+  color: #000; 
+  font-weight: bold; 
+  text-align: center; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  background: #2E5D3D;  /* Standardfarbe */
+  transition: width 0.5s ease, background 0.5s ease; /* sanfte Animation */
+}
 
 footer { 
   text-align:center; 
