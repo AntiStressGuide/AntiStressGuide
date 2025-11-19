@@ -342,7 +342,7 @@ const stressQuestions = [
 ];
 
 /* create stress inputs */
-const questionsContainer = document.getElementById('questionsContainer');
+const stressContainer = document.getElementById('stressContainer'); // <--- hier ändern
 stressQuestions.forEach((q,i) => {
   const div = document.createElement('div');
   div.className = 'question';
@@ -351,8 +351,9 @@ stressQuestions.forEach((q,i) => {
     <input type="range" class="slider" min="0" max="4" value="2" name="q${i}" required>
     <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>
   `;
-  questionsContainer.appendChild(div);
+  stressContainer.appendChild(div); // <--- hier an stressContainer anhängen
 });
+
 
 
 /* ---------- helpers ---------- */
