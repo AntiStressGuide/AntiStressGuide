@@ -291,6 +291,7 @@ function generateSequentialID() {
 // ---------- DOM Ready ----------
 document.addEventListener('DOMContentLoaded', () => {
   const stressContainer = document.getElementById('stressContainer');
+  const form = document.getElementById('assessmentForm');
 
   // Stressfragen erzeugen
   stressQuestions.forEach((q, i) => {
@@ -304,8 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
     stressContainer.appendChild(div);
   });
 
-  const form = document.getElementById('assessmentForm');
-
   // Submit-Events
   document.getElementById('submitIndex').addEventListener('click', () => {
     if (!form.checkValidity()) {
@@ -313,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     document.getElementById('errorMessage').style.display = 'none';
-    submitIndexValue();
+    submitIndexValue(form);
   });
 
   document.getElementById('submitSessions').addEventListener('click', () => {
@@ -334,8 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ---------- Submit Functions ----------
-function submitIndexValue() {
-  const form = document.getElementById('assessmentForm');
+function submitIndexValue(form) {
   const responseID = generateSequentialID();
 
   // Stress
@@ -404,10 +402,10 @@ function submitIndexValue() {
     bar.textContent = `${c.label} (${Math.round(c.score*4)})`;
 
     // Farbe je nach Score
-    if(c.score <= 0.25) bar.style.background = '#2ecc71';      // Grün
-    else if(c.score <= 0.5) bar.style.background = '#f1c40f';  // Gelb
-    else if(c.score <= 0.75) bar.style.background = '#e67e22'; // Orange
-    else bar.style.background = '#e74c3c';                     // Rot
+    if(c.score <= 0.25) bar.style.background = '#2ecc71';
+    else if(c.score <= 0.5) bar.style.background = '#f1c40f';
+    else if(c.score <= 0.75) bar.style.background = '#e67e22';
+    else bar.style.background = '#e74c3c';
 
     container.appendChild(bar);
     barChart.appendChild(container);
@@ -417,6 +415,7 @@ function submitIndexValue() {
 function submitStressSessions() {
   alert("Stress sessions submitted! (Hier kann die Edge-Function integriert werden)");
 }
+
 
 
 
