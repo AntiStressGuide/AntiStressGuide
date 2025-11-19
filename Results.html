@@ -362,15 +362,6 @@ function submitIndexValue() {
   document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
   document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b> Stress:${stressScore.toFixed(2)}, Habits:${habitsScore.toFixed(2)}, Nutrition:${nutritionScore}, Physical:${physicalScore}, Medical:${medicalScore}`;
   
-  // Bar chart
-  const barChart = document.getElementById('barChart');
-  const components = [
-    {label:"Stress",score:stressScore/4},
-    {label:"Habits",score:habitsScore/4},
-    {label:"Nutrition",score:nutritionScore/4},
-    {label:"Physical",score:physicalScore/4},
-    {label:"Medical",score:medicalScore/4}
-  ];
  // Bar chart
 const barChart = document.getElementById('barChart');
 const components = [
