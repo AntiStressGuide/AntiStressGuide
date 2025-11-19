@@ -1,161 +1,387 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<title>Stress Index</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Enhanced Stress Index (WHO-Based)</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+  :root{
+    --bg:#eaf5e8;
+    --card:#fff;
+    --accent:#2E5D3D;
+  }
+  body{font-family:Roboto, Arial, sans-serif;background:var(--bg);margin:0;padding:0;color:#143d2b;}
+  .container{max-width:900px;margin:28px auto;background:var(--card);padding:24px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.08);}
+
+  /* Header */
+  .header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 18px 0}
+  .logo{height:48px}
+  h1,h2{text-align:center;color:var(--accent);margin:8px 0}
+
+  /* Questions */
+  .question{margin:12px 0;padding:12px;border-radius:8px;}
+  .question:nth-child(odd){background:#eaf8ee}
+  label{display:block;margin:6px 0;font-size:16px}
+  select,input[type=email],input[type=text]{
+    width:100%;padding:10px;border-radius:20px;border:1px solid #cfcfcf;font-size:16px
+  }
+  input[type=radio],input[type=checkbox]{transform:scale(1.15);margin-right:8px}
+  .range-labels{display:flex;justify-content:space-between;font-size:13px;color:#556}
+
+  /* Submit */
+  .submit-container{display:flex;gap:10px;margin-top:12px}
+  .submit-container button{
+    flex:1;padding:12px;border-radius:8px;border:0;background:var(--accent);
+    color:#fff;font-weight:700;cursor:pointer
+  }
+  #errorMessage{color:#b00020;text-align:center;display:none;margin-top:8px}
+
+  /* Results */
+  #results{display:none;margin-top:18px;padding:14px;border-radius:10px;background:#f0fbf5}
+  ul.breakdown{text-align:left;margin:8px 0 0 18px}
+
+  /* ---------------- BALKEN – NEUE VERSION ---------------- */
+  .bar-row{
+    position:relative;
+    margin:18px 0;
+    padding-top:22px;     /* Platz für Label oben */
+    padding-bottom:6px;
+    border-radius:10px;
+    background:#e6f3ea;
+    overflow:visible;
   }
 
-  .bar-container {
-    position: relative;
-    width: 100%;
-    height: 28px;
-    background: #eee;
-    border-radius: 6px;
-    margin-top: 12px;
-    overflow: hidden;
+  .bar-fill{
+    height:30px;
+    border-radius:8px;
+    transition:width .35s ease;
+    background:#ccc;
+    position:relative;
+    z-index:1;
   }
 
-  .bar-fill {
-    height: 100%;
-    width: 0%;
-    background-color: #4CAF50;
-    border-radius: 6px;
-    transition: width 0.6s ease;
-    z-index: 1;
+  /* Text IMMER sichtbar, IMMER schwarz — jetzt OBEN über dem Balken */
+  .bar-label{
+    position:absolute;
+    top:2px;
+    left:10px;
+    z-index:5;
+    color:#000;
+    font-weight:700;
+    font-size:14px;
+    white-space:nowrap;
+    pointer-events:none;
   }
 
-  .bar-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    color: black !important;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;        /* TEXT LIEGT OBEN */
-    pointer-events: none;
-  }
+  footer{text-align:center;margin-top:18px;padding:10px;color:#1f4b39}
 
-  #results {
-    display: none;
-    margin-top: 20px;
+  @media(max-width:560px){
+    .bar-label{font-size:13px}
+    .submit-container{flex-direction:column}
   }
 </style>
-
 </head>
 <body>
-
-<h2>Stress-Index Berechnung</h2>
-
-<form id="clientForm">
-
-  <!-- Beispielhafte Felder -->
-  <label>Alter:</label>
-  <input name="age" type="number" required><br><br>
-
-  <label>Geschlecht:</label>
-  <select name="gender">
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-  </select><br><br>
-
-  <button type="submit">Berechnen</button>
-</form>
-
-
-<div id="results">
-  <h3>Ihr Stress-Index</h3>
-
-  <div class="bar-container">
-    <div id="bar" class="bar-fill"></div>
-    <div id="barText" class="bar-text"></div>
+<div class="container">
+  <div class="header">
+    <img class="logo" src="Logo AntiStressGuide.png" alt="Logo">
+    <nav><a href="index.html">Home</a> · <a href="Affirmations.html">Affirmations</a></nav>
   </div>
 
-  <br>
-  <button id="newFormBtn">Neue Eingabe</button>
+  <h1>Enhanced Stress Index (WHO-Based)</h1>
+
+  <form id="assessmentForm" autocomplete="off">
+
+    <!-- ----------------- FORM BEREICHE (unverändert) ----------------- -->
+    <!-- Ich kürze NICHTS – alles 1:1 vollständig, wie du wolltest -->
+    <!-- ... dein kompletter FORM Code bleibt unverändert ... -->
+
+    <!-- Demographics -->
+    <h2>Demographics</h2>
+    <div class="question">
+      <label>Alter</label>
+      <select name="age" required>
+        <option value="" disabled selected>Alter wählen</option>
+        <option value="18-30">18–30</option>
+        <option value="31-50">31–50</option>
+        <option value="51-70">51–70</option>
+        <option value=">70">&gt;70</option>
+      </select>
+      <label style="margin-top:10px">Geschlecht</label>
+      <select name="gender" required>
+        <option value="" disabled selected>Geschlecht wählen</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Medical Section -->
+    <h2>Medical Conditions</h2>
+    <div class="question" id="medicalBlock">
+      <label>Haben Sie chronische Erkrankungen oder kürzliche Operationen?</label>
+      <label><input type="checkbox" name="medical" value="None"> None</label>
+      <label><input type="checkbox" name="medical" value="Cardiovascular Disease"> Cardiovascular Disease</label>
+      <label><input type="checkbox" name="medical" value="Mental Health Condition"> Mental Health Condition</label>
+      <label><input type="checkbox" name="medical" value="Recent Surgery"> Recent Surgery</label>
+      <label><input type="checkbox" name="medical" value="Other"> Other</label>
+    </div>
+
+    <!-- Nutrition -->
+    <h2>Nutrition</h2>
+    <div class="question">
+      <label>Overall diet quality</label>
+      <label><input type="radio" name="nutrition" value="0" required> Very healthy (0)</label>
+      <label><input type="radio" name="nutrition" value="1"> Healthy (1)</label>
+      <label><input type="radio" name="nutrition" value="2"> Average (2)</label>
+      <label><input type="radio" name="nutrition" value="3"> Unhealthy (3)</label>
+      <label><input type="radio" name="nutrition" value="4"> Very unhealthy (4)</label>
+    </div>
+
+    <!-- Physical -->
+    <h2>Physical Activity</h2>
+    <div class="question">
+      <label>Weekly physical activity level</label>
+      <label><input type="radio" name="physical" value="Little or no activity" required>&lt;150 min/week, no strength</label>
+      <label><input type="radio" name="physical" value="150–300 min/week, 0–1 strength">150–300 min/week, 0–1 strength</label>
+      <label><input type="radio" name="physical" value="150–300 min/week, 2+ strength">150–300 min/week, 2+ strength</label>
+      <label><input type="radio" name="physical" value=">300 min/week, 2+ strength">&gt;300 min/week, 2+ strength</label>
+      <label><input type="radio" name="physical" value="Vigorous 75–150+ min/week">Vigorous 75–150+ min/week</label>
+    </div>
+
+    <!-- Habits -->
+    <h2>Harmful Habits</h2>
+    <div class="question">
+      <label>Alcohol (per week)</label>
+      <label><input type="radio" name="alcohol" value="0" required> None (0)</label>
+      <label><input type="radio" name="alcohol" value="1"> Low risk (1)</label>
+      <label><input type="radio" name="alcohol" value="2"> Moderate (2)</label>
+      <label><input type="radio" name="alcohol" value="3"> High (3)</label>
+      <label><input type="radio" name="alcohol" value="4"> Very high (4)</label>
+
+      <label style="margin-top:10px">Tobacco</label>
+      <label><input type="radio" name="tobacco" value="0" required> None</label>
+      <label><input type="radio" name="tobacco" value="1"> Low</label>
+      <label><input type="radio" name="tobacco" value="2"> Moderate</label>
+      <label><input type="radio" name="tobacco" value="3"> High</label>
+      <label><input type="radio" name="tobacco" value="4"> Very high</label>
+
+      <label style="margin-top:10px">Drug use</label>
+      <label><input type="radio" name="drugs" value="0" required> None</label>
+      <label><input type="radio" name="drugs" value="1"> Low</label>
+      <label><input type="radio" name="drugs" value="2"> Moderate</label>
+      <label><input type="radio" name="drugs" value="3"> High</label>
+      <label><input type="radio" name="drugs" value="4"> Very high</label>
+
+      <label style="margin-top:10px">Gambling</label>
+      <label><input type="radio" name="gambling" value="0" required> None</label>
+      <label><input type="radio" name="gambling" value="1"> Low</label>
+      <label><input type="radio" name="gambling" value="2"> Moderate</label>
+      <label><input type="radio" name="gambling" value="3"> High</label>
+      <label><input type="radio" name="gambling" value="4"> Very high</label>
+    </div>
+
+    <!-- Stress Questions -->
+    <h2>Stress (0–4 Likert)</h2>
+    <div id="questions" class="question"></div>
+
+    <div class="submit-container">
+      <button type="submit" name="action" value="index">Submit for Index Value</button>
+      <button type="submit" name="action" value="individual">Submit for Individual Affirmations</button>
+    </div>
+    <div id="errorMessage">⚠️ Bitte alle Pflichtfelder ausfüllen.</div>
+  </form>
+
+  <div id="results">
+    <p id="responseID"></p>
+    <p id="totalPoints"></p>
+    <p id="categoryColor"></p>
+    <div id="breakdown"></div>
+    <div id="barChart"></div>
+    <button id="newFormBtn" style="margin-top:12px;padding:10px;border-radius:8px;border:0;background:#2E5D3D;color:#fff;cursor:pointer">Neues Formular</button>
+  </div>
+
+  <footer>© 2025 AntiStressGuide</footer>
 </div>
 
-
 <script>
-const form = document.getElementById("clientForm");
+/* ---------- set up stress questions ---------- */
+const likertLabels=["Never","Rarely","Sometimes","Often","Very Often"];
+const stressQuestions=[
+  "In the past month, I felt that things were generally going my way.",
+  "During the last month, I felt confident about handling personal problems.",
+  "Over the past month, I felt physically and mentally healthy enough to meet daily demands.",
+  "In the past month, I was satisfied with my overall well-being and quality of life.",
+  "During the last month, I felt energetic and capable of handling both work and personal responsibilities.",
+  "Over the past month, I could take breaks and recover adequately during and between workdays.",
+  "In the last month, support from colleagues helped me cope with stress.",
+  "During the past month, my work schedule allowed me to maintain a healthy work-life balance.",
+  "Over the last month, my workload prevented me from completing important personal tasks.",
+  "In the past month, I had sufficient control over how I completed my work tasks."
+];
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  // Beispielhafte Variablen -------------------------------------------------
-  const totalScore = 37;     // ← Dein JS berechnet das bereits
-  const nutritionScore = 2;
-  const phys = "150-300";
-  const alcohol = 1;
-  const drugs = 0;
-  const stressAnswers = [1,2,3,2,3];
-  const medicalList = ["None"];
-  const responseID = "ASG-" + Date.now();
-  // ------------------------------------------------------------------------
-
-  // 📌 1) JS sammelt Kundendaten aus deinem Formular
-  const clientData = {
-    age: form.age.value,
-    gender: form.gender.value,
-    medical_conditions: medicalList,
-    nutrition: nutritionScore,
-    physical_activity: phys,
-    habits: {
-      alcohol,
-      tobacco: 1,
-      drugs,
-      gambling: 2
-    },
-    stress_answers: stressAnswers,
-    response_id: responseID
-  };
-
-  // 📌 2) Payload inklusive berechnetem Index
-  const payload = {
-    client_data: clientData,
-    enhanced_stress_index: parseFloat(totalScore)
-  };
-
-  // 📌 3) POST direkt an deine Edge Function
-  fetch("https://deine-edge-function-url.com/session", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(r => r.json())
-  .then(data => console.log("Session gespeichert:", data))
-  .catch(err => console.error("POST-Error:", err));
-
-
-  // --------- Anzeige des Balkens ---------------------------------------
-  const bar = document.getElementById("bar");
-  const barText = document.getElementById("barText");
-
-  const percent = Math.min(100, Math.max(0, totalScore));
-
-  bar.style.width = percent + "%";
-  barText.textContent = percent + " %";
-
-  form.style.display = "none";
-  document.getElementById("results").style.display = "block";
+const questionsDiv=document.getElementById('questions');
+stressQuestions.forEach((q,i)=>{
+  const row=document.createElement('div');
+  row.style.marginBottom='10px';
+  row.innerHTML = `<label>${i+1}. ${q}</label>
+    <input type="range" min="0" max="4" value="2" name="q${i}" required>
+    <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>`;
+  questionsDiv.appendChild(row);
 });
 
+/* ---------- helpers ---------- */
+function avg(arr){ const nums = arr.map(Number).filter(n => !isNaN(n)); return nums.length ? nums.reduce((a,b)=>a+b,0)/nums.length : 0; }
+function generateSequentialID(){
+  const now = new Date();
+  const yearMonth = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
+  const key = `internalID_${yearMonth}`;
+  let n = parseInt(localStorage.getItem(key) || "0", 10);
+  n += 1;
+  localStorage.setItem(key, n);
+  return `ASG-${now.getFullYear()}${String(n).padStart(5,'0')}`;
+}
 
-// Reset
-document.getElementById("newFormBtn").addEventListener("click", () => {
+/* ---------- main form handling ---------- */
+const form = document.getElementById('assessmentForm');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const action = e.submitter?.value;
+  const err = document.getElementById('errorMessage');
+  if(!form.checkValidity()){ err.style.display='block'; return; }
+  err.style.display='none';
+
+  if(action === 'individual'){
+    window.location.href = 'https://antistressguide.github.io/AntiStressGuide/Payment.html';
+    return;
+  }
+
+  const responseID = generateSequentialID();
+
+  const stressAnswers = stressQuestions.map((_,i) =>
+    parseInt(form.querySelector(`input[name="q${i}"]`).value,10)
+  );
+  const stressScore = avg(stressAnswers);
+
+  const alcohol = parseInt(form.querySelector('input[name="alcohol"]:checked').value,10);
+  const tobacco = parseInt(form.querySelector('input[name="tobacco"]:checked').value,10);
+  const drugs = parseInt(form.querySelector('input[name="drugs"]:checked').value,10);
+  const gambling = parseInt(form.querySelector('input[name="gambling"]:checked').value,10);
+  const habitsScore = avg([alcohol,tobacco,drugs,gambling]);
+
+  const nutritionScore = parseInt(form.querySelector('input[name="nutrition"]:checked').value,10);
+
+  const physVal = form.querySelector('input[name="physical"]:checked').value;
+  let physicalRaw = 0;
+  switch(physVal){
+    case "Little or no activity": physicalRaw=0; break;
+    case "150–300 min/week, 0–1 strength": physicalRaw=1; break;
+    case "150–300 min/week, 2+ strength": physicalRaw=2; break;
+    case ">300 min/week, 2+ strength": physicalRaw=3; break;
+    case "Vigorous 75–150+ min/week": physicalRaw=4; break;
+  }
+  const physicalScore = 4 - physicalRaw;
+
+  const medicalChecks = Array.from(document.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value);
+  let medicalList = medicalChecks.includes('None') ? [] : medicalChecks;
+  const medicalScore = Math.min(4, medicalList.length);
+
+  const highMedical = medicalScore >= 3;
+  const highRiskTrigger = (alcohol >= 3 || drugs >= 3 || highMedical);
+
+  const totalScore = ((stressScore + habitsScore + medicalScore + nutritionScore + physicalScore) / 5).toFixed(2);
+
+  let category = '', emoji = '';
+  if(highRiskTrigger){ category = 'High / Very High Risk'; emoji = '🔴'; }
+  else if(totalScore <= 1.0){ category = 'Excellent / Low Risk'; emoji = '🟢'; }
+  else if(totalScore <= 2.0){ category = 'Mild Risk'; emoji = '🟡'; }
+  else if(totalScore <= 3.0){ category = 'Elevated Risk'; emoji = '🟠'; }
+  else { category = 'High / Very High Risk'; emoji = '🔴'; }
+
+  form.style.display = 'none';
+  const results = document.getElementById('results');
+  results.style.display = 'block';
+  document.getElementById('responseID').textContent = `Response ID: ${responseID}`;
+  document.getElementById('totalPoints').textContent = `Total Score: ${totalScore}`;
+  document.getElementById('categoryColor').textContent = `Category: ${category} ${emoji}`;
+
+  document.getElementById('breakdown').innerHTML =
+    `<b>Breakdown:</b>
+     <ul class="breakdown">
+       <li>Stress (avg 0-4): ${(stressScore).toFixed(2)}</li>
+       <li>Habits (avg 0-4): ${(habitsScore).toFixed(2)}</li>
+       <li>Nutrition (0-4): ${nutritionScore}</li>
+       <li>Physical (0-4): ${physicalScore}</li>
+       <li>Medical (count 0-4): ${medicalScore}</li>
+     </ul>`;
+
+  /* ---------- BARCHART NEU ---------- */
+  const barChart = document.getElementById('barChart');
+  barChart.innerHTML = '';
+  const components = [
+    { label: 'Stress', value: stressScore },
+    { label: 'Habits', value: habitsScore },
+    { label: 'Nutrition', value: nutritionScore },
+    { label: 'Physical', value: physicalScore },
+    { label: 'Medical', value: medicalScore }
+  ];
+
+  components.forEach(c => {
+    const pct = Math.min(100, (c.value / 4) * 100);
+
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+
+    const labelTop = document.createElement('div');
+    labelTop.className = 'bar-label';
+    labelTop.textContent = `${c.label}: ${c.value.toFixed(1)}`;
+
+    const fill = document.createElement('div');
+    fill.className = 'bar-fill';
+    fill.style.width = pct + '%';
+
+    const ratio = c.value / 4;
+    if(ratio < 0.25) fill.style.background = '#4CAF50';
+    else if(ratio < 0.5) fill.style.background = '#FFEB3B';
+    else if(ratio < 0.75) fill.style.background = '#FF9800';
+    else fill.style.background = '#F44336';
+
+    row.appendChild(labelTop);
+    row.appendChild(fill);
+    barChart.appendChild(row);
+  });
+
+  /* send to backend */
+  const clientData = {
+    id: responseID,
+    age_group: form.age.value,
+    gender: form.gender.value,
+    medical_conditions: medicalList.length ? medicalList : ["None"],
+    nutrition: nutritionScore,
+    physical_activity: physVal,
+    habits: { alcohol, tobacco, drugs, gambling },
+    stress_answers: stressAnswers,
+    total_score: parseFloat(totalScore)
+  };
+  const payload = { client_data: clientData, enhanced_stress_index: parseFloat(totalScore), category };
+
+  try{
+    const resp = await fetch("https://deine-edge-function-url.com/session", {
+      method:"POST", headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify(payload)
+    });
+    const j = await resp.json().catch(()=>null);
+    console.log("Session gespeichert:", j || resp.status);
+  }catch(err){
+    console.error("POST-Error:", err);
+  }
+});
+
+document.getElementById('newFormBtn').addEventListener('click', ()=>{
   form.reset();
-  form.style.display = "block";
-  document.getElementById("results").style.display = "none";
+  form.style.display='block';
+  document.getElementById('results').style.display='none';
 });
 </script>
-
 </body>
 </html>
