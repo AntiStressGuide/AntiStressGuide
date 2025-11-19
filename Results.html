@@ -331,7 +331,7 @@ footer{ text-align:center;margin-top:18px;padding:10px;color:#1f4b39 }
 
 <script>
 /* ---------- CONFIG: Edge function / Web-App URL ---------- */
-const EDGE_URL = "https://deine-edge-function-url.com/session"; // <-- bleibt unverändert für POST
+const EDGE_URL = "https://deine-edge-function-url.com/session"; // bleibt unverändert für POST
 
 /* ---------- Stress questions (0..4 Likert) ---------- */
 const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
@@ -348,22 +348,7 @@ const stressQuestions = [
   "In the past month, I had sufficient control over how I completed my work tasks."
 ];
 
-/* ---------- Stress questions (0..4 Likert) ---------- */
-const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
-const stressQuestions = [
-  "In the past month, I felt that things were generally going my way.",
-  "During the last month, I felt confident about handling personal problems.",
-  "Over the past month, I felt physically and mentally healthy enough to meet daily demands.",
-  "In the past month, I was satisfied with my overall well-being and quality of life.",
-  "During the last month, I felt energetic and capable of handling both work and personal responsibilities.",
-  "Over the past month, I could take breaks and recover adequately during and between workdays.",
-  "In the last month, support from colleagues helped me cope with stress.",
-  "During the past month, my work schedule allowed me to maintain a healthy work-life balance.",
-  "Over the last month, my workload prevented me from completing important personal tasks.",
-  "In the past month, I had sufficient control over how I completed my work tasks."
-];
-
-/* create stress inputs in stressContainer */
+/* ---------- create stress sliders ---------- */
 const stressContainer = document.getElementById('stressContainer');
 
 stressQuestions.forEach((q, i) => {
@@ -375,8 +360,20 @@ stressQuestions.forEach((q, i) => {
     <div class="range-labels">${likertLabels.map(l => `<span>${l}</span>`).join('')}</div>
   `;
   stressContainer.appendChild(div);
-});
 
+  // Dynamische Farbänderung
+  const slider = div.querySelector('input.slider');
+  const updateColor = () => {
+    const val = parseInt(slider.value, 10);
+    if(val <= 1) slider.style.background = '#84c88a'; // grün
+    else if(val <= 2) slider.style.background = '#ffc107'; // gelb
+    else if(val <= 3) slider.style.background = '#ff9800'; // orange
+    else slider.style.background = '#f44336'; // rot
+  };
+  slider.addEventListener('input', updateColor);
+  updateColor(); // initial setzen
+});
+</script>
 
 
 /* ---------- helpers ---------- */
