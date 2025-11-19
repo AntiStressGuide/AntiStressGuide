@@ -371,16 +371,36 @@ function submitIndexValue() {
     {label:"Physical",score:physicalScore/4},
     {label:"Medical",score:medicalScore/4}
   ];
-  barChart.innerHTML="";
-  components.forEach(c=>{
-    const container = document.createElement('div'); container.className='bar-container';
-    const bar = document.createElement('div'); bar.className='bar';
-    bar.style.width = `${c.score*100}%`;
-    bar.textContent = `${c.label} (${Math.round(c.score*4)})`;
-    container.appendChild(bar);
-    barChart.appendChild(container);
-  });
-}
+ // Bar chart
+const barChart = document.getElementById('barChart');
+const components = [
+  {label:"Stress",score:stressScore/4},
+  {label:"Habits",score:habitsScore/4},
+  {label:"Nutrition",score:nutritionScore/4},
+  {label:"Physical",score:physicalScore/4},
+  {label:"Medical",score:medicalScore/4}
+];
+
+barChart.innerHTML="";
+
+components.forEach(c => {
+  const container = document.createElement('div');
+  container.className='bar-container';
+
+  const bar = document.createElement('div');
+  bar.className='bar';
+  bar.style.width = `${c.score*100}%`;
+  bar.textContent = `${c.label} (${Math.round(c.score*4)})`;
+
+  // Farbe je nach Score
+  if(c.score <= 0.25) bar.style.background = '#2ecc71';      // Grün
+  else if(c.score <= 0.5) bar.style.background = '#f1c40f';  // Gelb
+  else if(c.score <= 0.75) bar.style.background = '#e67e22'; // Orange
+  else bar.style.background = '#e74c3c';                     // Rot
+
+  container.appendChild(bar);
+  barChart.appendChild(container);
+});
 
 function submitStressSessions() {
   alert("Stress sessions submitted! (Hier kann die Edge-Function integriert werden)");
