@@ -79,20 +79,20 @@ footer {
 }
 
 @media (max-width: 480px){
+  .bar-container { height:auto; padding:2px 0; }
   .bar { 
     width:100% !important; 
     text-align:left; 
     padding-left:5px; 
     color:#2E5D3D; 
-    /* background:#d9f0e0; */   /* ← entfernen */
     border-radius:10px; 
     font-size:14px; 
     line-height:1.2em; 
     display:flex; 
     justify-content:space-between;
+    height:auto; /* Höhe flexibel */
   }
 }
-
 </style>
 </head>
 <body>
@@ -310,73 +310,31 @@ form.addEventListener('submit', e => {
   document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
   document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b> Stress:${stressScore.toFixed(2)}, Habits:${habitsScore.toFixed(2)}, Nutrition:${nutritionScore}, Physical:${physicalScore}, Medical:${medicalScore}`;
 
-  const barChart = document.getElementById('barChart');
-const components = [
-  {label:"Stress", score:stressScore/4},
-  {label:"Habits", score:habitsScore/4},
-  {label:"Nutrition", score:nutritionScore/4},
-  {label:"Physical", score:physicalScore/4},
-  {label:"Medical", score:medicalScore/4}
-];
-
-barChart.innerHTML = "";
-
-components.forEach(c => {
-  const container = document.createElement('div');
-  container.className = 'bar-container';
-
-  const bar = document.createElement('div');
-  bar.className = 'bar';
-  bar.style.width = `${Math.min(c.score * 100, 100)}%`;
-  
-  // Farbe abhängig vom Score
-  if(c.score < 0.25) bar.style.background = '#4CAF50';        // Grün
-  else if(c.score < 0.5) bar.style.background = '#FFEB3B';    // Gelb
-  else if(c.score < 0.75) bar.style.background = '#FF9800';   // Orange
-  else bar.style.background = '#F44336';                       // Rot
-
-  bar.textContent = `${c.label}: ${(c.score*4).toFixed(1)}`;
-  container.appendChild(bar);
-  barChart.appendChild(container);
+  // Balkendiagramm
+  const barChart=document.getElementById('barChart');
+  const components=[
+    {label:"Stress", score:stressScore/4},
+    {label:"Habits", score:habitsScore/4},
+    {label:"Nutrition", score:nutritionScore/4},
+    {label:"Physical", score:physicalScore/4},
+    {label:"Medical", score:medicalScore/4}
+  ];
+  barChart.innerHTML="";
+  components.forEach(c=>{
+    const container=document.createElement('div'); container.className='bar-container';
+    const bar=document.createElement('div'); bar.className='bar';
+    bar.style.width=`${Math.min(c.score*100,100)}%`;
+    bar.style.height='100%';
+    if(c.score<0.25) bar.style.background='#4CAF50';
+    else if(c.score<0.5) bar.style.background='#FFEB3B';
+    else if(c.score<0.75) bar.style.background='#FF9800';
+    else bar.style.background='#F44336';
+    bar.textContent=`${c.label}: ${(c.score*4).toFixed(1)}`;
+    container.appendChild(bar); barChart.appendChild(container);
+  });
 });
 
-
-  // 📌 1) JS sammelt Kundendaten aus deinem Formular
-  const clientData = {
-    age: form.age.value,
-    gender: form.gender.value,
-    medical_conditions: medicalList,
-    nutrition: nutritionScore,
-    physical_activity: phys,
-    habits: {
-      alcohol,
-      tobacco: parseInt(form.querySelector('input[name="tobacco"]:checked').value),
-      drugs,
-      gambling: parseInt(form.querySelector('input[name="gambling"]:checked').value)
-    },
-    stress_answers: stressAnswers,
-    response_id: responseID
-  };
-
-  // 📌 2) Payload inklusive berechnetem Index
-  const payload = {
-    client_data: clientData,
-    enhanced_stress_index: parseFloat(totalScore)
-  };
-
-  // 📌 3) POST direkt an deine Edge Function
-  fetch("https://deine-edge-function-url.com/session", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(r => r.json())
-  .then(data => console.log("Session gespeichert:", data))
-  .catch(err => console.error("POST-Error:", err));
-
-});
-
-document.getElementById('newFormBtn').addEventListener('click', ()=>{
+document.getElementById('newFormBtn').addEventListener('click',()=>{
   form.reset();
   form.style.display='block';
   document.getElementById('results').style.display='none';
