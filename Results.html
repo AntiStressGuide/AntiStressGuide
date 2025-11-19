@@ -38,27 +38,28 @@
 
 
 input[type="range"] {
-  -webkit-appearance: none;  /* Chrome/Safari */
-  width: 100%;               /* volle Containerbreite */
-  height: 14px;              /* Track-Höhe */
-  background: #c8e6c9;       /* grüne Leiste */
-  border-radius: 7px;
+  -webkit-appearance: none; /* Chrome/Safari */
+  width: 100%;              /* volle Breite des Containers */
+  height: 20px;             /* Track-Höhe */
+  background: #c8e6c9;      /* Track-Farbe */
+  border-radius: 10px;
   outline: none;
+  margin-top: 10px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 30px;              /* Thumb-Größe */
+  height: 30px;
   background: #2E5D3D;
   border-radius: 50%;
   cursor: pointer;
-  margin-top: -5px; /* vertikale Zentrierung */
+  margin-top: -5px;         /* vertikal zentrieren */
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   background: #2E5D3D;
   border-radius: 50%;
   cursor: pointer;
