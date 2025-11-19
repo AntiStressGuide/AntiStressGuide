@@ -171,15 +171,15 @@ footer { text-align:center; padding:20px; background:#f7fff8; border-radius:0 0 
 const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
 const stressQuestions = [
   "In the past month, I felt that things were generally going my way.",
-"During the last month, I felt confident about handling personal problems.",
-"Over the past month, I felt physically and mentally healthy enough to meet daily demands.",
-"In the past month, I was satisfied with my overall well-being and quality of life.",
-"During the last month, I felt energetic and capable of handling both work and personal responsibilities.",
-"Over the past month, I could take breaks and recover adequately during and between workdays.",
-"In the last month, support from colleagues helped me cope with stress.",
-"During the past month, my work schedule allowed me to maintain a healthy work-life balance.",
-"Over the last month, my workload prevented me from completing important personal tasks.",
-"In the past month, I had sufficient control over how I completed my work tasks."
+  "During the last month, I felt confident about handling personal problems.",
+  "Over the past month, I felt physically and mentally healthy enough to meet daily demands.",
+  "In the past month, I was satisfied with my overall well-being and quality of life.",
+  "During the last month, I felt energetic and capable of handling both work and personal responsibilities.",
+  "Over the past month, I could take breaks and recover adequately during and between workdays.",
+  "In the last month, support from colleagues helped me cope with stress.",
+  "During the past month, my work schedule allowed me to maintain a healthy work-life balance.",
+  "Over the last month, my workload prevented me from completing important personal tasks.",
+  "In the past month, I had sufficient control over how I completed my work tasks."
 ];
 
 // ---------- Utility Functions ----------
@@ -187,17 +187,22 @@ function avg(arr) {
   const nums = arr.map(Number).filter(n => !isNaN(n));
   return nums.length ? nums.reduce((a,b)=>a+b,0)/nums.length : 0;
 }
+
 function generateSequentialID(){
   const now = new Date();
   const yearMonth = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;
   let n = parseInt(localStorage.getItem("internalID_"+yearMonth)||"0",10);
-  n += 1; localStorage.setItem("internalID_"+yearMonth,n);
+  n += 1; 
+  localStorage.setItem("internalID_"+yearMonth,n);
   return `ASG${yearMonth}${String(n).padStart(4,'0')}`;
 }
 
 // ---------- DOM Ready ----------
 document.addEventListener('DOMContentLoaded', () => {
   const stressContainer = document.getElementById('stressContainer');
+  const form = document.getElementById('assessmentForm');
+
+  // Stressfragen generieren
   stressQuestions.forEach((q,i)=>{
     const div = document.createElement('div');
     div.className='question';
@@ -207,17 +212,31 @@ document.addEventListener('DOMContentLoaded', () => {
     stressContainer.appendChild(div);
   });
 
-  const form = document.getElementById('assessmentForm');
-
+  // Submit Index
   document.getElementById('submitIndex').addEventListener('click',()=>{
-    if(!form.checkValidity()){ document.getElementById('errorMessage').style.display='block'; return; }
+    if(!form.checkValidity()){ 
+      document.getElementById('errorMessage').style.display='block'; 
+      return; 
+    }
     document.getElementById('errorMessage').style.display='none';
     submitIndexValue();
   });
+
+  // Submit Stress Sessions
   document.getElementById('submitSessions').addEventListener('click',()=>{
-    if(!form.checkValidity()){ document.getElementById('errorMessage').style.display='block'; return; }
+    if(!form.checkValidity()){ 
+      document.getElementById('errorMessage').style.display='block'; 
+      return; 
+    }
     document.getElementById('errorMessage').style.display='none';
     submitStressSessions();
+  });
+
+  // Reset Button
+  document.getElementById('newFormBtn').addEventListener('click',()=>{
+    form.reset();
+    document.getElementById('results').style.display='none';
+    form.style.display='block';
   });
 });
 
@@ -226,15 +245,12 @@ function submitIndexValue(){
   const form = document.getElementById('assessmentForm');
   const responseID = generateSequentialID();
 
-  // Stress
   const stressAnswers = stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
   const stressScore = avg(stressAnswers);
 
-  // Habits
   const habitsValues = ["alcohol","tobacco","drugs","gambling"].map(n=>parseInt(form.querySelector(`input[name="${n}"]:checked`).value));
   const habitsScore = avg(habitsValues);
 
-  // Physical
   const phys = form.querySelector('input[name="physical"]:checked')?.value;
   let physicalRaw = 0;
   switch(phys){
@@ -246,28 +262,23 @@ function submitIndexValue(){
   }
   const physicalScore = 4 - physicalRaw;
 
-  // Nutrition
-  const nutritionScore = parseInt(form.querySelector('input[name="nutrition"]:checked').value);
+  const nutritionScore = parseInt(form.querySelector('input[name="nutrition"]:checked')?.value || "0");
 
-  // Medical
   const medicalList = Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
   const medicalScore = Math.min(4, medicalList.length);
 
-  // Total
   const totalScore = ((stressScore + habitsScore + medicalScore + nutritionScore + physicalScore)/5).toFixed(2);
 
-  // Kategorie + High Risk Trigger
   let category="", color="";
   if(totalScore <=1){ category="Excellent / Low Risk"; color="🟢"; }
   else if(totalScore <=2){ category="Mild Risk"; color="🟡"; }
   else if(totalScore <=3){ category="Elevated Risk"; color="🟠"; }
   else{ category="High / Very High Risk"; color="🔴"; }
 
-  const alcoholVal = parseInt(form.querySelector('input[name="alcohol"]:checked').value);
-  const drugsVal = parseInt(form.querySelector('input[name="drugs"]:checked').value);
+  const alcoholVal = parseInt(form.querySelector('input[name="alcohol"]:checked')?.value || "0");
+  const drugsVal = parseInt(form.querySelector('input[name="drugs"]:checked')?.value || "0");
   if(alcoholVal>=3 || drugsVal>=3 || medicalScore>=3){ category="High / Very High Risk"; color="🔴"; }
 
-  // Ergebnisse anzeigen
   form.style.display='none';
   const results = document.getElementById('results');
   results.style.display='block';
@@ -276,7 +287,6 @@ function submitIndexValue(){
   document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
   document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b> Stress:${stressScore.toFixed(2)}, Habits:${habitsScore.toFixed(2)}, Nutrition:${nutritionScore}, Physical:${physicalScore}, Medical:${medicalScore}`;
 
-  // Bar Chart
   const barChart = document.getElementById('barChart');
   const components = [
     {label:"Stress",score:stressScore/4},
@@ -298,14 +308,11 @@ function submitIndexValue(){
   });
 }
 
-<script>
 const EDGE_URL = "https://YOUR_SUPABASE_EDGE_FUNCTION_URL"; // <-- Supabase Edge Function URL
 
 async function submitStressSessions() {
   const form = document.getElementById('assessmentForm');
-
-  // Sammle alle Werte
-  const stressAnswers = stressQuestions.map((q,i) => parseInt(form.querySelector(`input[name="q${i}"]`).value));
+  const stressAnswers = stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
   const habitsValues = ["alcohol","tobacco","drugs","gambling"].map(n=>parseInt(form.querySelector(`input[name="${n}"]:checked`).value));
   const phys = form.querySelector('input[name="physical"]:checked')?.value || "";
   let physicalRaw = 0;
@@ -346,9 +353,9 @@ async function submitStressSessions() {
     console.error("POST error:", err);
   }
 
-  // Redirect zu Payment
   window.location.href = "Payment.html";
 }
+
 
 
 // Reset
