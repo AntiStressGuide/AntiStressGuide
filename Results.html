@@ -10,64 +10,187 @@
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
 
 <style>
-  :root{
-    --bg:#eaf5e8;
-    --card:#fff;
-    --accent:#2E5D3D;
-    --bar-height:36px;
-  }
+:root{
+  --bg:#eaf5e8;
+  --card:#fff;
+  --accent:#2E5D3D;
+  --bar-height:36px;
+}
 
-  body{font-family:Inter, Roboto, Arial, sans-serif;background:var(--bg);margin:0;padding:18px;color:#143d2b;}
-  .container{max-width:900px;margin:18px auto;background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.06);}
-  .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-  .logo{height:44px}
-  h1,h2{color:var(--accent);text-align:center;margin:8px 0}
-  .question{margin:10px 0;padding:12px;border-radius:10px}
-  .question:nth-child(odd){background:#f3fbf6}
-  label{display:block;margin:6px 0;font-size:16px}
-  select,input[type=email],input[type=text]{width:100%;padding:10px;border-radius:20px;border:1px solid #ddd;font-size:15px}
-  input[type=radio],input[type=checkbox]{transform:scale(1.1);margin-right:8px}
-  .range-labels{display:flex;justify-content:space-between;font-size:13px;color:#556;margin-top:6px}
-  
-  /* STRESS SLIDERS FIXED FULL WIDTH */
-  .slider {
-    width: 100%;
-  }
+body{
+  font-family:Inter, Roboto, Arial, sans-serif;
+  background:var(--bg);
+  margin:0;
+  padding:18px;
+  color:#143d2b;
+}
 
+.container{
+  max-width:900px;
+  margin:18px auto;
+  background:var(--card);
+  padding:22px;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
 
-  .submit-container{display:flex;gap:12px;margin-top:14px}
-  .submit-container button{flex:1;padding:12px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;font-size:16px}
-  .submit-container button.secondary{background:#1766a0}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
 
-  #errorMessage{color:#b00020;text-align:center;display:none;margin-top:8px}
+.logo{height:44px}
 
-  #results{display:none;margin-top:18px;padding:16px;border-radius:10px;background:#f0fbf5;text-align:center}
+h1,h2{
+  color:var(--accent);
+  text-align:center;
+  margin:8px 0;
+}
 
-  /* Bar styles */
-  .bar-container{position:relative;width:100%;height:var(--bar-height);background:#e6f3ea;border-radius:999px;overflow:visible;margin:12px 0}
-  .bar-fill{
-    position:absolute;
-    left:0;top:0;height:100%;
-    width:0%;
-    border-radius:999px;
-    transition:width .4s ease, background-color .2s;
-    display:flex;align-items:center;justify-content:center;
-  }
-  /* central text placed over container so it's always visible and looks like 'inside' the bar */
-  .bar-text{
-    position:absolute;left:0;top:0;width:100%;height:100%;
-    display:flex;align-items:center;justify-content:center;
-    pointer-events:none;font-weight:800;color:black;
-  }
+.question{
+  margin:10px 0;
+  padding:12px;
+  border-radius:10px;
+}
 
-  .breakdown{ text-align:left; margin:12px 0 0 8px; }
+.question:nth-child(odd){background:#f3fbf6}
 
-  footer{ text-align:center;margin-top:18px;padding:10px;color:#1f4b39 }
+label{display:block;margin:6px 0;font-size:16px}
+select,input[type=email],input[type=text]{width:100%;padding:10px;border-radius:20px;border:1px solid #ddd;font-size:15px}
+input[type=radio],input[type=checkbox]{transform:scale(1.1);margin-right:8px}
 
-  @media(max-width:640px){
-    .submit-container{flex-direction:column}
-  }
-</style>
+.range-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:#556;
+  margin-top:6px;
+}
+
+/* STRESS SLIDERS FIXED FULL WIDTH */
+input[type="range"], .slider {
+  -webkit-appearance: none; /* Chrome/Safari */
+  -moz-appearance: none;    /* Firefox */
+  width: 100%;
+  height: 28px;             /* Track Höhe */
+  background: #c8e6c9;      /* Track Farbe */
+  border-radius: 14px;
+  outline: none;
+  margin-top:10px;
+}
+
+/* Chrome/Safari Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 30px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -1px; /* zentriert Thumb */
+}
+
+/* Firefox Thumb */
+input[type="range"]::-moz-range-thumb {
+  width:30px;
+  height:30px;
+  background: var(--accent);
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* Firefox Track */
+input[type="range"]::-moz-range-track {
+  background:#c8e6c9;
+  height:28px;
+  border-radius:14px;
+}
+
+/* Submit Buttons */
+.submit-container{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+
+.submit-container button{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.submit-container button.secondary{background:#1766a0}
+
+#errorMessage{
+  color:#b00020;
+  text-align:center;
+  display:none;
+  margin-top:8px;
+}
+
+#results{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  border-radius:10px;
+  background:#f0fbf5;
+  text-align:center;
+}
+
+/* Bar styles */
+.bar-container{
+  position:relative;
+  width:100%;
+  height:var(--bar-height);
+  background:#e6f3ea;
+  border-radius:999px;
+  overflow:visible;
+  margin:12px 0;
+}
+
+.bar-fill{
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  transition:width .4s ease, background-color .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bar-text{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  font-weight:800;
+  color:black;
+}
+
+.breakdown{ text-align:left; margin:12px 0 0 8px; }
+
+footer{ text-align:center;margin-top:18px;padding:10px;color:#1f4b39 }
+
+@media(max-width:640px){
+  .submit-container{flex-direction:column}
+}
+
 </head>
 <body>
   <div class="container">
