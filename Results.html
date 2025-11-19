@@ -60,20 +60,7 @@ button:hover{ background:#27623e; }
 #results { display:none; margin-top:20px; text-align:center; padding:20px; background:#e0f2e9; border-radius:10px; }
 
 .bar-container { width:100%; background:#d9f0e0; border-radius:10px; margin:10px 0; height:28px; position:relative; overflow:hidden; }
-.bar { 
-  height: 100%; 
-  border-radius: 10px; 
-  font-weight: bold;
-  color: black;             /* Text schwarz */
-  display: flex; 
-  justify-content: center;   /* Horizontal zentrieren */
-  align-items: center;       /* Vertikal zentrieren */
-  line-height: 28px; 
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  background: #2E5D3D;      /* Balkenfarbe */
-}
+.bar { height:100%; border-radius:10px; line-height:28px; color:#000; font-weight:bold; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 footer { 
   text-align:center; 
@@ -95,9 +82,10 @@ footer {
   .bar { 
     width:100% !important; 
     text-align:center; 
-    padding-left:5px; 
-    color:black; 
-    background:#2E5D3D; 
+    padding-left:0; 
+    padding-right:0;
+    color:#000; 
+    background:#d9f0e0; 
     border-radius:10px; 
     font-size:14px; 
     line-height:1.2em; 
@@ -222,7 +210,8 @@ footer {
 <div id="questions"></div>
 
 <div class="submit-container">
-  <button type="submit"><b>Submit</b></button>
+  <button type="button" id="submitIndex"><b>Submit Index Value</b></button>
+  <button type="button" id="submitSessions"><b>Submit Stress Sessions</b></button>
 </div>
 <div id="errorMessage">⚠️ Please answer all required questions before submitting.</div>
 </form>
@@ -273,15 +262,29 @@ function avg(arr){const nums=arr.map(Number).filter(n=>!isNaN(n));return nums.le
 function generateSequentialID(){const now=new Date();const yearMonth=`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}`;const key=`internalID_${yearMonth}`;let n=parseInt(localStorage.getItem(key)||"0",10);n+=1;localStorage.setItem(key,n);return`ASG${yearMonth}${String(n).padStart(4,'0')}`;}
 
 const form=document.getElementById('assessmentForm');
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  const error=document.getElementById('errorMessage');
-  if(!form.checkValidity()){ error.style.display='block'; alert("⚠️ Please answer all required questions before submitting."); return; }
-  error.style.display='none';
 
-  const responseID=generateSequentialID();
-  const stressAnswers=stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
-  const stressScore=avg(stressAnswers);
+document.getElementById('submitIndex').addEventListener('click', () => {
+  if (!form.checkValidity()) {
+    document.getElementById('errorMessage').style.display = 'block';
+    return;
+  }
+  document.getElementById('errorMessage').style.display = 'none';
+  submitIndexValue();
+});
+
+document.getElementById('submitSessions').addEventListener('click', () => {
+  if (!form.checkValidity()) {
+    document.getElementById('errorMessage').style.display = 'block';
+    return;
+  }
+  document.getElementById('errorMessage').style.display = 'none';
+  submitStressSessions();
+});
+
+function submitIndexValue() {
+  const responseID = generateSequentialID();
+  const stressAnswers = stressQuestions.map((q,i)=>parseInt(form.querySelector(`input[name="q${i}"]`).value));
+  const stressScore = avg(stressAnswers);
 
   const habitsValues=["alcohol","tobacco","drugs","gambling"].map(name=>parseInt(form.querySelector(`input[name="${name}"]:checked`).value));
   const habitsScore=avg(habitsValues);
@@ -325,18 +328,4 @@ form.addEventListener('submit', e => {
   components.forEach(c=>{
     const container=document.createElement('div'); container.className='bar-container';
     const bar=document.createElement('div'); bar.className='bar';
-    bar.style.width=`${Math.min(c.score*100,100)}%`;
-    bar.textContent=`${c.label}: ${(c.score*4).toFixed(1)}`;
-    container.appendChild(bar);
-    barChart.appendChild(container);
-  });
-});
-
-document.getElementById('newFormBtn').addEventListener('click', ()=>{
-  form.reset();
-  form.style.display='block';
-  document.getElementById('results').style.display='none';
-});
-</script>
-</body>
-</html>
+    bar.style.width=`${Math.min(c
