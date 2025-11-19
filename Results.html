@@ -290,6 +290,7 @@ form.addEventListener('submit', e => {
   const medicalScore=Math.min(4,medicalList.length);
   const alcohol=parseInt(form.querySelector('input[name="alcohol"]:checked').value);
   const drugs=parseInt(form.querySelector('input[name="drugs"]:checked').value);
+
   const highMedical = medicalScore>=3;
   let highRiskTrigger = (alcohol>=3 || drugs>=3 || highMedical);
   let totalScore=((stressScore+habitsScore+medicalScore+nutritionScore+physicalScore)/5).toFixed(2);
@@ -320,6 +321,40 @@ form.addEventListener('submit', e => {
     container.appendChild(bar);
     barChart.appendChild(container);
   });
+
+  // 📌 1) JS sammelt Kundendaten aus deinem Formular
+  const clientData = {
+    age: form.age.value,
+    gender: form.gender.value,
+    medical_conditions: medicalList,
+    nutrition: nutritionScore,
+    physical_activity: phys,
+    habits: {
+      alcohol,
+      tobacco: parseInt(form.querySelector('input[name="tobacco"]:checked').value),
+      drugs,
+      gambling: parseInt(form.querySelector('input[name="gambling"]:checked').value)
+    },
+    stress_answers: stressAnswers,
+    response_id: responseID
+  };
+
+  // 📌 2) Payload inklusive berechnetem Index
+  const payload = {
+    client_data: clientData,
+    enhanced_stress_index: parseFloat(totalScore)
+  };
+
+  // 📌 3) POST direkt an deine Edge Function
+  fetch("https://deine-edge-function-url.com/session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => console.log("Session gespeichert:", data))
+  .catch(err => console.error("POST-Error:", err));
+
 });
 
 document.getElementById('newFormBtn').addEventListener('click', ()=>{
