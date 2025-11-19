@@ -292,7 +292,58 @@ function submitIndexValue(){
   });
 }
 
-function submitStressSessions(){ alert("Stress sessions submitted!"); }
+<script>
+const EDGE_URL = "https://YOUR_SUPABASE_EDGE_FUNCTION_URL"; // <-- Supabase Edge Function URL
+
+async function submitStressSessions() {
+  const form = document.getElementById('assessmentForm');
+
+  // Sammle alle Werte
+  const stressAnswers = stressQuestions.map((q,i) => parseInt(form.querySelector(`input[name="q${i}"]`).value));
+  const habitsValues = ["alcohol","tobacco","drugs","gambling"].map(n=>parseInt(form.querySelector(`input[name="${n}"]:checked`).value));
+  const phys = form.querySelector('input[name="physical"]:checked')?.value || "";
+  let physicalRaw = 0;
+  switch(phys){
+    case "Little or no activity": physicalRaw=0; break;
+    case "150–300 min/week, 0–1 strength": physicalRaw=1; break;
+    case "150–300 min/week, 2+ strength": physicalRaw=2; break;
+    case ">300 min/week, 2+ strength": physicalRaw=3; break;
+    case "Vigorous 75–150+ min/week": physicalRaw=4; break;
+  }
+  const physicalScore = 4 - physicalRaw;
+  const nutritionScore = parseInt(form.querySelector('input[name="nutrition"]:checked')?.value || "0");
+  const medicalList = Array.from(form.querySelectorAll('input[name="medical"]:checked')).map(c=>c.value).filter(v=>v!=="None");
+  const medicalScore = Math.min(4, medicalList.length);
+  const totalScore = ((avg(stressAnswers) + avg(habitsValues) + medicalScore + nutritionScore + physicalScore)/5).toFixed(2);
+
+  const payload = {
+    responseID: generateSequentialID(),
+    stressAnswers,
+    habitsValues,
+    physical: phys,
+    physicalScore,
+    nutritionScore,
+    medicalList,
+    medicalScore,
+    totalScore
+  };
+
+  try {
+    const resp = await fetch(EDGE_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+    const text = await resp.text().catch(()=>null);
+    console.log("Edge response status:", resp.status, text);
+  } catch(err) {
+    console.error("POST error:", err);
+  }
+
+  // Redirect zu Payment
+  window.location.href = "Payment.html";
+}
+</script>
 
 // Reset
 document.getElementById('newFormBtn').addEventListener('click',()=>{
