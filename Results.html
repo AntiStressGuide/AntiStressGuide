@@ -310,17 +310,36 @@ form.addEventListener('submit', e => {
   document.getElementById('categoryColor').textContent=`Category: ${category} ${color}`;
   document.getElementById('breakdown').innerHTML=`<b>Breakdown:</b> Stress:${stressScore.toFixed(2)}, Habits:${habitsScore.toFixed(2)}, Nutrition:${nutritionScore}, Physical:${physicalScore}, Medical:${medicalScore}`;
 
-  const barChart=document.getElementById('barChart');
-  const components=[{label:"Stress",score:stressScore/4},{label:"Habits",score:habitsScore/4},{label:"Nutrition",score:nutritionScore/4},{label:"Physical",score:physicalScore/4},{label:"Medical",score:medicalScore/4}];
-  barChart.innerHTML="";
-  components.forEach(c=>{
-    const container=document.createElement('div'); container.className='bar-container';
-    const bar=document.createElement('div'); bar.className='bar';
-    bar.style.width=`${Math.min(c.score*100,100)}%`;
-    bar.textContent=`${c.label}: ${(c.score*4).toFixed(1)}`;
-    container.appendChild(bar);
-    barChart.appendChild(container);
-  });
+  const barChart = document.getElementById('barChart');
+const components = [
+  {label:"Stress", score:stressScore/4},
+  {label:"Habits", score:habitsScore/4},
+  {label:"Nutrition", score:nutritionScore/4},
+  {label:"Physical", score:physicalScore/4},
+  {label:"Medical", score:medicalScore/4}
+];
+
+barChart.innerHTML = "";
+
+components.forEach(c => {
+  const container = document.createElement('div');
+  container.className = 'bar-container';
+
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  bar.style.width = `${Math.min(c.score * 100, 100)}%`;
+  
+  // Farbe abhängig vom Score
+  if(c.score < 0.25) bar.style.background = '#4CAF50';        // Grün
+  else if(c.score < 0.5) bar.style.background = '#FFEB3B';    // Gelb
+  else if(c.score < 0.75) bar.style.background = '#FF9800';   // Orange
+  else bar.style.background = '#F44336';                       // Rot
+
+  bar.textContent = `${c.label}: ${(c.score*4).toFixed(1)}`;
+  container.appendChild(bar);
+  barChart.appendChild(container);
+});
+
 
   // 📌 1) JS sammelt Kundendaten aus deinem Formular
   const clientData = {
