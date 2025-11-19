@@ -9,7 +9,6 @@
 <link rel="shortcut icon" type="image/x-icon" href="Logo AntiStressGuide.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="Logo AntiStressGuide.png">
 
-<style>
 :root{
   --bg:#eaf5e8;
   --card:#fff;
@@ -34,6 +33,7 @@ body{
   box-shadow:0 8px 24px rgba(0,0,0,.06);
 }
 
+/* Header */
 .header{
   display:flex;
   align-items:center;
@@ -49,6 +49,7 @@ h1,h2{
   margin:8px 0;
 }
 
+/* Fragen */
 .question{
   margin:10px 0;
   padding:12px;
@@ -69,7 +70,13 @@ input[type=radio],input[type=checkbox]{transform:scale(1.1);margin-right:8px}
   margin-top:6px;
 }
 
-/* Vollbreite Slider */
+/* Slider: Vollbreite im eigenen Container */
+#stressContainer {
+  max-width:700px;      /* begrenzt Breite */
+  margin:10px auto;     /* zentriert */
+  padding:10px;
+}
+
 input.slider {
   width: 100%;
   height: 28px;
@@ -102,7 +109,6 @@ input.slider::-moz-range-track {
   background: #c8e6c9;
   border-radius: 10px;
 }
-
 
 /* Submit Buttons */
 .submit-container{
@@ -186,7 +192,8 @@ footer{ text-align:center;margin-top:18px;padding:10px;color:#1f4b39 }
 @media(max-width:640px){
   .submit-container{flex-direction:column}
 }
-</Style>
+
+</style>
 </head>
 <body>
   <div class="container">
@@ -341,17 +348,33 @@ const stressQuestions = [
   "In the past month, I had sufficient control over how I completed my work tasks."
 ];
 
-/* create stress inputs */
-const stressContainer = document.getElementById('stressContainer'); // <--- hier ändern
-stressQuestions.forEach((q,i) => {
+/* ---------- Stress questions (0..4 Likert) ---------- */
+const likertLabels = ["Never","Rarely","Sometimes","Often","Very Often"];
+const stressQuestions = [
+  "In the past month, I felt that things were generally going my way.",
+  "During the last month, I felt confident about handling personal problems.",
+  "Over the past month, I felt physically and mentally healthy enough to meet daily demands.",
+  "In the past month, I was satisfied with my overall well-being and quality of life.",
+  "During the last month, I felt energetic and capable of handling both work and personal responsibilities.",
+  "Over the past month, I could take breaks and recover adequately during and between workdays.",
+  "In the last month, support from colleagues helped me cope with stress.",
+  "During the past month, my work schedule allowed me to maintain a healthy work-life balance.",
+  "Over the last month, my workload prevented me from completing important personal tasks.",
+  "In the past month, I had sufficient control over how I completed my work tasks."
+];
+
+/* create stress inputs in stressContainer */
+const stressContainer = document.getElementById('stressContainer');
+
+stressQuestions.forEach((q, i) => {
   const div = document.createElement('div');
   div.className = 'question';
   div.innerHTML = `
     <label>${i+1}. ${q}</label>
     <input type="range" class="slider" min="0" max="4" value="2" name="q${i}" required>
-    <div class="range-labels">${likertLabels.map(l=>`<span>${l}</span>`).join('')}</div>
+    <div class="range-labels">${likertLabels.map(l => `<span>${l}</span>`).join('')}</div>
   `;
-  stressContainer.appendChild(div); // <--- hier an stressContainer anhängen
+  stressContainer.appendChild(div);
 });
 
 
