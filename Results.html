@@ -72,18 +72,19 @@ button:hover{ background:#27623e; }
 
 /* Gefüllter Balken */
 .bar { 
-  height: 100%; 
-  border-radius: 10px; 
-  line-height: 28px; 
-  color: #000; 
-  font-weight: bold; 
-  text-align: center; 
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  background: #2E5D3D;  /* Standardfarbe */
+  height: 100%;                 /* Balkenhöhe passt sich dem Container an */
+  border-radius: 10px;          /* abgerundete Enden */
+  line-height: 28px;            /* vertikale Zentrierung Text */
+  color: #fff;                  /* Textfarbe */
+  font-weight: bold;            
+  text-align: center;           
+  white-space: nowrap;          
+  overflow: hidden;             
+  text-overflow: ellipsis;      
+  background: linear-gradient(90deg, #2E5D3D, #6fbf73); /* Farbverlauf, optional */
   transition: width 0.5s ease, background 0.5s ease; /* sanfte Animation */
 }
+
 
 footer { 
   text-align:center; 
