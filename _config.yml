@@ -1,0 +1,53 @@
+# ==============================
+# AntiStressGuide – GitHub Pages Config
+# Using remote minimal-mistakes Theme
+# ==============================
+
+remote_theme: mmistakes/minimal-mistakes
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed   # optional RSS feed
+
+# Basic site info
+title: "AntiStressGuide"
+description: "Practical tips against stress, evidence-based"
+baseurl: ""   # leave empty for root
+url: "https://antistressguide.github.io/AntiStressGuide"
+
+author:
+  name: "SmartSolutionsHub"
+
+markdown: kramdown
+highlighter: rouge
+
+# Preserve your existing HTML pages
+# These will remain as static pages.
+include:
+  - "*.html"
+  - "*.png"
+  - "*.jpg"
+  - "*.css"
+  - "*.js"
+
+# Theme configuration (optional UI tweaks)
+theme:
+  skin: air
+  logo: "/AntiStressGuide_Symbol.png"  # relative to root
+
+# Navigation example (if not already in markup)
+navigation:
+  - title: "Home"
+    url: "/index.html"
+  - title: "Results"
+    url: "/Results.html"
+  - title: "About"
+    url: "/About.html"  # falls vorhanden
+
+# Don't process these
+exclude:
+  - node_modules
+  - vendor
+
+# GitHub repository
+repository: "https://github.com/antistressguide/AntiStressGuide"
+
